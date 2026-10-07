@@ -55,7 +55,6 @@
         ul { list-style: none; }
         a { text-decoration: none; color: inherit; }
 
-        /* Disable custom cursor on Touch Devices (Mobile Fix) */
         @media (pointer: coarse) {
             *, *::before, *::after { cursor: auto !important; }
             .cursor { display: none !important; }
@@ -98,6 +97,7 @@
         .loader-text {
             font-family: var(--font-display);
             font-size: clamp(1.5rem, 6vw, 4rem); 
+            line-height: 1.2;
             color: transparent;
             -webkit-text-stroke: 1px var(--color-text-main);
             text-transform: uppercase;
@@ -125,7 +125,15 @@
             line-height: 0.85; text-transform: uppercase;
             word-wrap: break-word;
         }
-        .hero__line { display: block; overflow: hidden; }
+        
+        /* FIX: Adds internal padding to prevent top of letters clipping, while negative margin keeps line-height tight */
+        .hero__line { 
+            display: block; 
+            overflow: hidden; 
+            padding: 0.12em 0; 
+            margin: -0.12em 0;
+        }
+        
         .hero__text-stroke { color: transparent; -webkit-text-stroke: 2px var(--color-text-main); display: inline-block; }
         .hero__text-fill { color: var(--color-accent-red); display: inline-block; }
         
@@ -228,10 +236,7 @@
         .footer__cta span { display: block; -webkit-text-stroke: 2px #333; color: transparent; transition: color 0.3s, -webkit-text-stroke 0.3s, text-shadow 0.3s; }
         .footer__cta:hover span, .footer__cta:focus-visible span { color: var(--color-text-main); -webkit-text-stroke: 0px; text-shadow: 0 0 30px rgba(255,255,255,0.3); }
         
-        /* Social Links styling */
-        .footer__socials {
-            display: flex; gap: clamp(1rem, 4vw, 3rem); justify-content: center; flex-wrap: wrap; margin-top: 2rem; width: 100%; max-width: 800px;
-        }
+        .footer__socials { display: flex; gap: clamp(1rem, 4vw, 3rem); justify-content: center; flex-wrap: wrap; margin-top: 2rem; width: 100%; max-width: 800px; }
         .footer__socials a {
             font-family: var(--font-tech); font-size: clamp(0.8rem, 2vw, 1.2rem);
             color: var(--color-text-muted); position: relative; text-transform: uppercase;
@@ -244,9 +249,7 @@
         }
         .footer__socials a:hover, .footer__socials a:focus-visible { color: var(--color-text-main); }
         .footer__socials a:hover::after, .footer__socials a:focus-visible::after { width: 100%; }
-        
-        /* Alternating Green underline for even links */
-        .footer__socials a:nth-child(even)::after { background: var(--color-accent-green); }
+        .footer__socials a:nth-child(even):after { background: var(--color-accent-green); }
 
         .footer__legal { font-family: var(--font-tech); font-size: clamp(0.5rem, 1.5vw, 0.75rem); color: #555; margin-top: 4rem; letter-spacing: 2px; text-transform: uppercase; }
     </style>
@@ -292,7 +295,7 @@
             </div>
         </aside>
 
-        <!-- 2. HGHLNDS 4114 (Horizontal Scroll) -->
+        <!-- 2. HGHLNDS 4114 -->
         <section class="hghlnds" id="hghlnds">
             <div class="hghlnds__wrapper" id="hgh-wrapper">
                 <article class="hghlnds__panel">
@@ -354,7 +357,7 @@
             </ul>
         </section>
 
-        <!-- 4. Rap Battles (Fixed Cascading Stack) -->
+        <!-- 4. Rap Battles -->
         <section class="battles" id="battles">
             <div class="battles__container" id="battle-container">
                 <header class="battles__header">
@@ -394,7 +397,6 @@
             <span aria-hidden="true">NOW.</span>
         </a>
 
-        <!-- Social Links Added Here -->
         <div class="footer__socials">
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="interactable">INSTAGRAM</a>
             <a href="https://spotify.com" target="_blank" rel="noopener noreferrer" class="interactable">SPOTIFY</a>
@@ -430,28 +432,35 @@
             // 2. Master Animations
             window.addEventListener("load", () => {
                 
-                // Preloader Sequence
-                gsap.timeline({ onComplete: initMainAnimations })
-                    .to("#loader-bar", { width: "100%", duration: 1.2, ease: "expo.inOut" })
-                    .to(".loader-text", { opacity: 0, y: -20, duration: 0.4 }, "+=0.1")
-                    .to("#preloader", { yPercent: -100, duration: 1, ease: "power4.inOut" }, "-=0.2")
-                    .set("#preloader", { display: "none" });
+                let ctx = gsap.context(() => {
 
-                function initMainAnimations() {
-                    let ctx = gsap.context(() => {
-                        
-                        // Hero Reveal
-                        gsap.from(".hero__text-stroke, .hero__text-fill", {
+                    // FIXED: Single Master Timeline for Intro Sequence
+                    // Attaching the Hero reveal directly to the end of the preloader timeline guarantees 
+                    // GSAP sets the initial states immediately, preventing any layout flashes.
+                    const masterTl = gsap.timeline();
+
+                    masterTl
+                        .to("#loader-bar", { width: "100%", duration: 1.2, ease: "expo.inOut" })
+                        .to(".loader-text", { opacity: 0, y: -20, duration: 0.4 }, "+=0.1")
+                        .to("#preloader", { yPercent: -100, duration: 1, ease: "power4.inOut" }, "-=0.2")
+                        // Introduce Hero Text seamlessly as the black screen slides up
+                        .from(".hero__text-stroke, .hero__text-fill", {
                             y: 100, skewY: 10, opacity: 0, duration: 1.2, stagger: 0.1, ease: "power4.out"
-                        });
-                        gsap.from(".hero__subtitle", { opacity: 0, y: 15, duration: 1, delay: 0.6 });
-                        
+                        }, "-=0.6")
+                        .from(".hero__subtitle", { 
+                            opacity: 0, y: 15, duration: 1 
+                        }, "-=0.8")
+                        .set("#preloader", { display: "none" }) // Cleanup DOM
+                        .add(initScrollAnimations); // Initialize ScrollTrigger after intro
+                    
+                    function initScrollAnimations() {
+                        // Hero Parallax
                         gsap.to(".hero__bg", {
                             y: "15%", opacity: 0,
                             scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true }
                         });
 
-                        // HGHLNDS Desktop Pinning logic
+                        // HGHLNDS Pinning
                         let mm = gsap.matchMedia();
                         mm.add("(min-width: 769px)", () => {
                             const hghWrapper = document.getElementById("hgh-wrapper");
@@ -501,7 +510,7 @@
                             end: "+=200%", 
                             scrub: 1,
                             animation: gsap.to(battleCards, {
-                                y: (index) => index * 45, // Staggers them slightly downward so borders don't overlap
+                                y: (index) => index * 45,
                                 opacity: 1,
                                 scale: 1, 
                                 stagger: 0.3,
@@ -509,7 +518,7 @@
                             })
                         });
                         
-                        // Footer Reveal & Socials Hook
+                        // Footer & Socials
                         const footerTl = gsap.timeline({
                             scrollTrigger: { trigger: ".footer", start: "top 85%" }
                         });
@@ -521,10 +530,10 @@
                             y: 20, opacity: 0, stagger: 0.1, duration: 0.6, ease: "power3.out"
                         }, "-=0.5");
 
-                    });
-                    
-                    ScrollTrigger.refresh();
-                }
+                        // Recalculate geometry after init
+                        ScrollTrigger.refresh();
+                    }
+                });
             });
         })();
     </script>
