@@ -97,7 +97,7 @@
 
         .loader-text {
             font-family: var(--font-display);
-            font-size: clamp(1.5rem, 6vw, 4rem); /* Mobile safe */
+            font-size: clamp(1.5rem, 6vw, 4rem); 
             color: transparent;
             -webkit-text-stroke: 1px var(--color-text-main);
             text-transform: uppercase;
@@ -121,7 +121,7 @@
         
         .hero__title {
             font-family: var(--font-display);
-            font-size: clamp(4rem, 15vw, 15rem); /* Responsive scale */
+            font-size: clamp(4rem, 15vw, 15rem);
             line-height: 0.85; text-transform: uppercase;
             word-wrap: break-word;
         }
@@ -161,7 +161,6 @@
         .hghlnds__heading { font-family: var(--font-display); font-size: clamp(2.5rem, 7vw, 6rem); line-height: 1; margin-bottom: 1.5rem; text-transform: uppercase; }
         .hghlnds__desc { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--color-text-muted); max-width: 600px; line-height: 1.6; }
 
-        /* Mobile HGHLNDS Fixes */
         @media (max-width: 768px) {
             .hghlnds__wrapper { height: auto; flex-direction: column; }
             .hghlnds__panel { height: auto; min-height: 100vh; padding: 15vh 5vw; }
@@ -192,14 +191,13 @@
         .track-item__meta { font-family: var(--font-tech); color: var(--color-text-muted); font-size: clamp(0.65rem, 1.5vw, 1rem); z-index: 1; text-align: right; }
         .track-item__type { display: block; color: var(--color-text-main); font-weight: bold; margin-bottom: 0.5rem; }
 
-        /* Mobile Discography Fixes */
         @media (max-width: 768px) {
             .track-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
             .track-item__meta { text-align: left; }
             .track-item:hover .track-item__name { padding-left: 1rem; }
         }
 
-        /* --- RAP BATTLES (Pinned Stack) --- */
+        /* --- RAP BATTLES (Fixed Cascading Stack) --- */
         .battles { background: var(--color-surface); padding-top: 10vh; }
         .battles__container { height: 100vh; position: relative; display: flex; justify-content: center; align-items: center; }
         .battles__header { position: absolute; top: 10%; text-align: center; width: 100%; z-index: 10; padding: 0 5vw; }
@@ -207,13 +205,12 @@
         
         .battles__stack { position: relative; width: 90vw; max-width: 600px; height: 50vh; }
         
-        /* Fixed opaque cards so they NEVER visually conflict transparently */
         .battle-card {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--color-surface-card); border: 2px solid #222;
             padding: clamp(1.5rem, 5vw, 3rem);
             display: flex; flex-direction: column; justify-content: center;
-            box-shadow: 0 -20px 40px rgba(0,0,0,0.9); /* Shadows cast UP to separate stacked cards */
+            box-shadow: 0 -20px 40px rgba(0,0,0,0.9);
             will-change: transform, opacity;
         }
 
@@ -225,11 +222,32 @@
             .battles__stack { height: 60vh; margin-top: 15vh; }
         }
 
-        /* --- FOOTER --- */
-        .footer { padding: 15vw 5vw 5vw 5vw; background: #000; text-align: center; }
-        .footer__cta { font-family: var(--font-display); font-size: clamp(4rem, 15vw, 15rem); line-height: 0.85; margin-bottom: 3rem; display: block; }
+        /* --- FOOTER & SOCIALS --- */
+        .footer { padding: 15vw 5vw 5vw 5vw; background: #000; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .footer__cta { font-family: var(--font-display); font-size: clamp(4rem, 15vw, 15rem); line-height: 0.85; margin-bottom: 2rem; display: block; }
         .footer__cta span { display: block; -webkit-text-stroke: 2px #333; color: transparent; transition: color 0.3s, -webkit-text-stroke 0.3s, text-shadow 0.3s; }
         .footer__cta:hover span, .footer__cta:focus-visible span { color: var(--color-text-main); -webkit-text-stroke: 0px; text-shadow: 0 0 30px rgba(255,255,255,0.3); }
+        
+        /* Social Links styling */
+        .footer__socials {
+            display: flex; gap: clamp(1rem, 4vw, 3rem); justify-content: center; flex-wrap: wrap; margin-top: 2rem; width: 100%; max-width: 800px;
+        }
+        .footer__socials a {
+            font-family: var(--font-tech); font-size: clamp(0.8rem, 2vw, 1.2rem);
+            color: var(--color-text-muted); position: relative; text-transform: uppercase;
+            letter-spacing: 2px; transition: color 0.3s; padding-bottom: 5px;
+        }
+        .footer__socials a::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 0%; height: 2px; background: var(--color-accent-red);
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .footer__socials a:hover, .footer__socials a:focus-visible { color: var(--color-text-main); }
+        .footer__socials a:hover::after, .footer__socials a:focus-visible::after { width: 100%; }
+        
+        /* Alternating Green underline for even links */
+        .footer__socials a:nth-child(even)::after { background: var(--color-accent-green); }
+
         .footer__legal { font-family: var(--font-tech); font-size: clamp(0.5rem, 1.5vw, 0.75rem); color: #555; margin-top: 4rem; letter-spacing: 2px; text-transform: uppercase; }
     </style>
 </head>
@@ -368,13 +386,22 @@
 
     </main>
 
-    <!-- 5. Footer -->
+    <!-- 5. Footer & Socials -->
     <footer class="footer">
-        <a href="#" class="footer__cta interactable" aria-label="Book Smicc Now">
+        <a href="mailto:booking@smiccophisto.com" class="footer__cta interactable" aria-label="Book Smicc Now">
             <span aria-hidden="true">BOOK</span>
             <span aria-hidden="true">SMICC</span>
             <span aria-hidden="true">NOW.</span>
         </a>
+
+        <!-- Social Links Added Here -->
+        <div class="footer__socials">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="interactable">INSTAGRAM</a>
+            <a href="https://spotify.com" target="_blank" rel="noopener noreferrer" class="interactable">SPOTIFY</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="interactable">YOUTUBE</a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="interactable">FACEBOOK</a>
+        </div>
+
         <div class="footer__legal">
             &copy; <script>document.write(new Date().getFullYear())</script> SMICC SO DOPE / SMICCOPHISTO. HGHLNDS 4114. ENGINEERED FOR GREATNESS.
         </div>
@@ -463,7 +490,7 @@
                             });
                         });
 
-                        // 🔴 FIXED BUG: Cascading Deck-of-Cards Stack (No transparent overlaps)
+                        // Rap Battles Card Stack 
                         const battleCards = gsap.utils.toArray(".battle-card");
                         gsap.set(battleCards, { y: window.innerHeight, opacity: 0 });
 
@@ -474,21 +501,26 @@
                             end: "+=200%", 
                             scrub: 1,
                             animation: gsap.to(battleCards, {
-                                // Instead of scaling them into each other, we physically stagger their Y axis
-                                // This guarantees you see the tops of the previous cards, perfectly opaque.
-                                y: (index) => index * 45, 
+                                y: (index) => index * 45, // Staggers them slightly downward so borders don't overlap
                                 opacity: 1,
-                                scale: 1, // Fixed scale keeps dimensions crisp
+                                scale: 1, 
                                 stagger: 0.3,
                                 ease: "power3.out"
                             })
                         });
                         
-                        // Footer Reveal
-                        gsap.from(".footer__cta span", {
-                            y: 80, opacity: 0, stagger: 0.1, duration: 1, ease: "power4.out",
+                        // Footer Reveal & Socials Hook
+                        const footerTl = gsap.timeline({
                             scrollTrigger: { trigger: ".footer", start: "top 85%" }
                         });
+                        
+                        footerTl.from(".footer__cta span", {
+                            y: 80, opacity: 0, stagger: 0.1, duration: 1, ease: "power4.out"
+                        })
+                        .from(".footer__socials a", {
+                            y: 20, opacity: 0, stagger: 0.1, duration: 0.6, ease: "power3.out"
+                        }, "-=0.5");
+
                     });
                     
                     ScrollTrigger.refresh();
