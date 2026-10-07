@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smicc So Dope (Smiccophisto) | HGHLNDS 4114</title>
+<meta name="description" content="Smicc So Dope, a.k.a. Smiccophisto: Philippine hip-hop artist, rap battler and member of HGHLNDS 4114.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14110f;--chalk:#f1ece0;--red:#c4232d;--green:#1e9e57;--mute:#b3aa99}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--chalk);font:400 1.05rem/1.5 Archivo,system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit}
+a:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.bar{position:fixed;top:0;left:0;right:0;height:6px;z-index:80;background:linear-gradient(90deg,var(--red),var(--green));transform-origin:0 50%;transform:scaleX(0)}
+h1,h2,h3,.anton{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:.9}
+/* old school wall: brick + halftone + grain + vignette */
+.wall{position:fixed;inset:0;z-index:-2;background-color:#241a17;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='80'%3E%3Cpath d='M0 .5H120M0 40.5H120M.5 0V40M60.5 40V80' stroke='%23000' stroke-opacity='.5' stroke-width='3' fill='none'/%3E%3C/svg%3E")}
+.wall::after{content:"";position:absolute;inset:0;background:radial-gradient(#0000004d 1.5px,transparent 2px) 0 0/9px 9px,radial-gradient(ellipse at 50% 40%,transparent 30%,#000000e6 100%)}
+.grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.22;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.vinyl{position:fixed;right:-90px;bottom:-90px;width:300px;height:300px;border-radius:50%;z-index:-1;opacity:.55;
+background:radial-gradient(circle,var(--red) 0 16%,#000 17% 19%,transparent 20%),repeating-radial-gradient(#0c0c0c 0 3px,#1c1c1c 4px 5px)}
+nav{position:fixed;top:0;left:0;right:0;z-index:70;display:flex;justify-content:space-between;align-items:center;padding:14px 5vw;mix-blend-mode:difference}
+nav b{font:400 1.3rem Anton,sans-serif;letter-spacing:.04em}
+nav div{display:flex;gap:18px;font-size:.9rem}
+nav a{text-decoration:none}
+section{position:relative}
+/* hero */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:90px 5vw 140px;overflow:hidden}
+.hero h1{font-size:clamp(5rem,26vw,24rem);letter-spacing:-.01em}
+.hero h1 span{display:block;overflow:visible}
+.hero h1 span:nth-child(2){color:transparent;-webkit-text-stroke:3px var(--chalk);margin-left:8vw}
+.hero h1 span:nth-child(3){color:var(--red);text-shadow:8px 8px 0 #000}
+.tag{display:inline-block;align-self:flex-start;background:var(--green);color:#06130b;font:400 1.4rem Anton,sans-serif;padding:6px 16px;transform:rotate(-3deg);margin-bottom:18px}
+.hero p{max-width:34ch;margin-top:22px;color:var(--mute);font-size:1.15rem}
+/* marquee strips overlap hero + next section */
+.strip{position:relative;z-index:20;margin:-70px -5vw -70px;background:var(--red);color:var(--chalk);white-space:nowrap;padding:14px 0;transform:rotate(-3deg);box-shadow:0 14px 0 #000}
+.strip.alt{background:var(--chalk);color:var(--ink);transform:rotate(2deg);margin-top:-30px;z-index:19;box-shadow:0 14px 0 var(--green)}
+.row{display:inline-block;font:400 clamp(2.4rem,7vw,5rem) Anton,sans-serif;text-transform:uppercase}
+h2{font-size:clamp(3.4rem,13vw,10rem);padding:0 5vw}
+h2 em{font-style:normal;color:var(--red)}
+.pad{padding:130px 0 100px}
+/* solos: stacked sleeves */
+.solos .stage{padding:0 5vw}
+.solo{background:var(--chalk);color:var(--ink);width:min(86vw,520px);padding:26px;border:4px solid #000;box-shadow:12px 12px 0 var(--red);margin:0 auto 26px}
+.solo:nth-child(even){box-shadow:12px 12px 0 var(--green)}
+.solo h3{font-size:clamp(2.2rem,8vw,3.6rem);margin:30px 0 14px}
+.solo small{font-weight:700}
+.btn{display:inline-block;background:#000;color:var(--chalk);padding:10px 22px;text-decoration:none;font:400 1.1rem Anton,sans-serif;text-transform:uppercase;letter-spacing:.05em}
+.btn:hover{background:var(--red)}
+.fx .solos{height:100svh;overflow:hidden}
+.fx .solos h2{position:absolute;top:80px;left:0;z-index:0;opacity:.9}
+.fx .solo{position:absolute;left:50%;top:52%;margin:0;translate:-50% -50%;z-index:2}
+/* collabs */
+.collab{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 24px;padding:16px 5vw;border-top:4px solid var(--chalk);background:#14110fe0;margin-bottom:-6px}
+.collab:nth-child(even){background:var(--green);color:#06130b;border-color:#000}
+.collab h3{font-size:clamp(2rem,7vw,5.5rem)}
+.collab span{font-size:1.1rem;font-weight:700}
+.collab a{margin-left:auto}
+/* group */
+.group{overflow:hidden}
+.big4114{position:absolute;right:-4vw;top:40px;font:400 clamp(10rem,48vw,42rem) Anton,sans-serif;line-height:.8;color:transparent;-webkit-text-stroke:3px var(--red);opacity:.55;z-index:0;pointer-events:none}
+.group .in{position:relative;z-index:2;padding:0 5vw}
+.members{display:flex;flex-wrap:wrap;gap:18px;margin:34px 0}
+.member{background:var(--red);padding:20px 28px;font:400 2rem Anton,sans-serif;text-transform:uppercase;border:4px solid #000;box-shadow:8px 8px 0 #000}
+.member:nth-child(even){background:var(--green);color:#06130b;transform:translateY(24px)}
+.gt{list-style:none;max-width:560px;margin-top:50px}
+.gt li{padding:14px 0;border-bottom:2px dashed var(--mute);font:400 1.8rem Anton,sans-serif;text-transform:uppercase}
+/* battles */
+.battle{display:grid;grid-template-columns:1fr auto;gap:8px 20px;align-items:end;margin:0 5vw 22px;padding:22px 26px;background:var(--chalk);color:var(--ink);border-left:16px solid var(--red);transform:skewX(-4deg)}
+.battle:nth-child(even){border-color:var(--green)}
+.battle h3{font-size:clamp(1.8rem,6vw,3.6rem)}
+.battle b{font:400 clamp(1.6rem,5vw,3rem) Anton,sans-serif;color:var(--red);text-transform:uppercase}
+/* contact */
+.contact{padding:130px 5vw 60px;text-align:center}
+.contact h2{padding:0;font-size:clamp(3.2rem,14vw,12rem)}
+.links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:36px 0}
+.links .btn{background:var(--green);color:#06130b;font-size:1.5rem;padding:14px 30px}
+.links .btn:hover{background:var(--red);color:var(--chalk)}
+footer{color:var(--mute);font-size:.85rem}
+@media(max-width:640px){nav div{display:none}.vinyl{width:200px;height:200px}.hero h1 span:nth-child(2){-webkit-text-stroke-width:2px}}
+</style>
+</head>
+<body>
+<div class="bar" aria-hidden="true"></div><div class="wall"></div><div class="grain"></div><div class="vinyl" aria-hidden="true"></div>
+
+<nav><b>SMICC</b><div><a href="#solos">Solos</a><a href="#collabs">Collabs</a><a href="#group">HGHLNDS 4114</a><a href="#battles">Battles</a><a href="#contact">Contact</a></div></nav>
+
+<header class="hero">
+  <span class="tag">a.k.a. Smiccophisto</span>
+  <h1><span>Smicc</span><span>So</span><span>Dope</span></h1>
+  <p>Raw bars out of the Philippines. Battle-tested. HGHLNDS 4114 on deck. Don't blink.</p>
+</header>
+
+<div class="strip" aria-hidden="true"><div class="row" id="m1"></div></div>
+<div class="strip alt" aria-hidden="true"><div class="row" id="m2"></div></div>
+
+<section class="solos pad" id="solos">
+  <h2>Solo <em>heat</em></h2>
+  <div class="stage" id="soloList"></div>
+</section>
+
+<section class="pad" id="collabs">
+  <h2>Link<em>ups</em></h2>
+  <div id="collabList" style="margin-top:40px"></div>
+</section>
+
+<section class="group pad" id="group">
+  <div class="big4114" aria-hidden="true">4114</div>
+  <div class="in">
+    <h2 style="padding:0">HGHLNDS<br><em>4114</em></h2>
+    <div class="members" id="members"></div>
+    <ul class="gt" id="groupTracks"></ul>
+  </div>
+</section>
+
+<section class="pad" id="battles">
+  <h2>Rap <em>battles</em></h2>
+  <div id="battleList" style="margin-top:40px"></div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>Hit play.<br><em>Book him.</em></h2>
+  <div class="links" id="links"></div>
+  <footer>&copy; <span id="yr"></span> Smicc So Dope</footer>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+/* ===== EDIT HERE: replace every placeholder with real titles, names and links ===== */
+const DATA = {
+  solos: [
+    {t:"Solo Track 01", y:"Year", u:"#"},
+    {t:"Solo Track 02", y:"Year", u:"#"},
+    {t:"Solo Track 03", y:"Year", u:"#"},
+    {t:"Solo Track 04", y:"Year", u:"#"}
+  ],
+  collabs: [
+    {t:"Collab Track 01", w:"feat. Artist Name", u:"#"},
+    {t:"Collab Track 02", w:"feat. Artist Name", u:"#"},
+    {t:"Collab Track 03", w:"feat. Artist Name", u:"#"}
+  ],
+  members: ["Smicc So Dope", "Member 02", "Member 03"],
+  groupTracks: ["Group Track 01", "Group Track 02", "Group Track 03"],
+  battles: [
+    {e:"Battle League / Event 01", y:"Year", r:"Result"},
+    {e:"Battle League / Event 02", y:"Year", r:"Result"},
+    {e:"Battle League / Event 03", y:"Year", r:"Result"}
+  ],
+  links: [
+    {n:"Spotify", u:"#"}, {n:"YouTube", u:"#"}, {n:"Facebook", u:"#"}, {n:"Instagram", u:"#"}
+  ]
+};
+/* ===== END EDIT ===== */
+
+const $ = id => document.getElementById(id);
+$("yr").textContent = new Date().getFullYear();
+const strip = txt => Array(8).fill(txt).join(" × ") + " × ";
+$("m1").textContent = strip("Smiccophisto × HGHLNDS 4114 × Philippines");
+$("m2").textContent = strip("Bars × Battles × Bangers");
+$("soloList").innerHTML = DATA.solos.map((s,i)=>`<article class="solo"><small>${s.y}</small><h3>${s.t}</h3><a class="btn" href="${s.u}">Play it</a></article>`).join("");
+$("collabList").innerHTML = DATA.collabs.map(c=>`<div class="collab"><h3>${c.t}</h3><span>${c.w}</span><a class="btn" href="${c.u}">Listen</a></div>`).join("");
+$("members").innerHTML = DATA.members.map(m=>`<div class="member">${m}</div>`).join("");
+$("groupTracks").innerHTML = DATA.groupTracks.map(t=>`<li>${t}</li>`).join("");
+$("battleList").innerHTML = DATA.battles.map(b=>`<div class="battle"><div><small>${b.y}</small><h3>${b.e}</h3></div><b>${b.r}</b></div>`).join("");
+$("links").innerHTML = DATA.links.map(l=>`<a class="btn" href="${l.u}">${l.n}</a>`).join("");
+
+gsap.registerPlugin(ScrollTrigger);
+const mm = gsap.matchMedia();
+mm.add("(prefers-reduced-motion: no-preference)", () => {
+  document.documentElement.classList.add("fx");
+  const st = (trigger, start, end, extra={}) => ({trigger, start, end, scrub:true, ...extra});
+
+  // hero slam-in, then lines tear apart on scroll while the strips slide over them
+  gsap.from(".hero h1 span", {yPercent:130, rotation:9, stagger:.14, duration:.8, ease:"power4.out"});
+  gsap.from(".tag", {x:-300, opacity:0, delay:.5, duration:.6, ease:"back.out(2.5)"});
+  gsap.to(".hero h1 span:nth-child(1)", {xPercent:-40, scrollTrigger:st(".hero","top top","bottom top")});
+  gsap.to(".hero h1 span:nth-child(2)", {xPercent:35, scrollTrigger:st(".hero","top top","bottom top")});
+  gsap.to(".hero h1 span:nth-child(3)", {scale:1.5, yPercent:25, transformOrigin:"0 50%", scrollTrigger:st(".hero","top top","bottom top")});
+
+  // marquees run opposite ways and skew on scroll velocity
+  gsap.fromTo("#m1", {xPercent:0}, {xPercent:-45, ease:"none", scrollTrigger:st(".strip","top bottom","bottom top")});
+  gsap.fromTo("#m2", {xPercent:-45}, {xPercent:0, ease:"none", scrollTrigger:st(".strip.alt","top bottom","bottom top")});
+  ScrollTrigger.create({onUpdate:s=>gsap.to(".strip",{skewX:gsap.utils.clamp(-10,10,s.getVelocity()/-180),duration:.25,overwrite:"auto"})});
+
+  // solos: sleeves slam in and pile over each other
+  const cards = gsap.utils.toArray(".solo");
+  const tl = gsap.timeline({scrollTrigger:{trigger:".solos", start:"top top", end:"+="+(cards.length*80)+"%", pin:true, scrub:.6}});
+  gsap.set(cards, {rotation:i=>(i%2?4:-4)});
+  cards.forEach((c,i)=>{
+    if(i===0) return;
+    tl.from(c, {yPercent:140, xPercent:i%2?60:-60, rotation:i%2?25:-25, ease:"power3.out", duration:1});
+    tl.to(cards[i-1], {scale:.88, yPercent:-6, opacity:.7, duration:1}, "<");
+  });
+  gsap.from(".solos h2", {xPercent:-30, scrollTrigger:st(".solos","top bottom","top top")});
+
+  // collabs: rows crash in from alternating sides
+  gsap.utils.toArray(".collab").forEach((el,i)=>
+    gsap.from(el, {xPercent:i%2?110:-110, skewX:i%2?-18:18, scrollTrigger:st(el,"top 98%","top 55%")}));
+
+  // group: giant 4114 drifts behind, members overlap it
+  gsap.fromTo(".big4114", {yPercent:20}, {yPercent:-45, scrollTrigger:st(".group","top bottom","bottom top")});
+  gsap.from(".member", {yPercent:180, rotation:-12, stagger:.2, scrollTrigger:st(".members","top 100%","top 55%")});
+  gsap.from(".gt li", {xPercent:-100, opacity:0, stagger:.15, scrollTrigger:st(".gt","top 95%","top 50%")});
+
+  // battles: wipe in with a hard clip
+  gsap.utils.toArray(".battle").forEach(el=>
+    gsap.fromTo(el, {clipPath:"inset(0 100% 0 0)", x:-80}, {clipPath:"inset(0 0% 0 0)", x:0, scrollTrigger:st(el,"top 95%","top 60%")}));
+
+  // contact + vinyl
+  gsap.from(".contact h2", {scale:.5, rotation:-6, scrollTrigger:st(".contact","top 90%","top 40%")});
+  gsap.to(".vinyl", {rotation:1800, ease:"none", scrollTrigger:st(document.body,"top top","bottom bottom")});
+
+  // extras: progress bar, wall parallax, heading slams, verdict stamps, collab drift
+  gsap.to(".bar", {scaleX:1, ease:"none", scrollTrigger:st(document.body,"top top","bottom bottom")});
+  gsap.fromTo(".wall", {backgroundPosition:"0px 0px"}, {backgroundPosition:"0px -900px", ease:"none", scrollTrigger:st(document.body,"top top","bottom bottom")});
+  ["#collabs","#group","#battles"].forEach(s=>
+    gsap.from(s+" h2", {yPercent:90, rotation:-6, opacity:0, transformOrigin:"0 100%", scrollTrigger:st(s,"top 90%","top 40%")}));
+  gsap.utils.toArray(".battle b").forEach(el=>
+    gsap.from(el, {scale:3.5, rotation:-15, opacity:0, scrollTrigger:st(el,"top 95%","top 70%")}));
+  gsap.utils.toArray(".collab h3").forEach((el,i)=>
+    gsap.to(el, {xPercent:i%2?-6:6, scrollTrigger:st(el,"top bottom","bottom top")}));
+
+  return () => document.documentElement.classList.remove("fx");
+});
+</script>
+</body>
+</html>
