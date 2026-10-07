@@ -1,244 +1,459 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Smicc So Dope (Smiccophisto) | HGHLNDS 4114</title>
-<meta name="description" content="Smicc So Dope, a.k.a. Smiccophisto: Philippine hip-hop artist, rap battler and member of HGHLNDS 4114.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#141110;--panel:#1d1815;--line:#3a312c;--text:#f1ece0;--mute:#b3aa99;--red:#c4232d;--green:#1e9e57;--wrap:1100px}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font:400 1.05rem/1.6 Archivo,system-ui,sans-serif}
-a{color:inherit}
-a:focus-visible{outline:3px solid var(--green);outline-offset:3px}
-h1,h2,h3,.display{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:1}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smicc So Dope | Smiccophisto Official</title>
+    <meta name="description" content="The official portfolio of Smicc So Dope (Smiccophisto) - Philippine Hip-Hop Artist, HGHLNDS 4114 Member, and Rap Battle Emcee.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Syncopate:wght@400;700&family=Manrope:wght@300;500;800&display=swap" rel="stylesheet">
 
-/* subtle old school brick wall behind everything */
-.wall{position:fixed;inset:0;z-index:-1;background-color:#1a1412;
-background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='80'%3E%3Cpath d='M0 .5H120M0 40.5H120M.5 0V40M60.5 40V80' stroke='%23000' stroke-opacity='.35' stroke-width='3' fill='none'/%3E%3C/svg%3E")}
-.wall::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,#14111000 0%,#141110f2 85%)}
+    <!-- GSAP for Aggressive Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
-section{padding:88px 0}
-.head{margin-bottom:36px}
-h2{font-size:clamp(2.4rem,7vw,4rem)}
-h2::after{content:"";display:block;width:72px;height:6px;background:var(--red);margin-top:14px}
-.head p{color:var(--mute);margin-top:14px;max-width:52ch}
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-main: #f0f0f0;
+            --accent-red: #D32F2F;
+            --accent-green: #388E3C;
+            --font-display: 'Anton', sans-serif;
+            --font-tech: 'Syncopate', sans-serif;
+            --font-body: 'Manrope', sans-serif;
+        }
 
-/* nav */
-nav{position:sticky;top:0;z-index:10;background:#141110ee;border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;justify-content:space-between;align-items:center;height:60px}
-nav b{font:400 1.4rem Anton,sans-serif;letter-spacing:.04em;text-transform:uppercase}
-nav ul{display:flex;gap:24px;list-style:none;font-size:.95rem}
-nav a{text-decoration:none;color:var(--mute)}
-nav a:hover{color:var(--text)}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* buttons */
-.btn{display:inline-block;padding:11px 24px;background:var(--green);color:#06130b;text-decoration:none;font:400 1.05rem Anton,sans-serif;text-transform:uppercase;letter-spacing:.05em;border:2px solid var(--green)}
-.btn:hover{background:var(--red);border-color:var(--red);color:var(--text)}
-.btn.ghost{background:transparent;color:var(--text);border-color:var(--line)}
-.btn.ghost:hover{border-color:var(--red)}
+        body, html {
+            width: 100%;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            overscroll-behavior: none;
+        }
 
-/* hero */
-.hero{padding:120px 0 96px}
-.tag{display:inline-block;padding:4px 14px;border:2px solid var(--green);color:var(--green);font-weight:700;margin-bottom:22px}
-.hero h1{font-size:clamp(3.6rem,15vw,10rem);letter-spacing:-.01em}
-.hero p{max-width:46ch;margin:26px 0 34px;color:var(--mute);font-size:1.2rem}
-.hero .cta{display:flex;flex-wrap:wrap;gap:14px}
+        /* Old School Hip-Hop Gritty Texture Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
 
-/* solos */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
-.card{background:var(--panel);border:1px solid var(--line);border-top:5px solid var(--red);padding:24px}
-.card:nth-child(even){border-top-color:var(--green)}
-.card small{color:var(--mute);font-weight:700}
-.card h3{font-size:2rem;margin:10px 0 22px}
+        /* Subtle Ambient Glows */
+        .glow-red {
+            position: fixed;
+            top: -20vh;
+            left: -10vw;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(211,47,47,0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
 
-/* collabs + battles rows */
-.list{border-top:1px solid var(--line)}
-.row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 24px;padding:20px 0;border-bottom:1px solid var(--line)}
-.row h3{font-size:clamp(1.6rem,4vw,2.2rem)}
-.row span{color:var(--mute)}
-.row .res{font:400 1.6rem Anton,sans-serif;text-transform:uppercase;color:var(--red)}
+        .glow-green {
+            position: fixed;
+            bottom: -20vh;
+            right: -10vw;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(56,142,60,0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
 
-/* group */
-.panel{display:grid;grid-template-columns:1fr 1fr;gap:40px;background:var(--panel);border:1px solid var(--line);border-left:6px solid var(--green);padding:36px}
-.panel h3{font-size:1.6rem;margin-bottom:18px;color:var(--mute)}
-.chips{display:flex;flex-wrap:wrap;gap:12px;list-style:none}
-.chips li{padding:10px 18px;border:2px solid var(--line);font:400 1.3rem Anton,sans-serif;text-transform:uppercase}
-.tracks{list-style:none}
-.tracks li{padding:12px 0;border-bottom:1px solid var(--line);font:400 1.5rem Anton,sans-serif;text-transform:uppercase}
+        section {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            padding: 5vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-/* contact */
-.contact{text-align:center;border-top:1px solid var(--line)}
-.contact h2::after{margin:14px auto 0}
-.links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:34px 0 56px}
-footer{color:var(--mute);font-size:.85rem}
+        /* Typography */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            line-height: 0.9;
+        }
 
-/* scrolling text bands (clipped to their own box so they never widen the page) */
-.ticker{overflow:hidden;background:var(--red);border-block:3px solid #000;padding:12px 0;white-space:nowrap}
-.ticker.alt{background:var(--panel);border-color:var(--line);color:var(--mute)}
-.track{display:flex;width:max-content;font:400 clamp(1.4rem,4vw,2rem) Anton,sans-serif;text-transform:uppercase;letter-spacing:.04em;animation:run 30s linear infinite}
-.track.rev{animation-direction:reverse;animation-duration:45s}
-@keyframes run{to{transform:translateX(-50%)}}
-@media(prefers-reduced-motion:reduce){.track{animation:none;width:auto;white-space:normal;flex-wrap:wrap;padding:0 24px}.track span+span{display:none}}
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 600px;
+            color: #a0a0a0;
+        }
 
-/* scroll motion: things fall hard, squash on impact, then the page rumbles */
-html{overflow-x:hidden}
-main{overflow-x:hidden;overflow-x:clip}
-.fx [data-hit]{opacity:0}
-.fx [data-hit].in{animation:slam .75s both}
-@keyframes slam{
-0%{opacity:0;transform:translateY(-90px) scale(1.1);animation-timing-function:cubic-bezier(.6,0,1,.5)}
-50%{opacity:1;transform:none}
-62%{transform:translateY(9px) scaleY(.96)}
-80%{transform:translateY(-3px)}
-100%{opacity:1;transform:none}}
-.rumble{animation:rumble .32s linear}
-@keyframes rumble{
-0%,100%{transform:none}
-15%{transform:translate(calc(-4px*var(--s,1)),calc(3px*var(--s,1)))}
-35%{transform:translate(calc(4px*var(--s,1)),calc(-3px*var(--s,1)))}
-55%{transform:translate(calc(-3px*var(--s,1)),calc(-2px*var(--s,1)))}
-75%{transform:translate(calc(2px*var(--s,1)),calc(2px*var(--s,1)))}}
+        /* Hero Section */
+        #hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
 
-@media(max-width:760px){nav ul{display:none}.panel{grid-template-columns:1fr;padding:26px}section{padding:64px 0}.hero{padding:80px 0 64px}}
-</style>
+        .hero-wrapper {
+            position: relative;
+            text-align: center;
+        }
+
+        .title-smicc {
+            font-size: clamp(4rem, 15vw, 12rem);
+            color: transparent;
+            -webkit-text-stroke: 2px var(--accent-red);
+            position: relative;
+            z-index: 2;
+        }
+
+        .title-dope {
+            font-size: clamp(5rem, 18vw, 15rem);
+            color: var(--text-main);
+            margin-top: -4vw;
+            position: relative;
+            z-index: 3;
+            text-shadow: 10px 10px 0px rgba(56,142,60,0.3);
+        }
+
+        .title-aka {
+            font-family: var(--font-tech);
+            font-size: clamp(1rem, 2vw, 2rem);
+            letter-spacing: 0.5em;
+            color: var(--accent-green);
+            margin-top: 2rem;
+            opacity: 0;
+        }
+
+        /* HGHLNDS 4114 Section */
+        #hghlnds {
+            align-items: flex-start;
+        }
+
+        .section-header {
+            font-size: clamp(3rem, 8vw, 8rem);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 10px;
+            background: var(--accent-red);
+            transition: width 0.5s ease;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+            width: 100%;
+            margin-top: 5vh;
+        }
+
+        .grid-item {
+            background: #111;
+            padding: 2rem;
+            border-left: 4px solid var(--accent-green);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grid-item:nth-child(even) {
+            border-left: none;
+            border-right: 4px solid var(--accent-red);
+        }
+
+        .item-1 { grid-column: 1 / 8; }
+        .item-2 { grid-column: 8 / 13; margin-top: 100px; }
+        .item-3 { grid-column: 2 / 7; margin-top: -50px; }
+        .item-4 { grid-column: 7 / 12; }
+
+        .item-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        /* Solos & Collabs Section */
+        #music {
+            text-align: right;
+            align-items: flex-end;
+            background: #0a0a0a;
+        }
+
+        .music-list {
+            list-style: none;
+            margin-top: 4rem;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .music-list li {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 5rem);
+            border-bottom: 1px solid #222;
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .music-list li:hover {
+            color: var(--accent-red);
+            padding-left: 20px;
+        }
+
+        .music-list li .collab-badge {
+            font-family: var(--font-tech);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            color: var(--accent-green);
+        }
+
+        /* Rap Battle Section */
+        #battles {
+            background: var(--bg-color);
+            position: relative;
+        }
+
+        .battle-wrapper {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .battle-text-bg {
+            position: absolute;
+            font-family: var(--font-display);
+            font-size: 25vw;
+            color: rgba(255,255,255,0.02);
+            white-space: nowrap;
+            z-index: 0;
+        }
+
+        .battle-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background: rgba(5,5,5,0.8);
+            padding: 4rem;
+            border: 2px solid #222;
+            box-shadow: -15px 15px 0px rgba(211,47,47,0.5), 15px -15px 0px rgba(56,142,60,0.5);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem;
+            text-align: center;
+            font-family: var(--font-tech);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            background: #000;
+            color: #555;
+        }
+
+        /* Scroll Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-green));
+            z-index: 10000;
+        }
+    </style>
 </head>
 <body>
-<div class="wall"></div>
 
-<nav>
-  <div class="wrap">
-    <b>Smicc So Dope</b>
-    <ul>
-      <li><a href="#solos">Solos</a></li>
-      <li><a href="#collabs">Collabs</a></li>
-      <li><a href="#group">HGHLNDS 4114</a></li>
-      <li><a href="#battles">Battles</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
+    <div class="noise-overlay"></div>
+    <div class="glow-red"></div>
+    <div class="glow-green"></div>
+    <div class="progress-bar" id="progress"></div>
 
-<main id="m">
-<header class="hero">
-  <div class="wrap">
-    <span class="tag">a.k.a. Smiccophisto</span>
-    <h1>Smicc So Dope</h1>
-    <p>Hip-hop artist and rap battler from the Philippines. Solo records, collabs and HGHLNDS 4114.</p>
-    <div class="cta">
-      <a class="btn" href="#solos">Hear the music</a>
-      <a class="btn ghost" href="#battles">Battle record</a>
-    </div>
-  </div>
-</header>
-<div class="ticker" aria-hidden="true"><div class="track" id="t1"></div></div>
-<div class="ticker alt" aria-hidden="true"><div class="track rev" id="t2"></div></div>
+    <!-- HERO SECTION -->
+    <section id="hero">
+        <div class="hero-wrapper">
+            <h1 class="title-smicc">SMICC</h1>
+            <h1 class="title-dope">SO DOPE</h1>
+            <p class="title-aka">A.K.A. SMICCOPHISTO</p>
+        </div>
+    </section>
 
-<section id="solos">
-  <div class="wrap">
-    <div class="head"><h2>Solo tracks</h2><p>Every record he put out on his own.</p></div>
-    <div class="grid" id="soloList"></div>
-  </div>
-</section>
+    <!-- HGHLNDS 4114 SECTION -->
+    <section id="hghlnds">
+        <h2 class="section-header hgh-header">HGHLNDS 4114</h2>
+        <p class="hgh-desc">The movement. The brotherhood. The authentic sound echoing from the highlands of the Philippines. We don't just make tracks; we build anthems for the streets.</p>
+        
+        <div class="grid-container">
+            <div class="grid-item item-1">
+                <h3 class="item-title">THE VISION</h3>
+                <p>Establishing dominance in the local scene with raw lyricism, heavy beats, and an unbreakable crew mentality.</p>
+            </div>
+            <div class="grid-item item-2">
+                <h3 class="item-title">THE CYPHER</h3>
+                <p>Where iron sharpens iron. The collective energy of 4114 elevates every verse spit into the mic.</p>
+            </div>
+            <div class="grid-item item-3">
+                <h3 class="item-title">THE RELEASES</h3>
+                <p>Stream the collective's hardest drops. Cultivating a sound that resonates far beyond the city borders.</p>
+            </div>
+            <div class="grid-item item-4">
+                <h3 class="item-title">THE IMPACT</h3>
+                <p>Redefining what independent hip-hop looks like in the motherland. Real recognize real.</p>
+            </div>
+        </div>
+    </section>
 
-<section id="collabs">
-  <div class="wrap">
-    <div class="head"><h2>Collabs</h2><p>Tracks made with other artists.</p></div>
-    <div class="list" id="collabList"></div>
-  </div>
-</section>
+    <!-- SOLOS & COLLABS SECTION -->
+    <section id="music">
+        <h2 class="section-header music-header" style="text-align: right;">THE DISCOGRAPHY</h2>
+        <p style="margin-left: auto;">A testament to the grind. From lethal solo drops to high-voltage collaborations with the scene's heavyweights. Listen and witness the evolution of Smiccophisto.</p>
+        
+        <ul class="music-list">
+            <li class="track">
+                <span class="track-name">STREET GOSPEL</span>
+                <span class="collab-badge">SOLO</span>
+            </li>
+            <li class="track">
+                <span class="track-name">HIGHLAND MOBBIN'</span>
+                <span class="collab-badge">FT. HGHLNDS 4114</span>
+            </li>
+            <li class="track">
+                <span class="track-name">MIDNIGHT VENOM</span>
+                <span class="collab-badge">SOLO</span>
+            </li>
+            <li class="track">
+                <span class="track-name">TRENCH WARFARE</span>
+                <span class="collab-badge">COLLAB</span>
+            </li>
+            <li class="track">
+                <span class="track-name">SMICCOPHISTO FREESTYLE</span>
+                <span class="collab-badge">SOLO</span>
+            </li>
+        </ul>
+    </section>
 
-<section id="group">
-  <div class="wrap">
-    <div class="head"><h2>HGHLNDS 4114</h2><p>His group: the crew and the music they made together.</p></div>
-    <div class="panel">
-      <div><h3>Members</h3><ul class="chips" id="members"></ul></div>
-      <div><h3>Group tracks</h3><ul class="tracks" id="groupTracks"></ul></div>
-    </div>
-  </div>
-</section>
+    <!-- RAP BATTLES SECTION -->
+    <section id="battles">
+        <div class="battle-wrapper">
+            <div class="battle-text-bg">THE ARENA</div>
+            <div class="battle-content">
+                <h2 style="font-size: clamp(3rem, 6vw, 6rem); margin-bottom: 1rem; color: var(--accent-red);">BLOOD ON THE STAGE</h2>
+                <h3 style="font-family: var(--font-tech); font-size: 1.5rem; color: var(--accent-green); margin-bottom: 2rem;">RAP BATTLE EXPERIENCE</h3>
+                <p style="margin: 0 auto; color: #ccc;">Tested by fire in the Philippine battle rap circuit. Where words become weapons and delivery is everything. Smicc So Dope brings an aggressive, tactical, and unorthodox style to the ring that dismantles opponents bar by bar. No gimmicks, just pure, unadulterated pen game and undeniable stage presence.</p>
+            </div>
+        </div>
+    </section>
 
-<section id="battles">
-  <div class="wrap">
-    <div class="head"><h2>Rap battles</h2><p>Where he proves it live.</p></div>
-    <div class="list" id="battleList"></div>
-  </div>
-</section>
+    <footer>
+        <p>&copy; 2026 SMICC SO DOPE / SMICCOPHISTO. HGHLNDS 4114. ALL RIGHTS RESERVED.</p>
+    </footer>
 
-<section class="contact" id="contact">
-  <div class="wrap">
-    <div class="head"><h2>Listen and book</h2><p style="margin:14px auto 0">Find the music and get in touch.</p></div>
-    <div class="links" id="links"></div>
-    <footer>&copy; <span id="yr"></span> Smicc So Dope</footer>
-  </div>
-</section>
-</main>
+    <script>
+        // Initialize GSAP and ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
 
-<script>
-/* ===== EDIT HERE: replace every placeholder with real titles, names and links ===== */
-const DATA = {
-  solos: [
-    {t:"Solo Track 01", y:"Year", u:"#"},
-    {t:"Solo Track 02", y:"Year", u:"#"},
-    {t:"Solo Track 03", y:"Year", u:"#"},
-    {t:"Solo Track 04", y:"Year", u:"#"}
-  ],
-  collabs: [
-    {t:"Collab Track 01", w:"feat. Artist Name", u:"#"},
-    {t:"Collab Track 02", w:"feat. Artist Name", u:"#"},
-    {t:"Collab Track 03", w:"feat. Artist Name", u:"#"}
-  ],
-  members: ["Smicc So Dope", "Member 02", "Member 03"],
-  groupTracks: ["Group Track 01", "Group Track 02", "Group Track 03"],
-  battles: [
-    {e:"Battle League / Event 01", y:"Year", r:"Result"},
-    {e:"Battle League / Event 02", y:"Year", r:"Result"},
-    {e:"Battle League / Event 03", y:"Year", r:"Result"}
-  ],
-  links: [
-    {n:"Spotify", u:"#"}, {n:"YouTube", u:"#"}, {n:"Facebook", u:"#"}, {n:"Instagram", u:"#"}
-  ]
-};
-/* ===== END EDIT ===== */
+        // Progress Bar
+        gsap.to("#progress", {
+            value: 100,
+            width: "100%",
+            ease: "none",
+            scrollTrigger: { scrub: 0.3 }
+        });
 
-const $ = id => document.getElementById(id);
-$("yr").textContent = new Date().getFullYear();
-$("soloList").innerHTML = DATA.solos.map(s=>`<article class="card"><small>${s.y}</small><h3>${s.t}</h3><a class="btn" href="${s.u}">Play</a></article>`).join("");
-$("collabList").innerHTML = DATA.collabs.map(c=>`<div class="row"><div><h3>${c.t}</h3><span>${c.w}</span></div><a class="btn ghost" href="${c.u}">Listen</a></div>`).join("");
-$("members").innerHTML = DATA.members.map(m=>`<li>${m}</li>`).join("");
-$("groupTracks").innerHTML = DATA.groupTracks.map(t=>`<li>${t}</li>`).join("");
-$("battleList").innerHTML = DATA.battles.map(b=>`<div class="row"><div><h3>${b.e}</h3><span>${b.y}</span></div><div class="res">${b.r}</div></div>`).join("");
-$("links").innerHTML = DATA.links.map(l=>`<a class="btn" href="${l.u}">${l.n}</a>`).join("");
+        // 1. Hero Animations (On Load)
+        const heroTl = gsap.timeline();
+        heroTl.from(".title-smicc", { y: 150, opacity: 0, duration: 1.2, ease: "power4.out", skewY: 10 })
+              .from(".title-dope", { y: -150, opacity: 0, duration: 1.2, ease: "power4.out", skewY: -10 }, "-=0.8")
+              .to(".title-aka", { opacity: 1, letterSpacing: "0.2em", duration: 1, ease: "power2.out" }, "-=0.5");
 
-/* ticker bands: built from DATA, so real titles show up here automatically */
-const info = ["Smicc So Dope a.k.a. Smiccophisto","Hip-hop artist from the Philippines","Member of HGHLNDS 4114","Rap battler"];
-const catalog = [...DATA.solos.map(s=>"Solo: "+s.t), ...DATA.collabs.map(c=>"Collab: "+c.t), ...DATA.groupTracks.map(t=>"HGHLNDS 4114: "+t), ...DATA.battles.map(b=>"Battle: "+b.e)];
-const fill = (el,a) => { const s = [...a,...a].join(" × ")+" × "; el.innerHTML = `<span>${s}</span><span>${s}</span>`; };
-fill($("t1"), info); fill($("t2"), catalog);
+        // Hero Parallax (On Scroll)
+        gsap.to(".title-smicc", {
+            y: -150,
+            scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: 1 }
+        });
+        gsap.to(".title-dope", {
+            y: 150,
+            scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: 1 }
+        });
 
-/* scroll motion: no library, skipped if the visitor prefers reduced motion */
-if(!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window){
-  const main=$("m"), heavy=".hero h1,.head,.panel";
-  document.documentElement.classList.add("fx");
-  const io=new IntersectionObserver(es=>{
-    es.filter(e=>e.isIntersecting).forEach((e,i)=>{
-      const el=e.target, d=i*110;
-      io.unobserve(el);
-      el.style.animationDelay=d+"ms";
-      el.classList.add("in");
-      setTimeout(()=>{ /* impact lands at ~half the slam: shake the page */
-        main.style.setProperty("--s",el.matches(heavy)?2.2:1);
-        main.classList.remove("rumble"); void main.offsetWidth; main.classList.add("rumble");
-      },d+380);
-    });
-  },{threshold:.2});
-  document.querySelectorAll(".tag,.hero h1,.hero p,.cta,.head,.card,.row,.panel,.links").forEach(el=>{el.dataset.hit="";io.observe(el)});
-  main.addEventListener("animationend",e=>{if(e.target===main)main.classList.remove("rumble")});
-}
-</script>
+        // 2. HGHLNDS 4114 Aggressive Overlap Animation
+        const hghTl = gsap.timeline({
+            scrollTrigger: { trigger: "#hghlnds", start: "top 70%", end: "center center", scrub: 1 }
+        });
+        
+        // Underline effect
+        ScrollTrigger.create({
+            trigger: "#hghlnds",
+            start: "top 60%",
+            onEnter: () => gsap.to(".hgh-header::after", { width: "100%", duration: 0.8, ease: "power3.inOut" })
+        });
+
+        hghTl.from(".hgh-header", { x: -200, opacity: 0, duration: 1, ease: "back.out(1.7)" })
+             .from(".hgh-desc", { x: 200, opacity: 0, duration: 1, ease: "back.out(1.7)" }, "<0.2")
+             .from(".item-1", { x: -300, y: 100, opacity: 0, rotation: -5, duration: 1.5, ease: "power4.out" }, "-=0.5")
+             .from(".item-2", { x: 300, y: 200, opacity: 0, rotation: 5, duration: 1.5, ease: "power4.out" }, "<0.2")
+             .from(".item-3", { y: 200, opacity: 0, scale: 0.8, duration: 1.5, ease: "power4.out" }, "<0.3")
+             .from(".item-4", { x: 200, y: -100, opacity: 0, rotation: 10, duration: 1.5, ease: "power4.out" }, "<0.2");
+
+        // 3. Music Section Staggered Strike
+        const musicTl = gsap.timeline({
+            scrollTrigger: { trigger: "#music", start: "top 60%", end: "bottom 80%", scrub: 1 }
+        });
+
+        musicTl.from(".music-header", { scale: 1.5, opacity: 0, transformOrigin: "right center", duration: 1, ease: "expo.out" });
+        
+        // Aggressively throw tracks into the DOM overlapping each other
+        gsap.utils.toArray(".track").forEach((track, i) => {
+            gsap.from(track, {
+                scrollTrigger: { trigger: track, start: "top 90%", end: "top 60%", scrub: 1 },
+                x: i % 2 === 0 ? 300 : -300,
+                opacity: 0,
+                skewX: 20,
+                duration: 1,
+                ease: "power4.out"
+            });
+        });
+
+        // 4. Rap Battle Arena Scale & Impact
+        const battleTl = gsap.timeline({
+            scrollTrigger: { trigger: "#battles", start: "top 80%", end: "center center", scrub: 1 }
+        });
+
+        battleTl.from(".battle-text-bg", { scale: 0.5, opacity: 0, x: -500, duration: 2, ease: "power3.out" })
+                .from(".battle-content", { scale: 1.5, opacity: 0, rotationX: 45, duration: 1.5, ease: "back.out(2)" }, "<0.5");
+
+        // Parallax background text for battles
+        gsap.to(".battle-text-bg", {
+            x: 500,
+            scrollTrigger: { trigger: "#battles", start: "top bottom", end: "bottom top", scrub: 2 }
+        });
+    </script>
 </body>
 </html>
