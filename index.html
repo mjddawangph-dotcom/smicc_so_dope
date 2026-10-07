@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMICC SO DOPE | SMICCOPHISTO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Official portfolio of Smicc So Dope (Smiccophisto) - Philippine Hip-Hop Artist, HGHLNDS 4114 Member.">
+    <title>SMICC SO DOPE | SMICCOPHISTO Official</title>
     
-    <!-- Fonts: Aggressive Display & Tech Sans -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Syncopate:wght@400;700&family=Manrope:wght@300;500;800&display=swap" rel="stylesheet">
@@ -15,389 +16,485 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
-        /* CSS VARIABLES & RESET */
+        /* =========================================
+           1. CSS VARIABLES
+           ========================================= */
         :root {
-            --bg: #030303;
-            --text: #f0f0f0;
-            --red: #D32F2F;
-            --green: #388E3C;
-            --font-head: 'Anton', sans-serif;
+            --color-bg: #030303;
+            --color-surface: #0a0a0a;
+            --color-surface-card: #080808;
+            --color-text-main: #f0f0f0;
+            --color-text-muted: #888888;
+            --color-accent-red: #D32F2F;
+            --color-accent-green: #388E3C;
+            
+            --font-display: 'Anton', sans-serif;
             --font-tech: 'Syncopate', sans-serif;
             --font-body: 'Manrope', sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-        
+        /* =========================================
+           2. BASE RESETS
+           ========================================= */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
+
         body {
-            background-color: var(--bg); color: var(--text);
-            font-family: var(--font-body); overflow-x: hidden;
+            background-color: var(--color-bg);
+            color: var(--color-text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            overscroll-behavior-y: none;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* CUSTOM CURSOR */
-        .cursor {
-            width: 20px; height: 20px; border: 2px solid var(--red);
-            border-radius: 50%; position: fixed; top: 0; left: 0;
-            pointer-events: none; z-index: 10000;
-            transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s;
+        ul { list-style: none; }
+        a { text-decoration: none; color: inherit; }
+
+        /* Disable custom cursor on Touch Devices (Mobile Fix) */
+        @media (pointer: coarse) {
+            *, *::before, *::after { cursor: auto !important; }
+            .cursor { display: none !important; }
         }
-        .cursor.active-green { border-color: var(--green); background: rgba(56,142,60,0.2); width: 40px; height: 40px; }
-        
-        /* GRITTY NOISE TEXTURE */
-        .noise {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+
+        /* =========================================
+           3. GLOBAL ELEMENTS
+           ========================================= */
+        .cursor {
+            width: 20px; height: 20px;
+            border: 2px solid var(--color-accent-red);
+            border-radius: 50%;
+            position: fixed; top: 0; left: 0;
+            pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+            will-change: transform;
+        }
+
+        .cursor.is-active {
+            width: 60px; height: 60px;
+            border-color: var(--color-accent-green);
+            background-color: rgba(56, 142, 60, 0.1);
+            backdrop-filter: blur(2px);
+        }
+
+        .noise-overlay {
+            position: fixed; inset: 0;
+            width: 100vw; height: 100vh;
             pointer-events: none; z-index: 9998; opacity: 0.05;
             background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)"/%3E%3C/svg%3E');
         }
 
-        /* PRELOADER */
         #preloader {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #000; z-index: 9999; display: flex;
-            align-items: center; justify-content: center; flex-direction: column;
-        }
-        .loader-text {
-            font-family: var(--font-head); font-size: 5vw; color: transparent;
-            -webkit-text-stroke: 1px var(--text); text-transform: uppercase;
-        }
-        .loader-bar {
-            width: 0%; height: 2px; background: var(--green); margin-top: 20px;
+            position: fixed; inset: 0;
+            background: var(--color-bg); z-index: 10000;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
         }
 
-        /* SECTION STYLES */
+        .loader-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 6vw, 4rem); /* Mobile safe */
+            color: transparent;
+            -webkit-text-stroke: 1px var(--color-text-main);
+            text-transform: uppercase;
+        }
+
+        .loader-progress {
+            width: 0%; height: 2px;
+            background: var(--color-accent-green);
+            margin-top: 24px;
+        }
+
+        /* =========================================
+           4. SECTIONS
+           ========================================= */
         section { position: relative; width: 100vw; overflow: hidden; }
 
-        /* HERO SECTION */
-        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; }
-        .hero-bg-img {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; opacity: 0.3; filter: grayscale(100%) contrast(120%); z-index: 0;
-        }
-        .hero-content { position: relative; z-index: 2; text-align: center; }
-        .hero-title {
-            font-family: var(--font-head); font-size: clamp(4rem, 12vw, 15rem);
-            line-height: 0.85; text-transform: uppercase;
-            color: var(--text); position: relative;
-        }
-        .hero-title span { display: block; overflow: hidden; }
-        .hero-title span div { display: inline-block; }
-        .h-stroke { color: transparent; -webkit-text-stroke: 2px var(--text); }
-        .h-red { color: var(--red); }
+        /* --- HERO --- */
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; padding: 0 5vw; }
+        .hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; filter: grayscale(100%) contrast(120%); z-index: -1; }
+        .hero__content { position: relative; z-index: 1; text-align: center; width: 100%; }
         
-        .hero-sub {
-            font-family: var(--font-tech); font-size: 1.2rem; letter-spacing: 0.5em;
-            color: var(--green); margin-top: 2rem;
+        .hero__title {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 15vw, 15rem); /* Responsive scale */
+            line-height: 0.85; text-transform: uppercase;
+            word-wrap: break-word;
+        }
+        .hero__line { display: block; overflow: hidden; }
+        .hero__text-stroke { color: transparent; -webkit-text-stroke: 2px var(--color-text-main); display: inline-block; }
+        .hero__text-fill { color: var(--color-accent-red); display: inline-block; }
+        
+        .hero__subtitle {
+            font-family: var(--font-tech);
+            font-size: clamp(0.7rem, 2.5vw, 1.2rem);
+            letter-spacing: 0.3em; color: var(--color-accent-green);
+            margin-top: 2rem; display: inline-block;
         }
 
-        /* MARQUEE SEPARATOR */
-        .marquee-container {
-            background: var(--red); color: var(--bg); padding: 15px 0;
-            font-family: var(--font-head); font-size: 3rem; white-space: nowrap;
-            overflow: hidden; display: flex; align-items: center; transform: rotate(-2deg);
-            width: 105%; margin-left: -2.5%; z-index: 5; position: relative;
+        /* --- MARQUEE --- */
+        .marquee {
+            background: var(--color-accent-red); color: var(--color-bg);
+            padding: clamp(1rem, 3vw, 1.5rem) 0;
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            white-space: nowrap; overflow: hidden;
+            display: flex; align-items: center;
+            transform: rotate(-2deg); width: 105%; margin-left: -2.5%;
+            z-index: 50; position: relative;
         }
-        .marquee-content { display: flex; gap: 50px; animation: scrollMarquee 20s linear infinite; }
+        .marquee__content { display: flex; gap: 3rem; animation: scrollMarquee 20s linear infinite; will-change: transform; }
         @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* HGHLNDS 4114 (HORIZONTAL SCROLL) */
-        .hghlnds-wrapper { height: 100vh; display: flex; flex-wrap: nowrap; background: #0a0a0a; }
-        .hgh-panel {
-            min-width: 100vw; height: 100vh; display: flex; align-items: center;
-            justify-content: center; padding: 5vw; position: relative;
-        }
-        .hgh-bg-text {
-            position: absolute; font-family: var(--font-head); font-size: 35vw;
-            color: rgba(255,255,255,0.02); white-space: nowrap; pointer-events: none;
-        }
-        .hgh-content {
-            display: flex; gap: 4rem; align-items: center; z-index: 2; width: 100%; max-width: 1400px;
-        }
-        .hgh-img { width: 40%; height: 60vh; object-fit: cover; filter: grayscale(100%); border: 1px solid #333; }
-        .hgh-text-box { width: 60%; }
-        .hgh-text-box h2 { font-family: var(--font-head); font-size: 6rem; line-height: 1; margin-bottom: 1rem; }
-        .hgh-text-box p { font-size: 1.5rem; color: #888; max-width: 600px; }
+        /* --- HGHLNDS 4114 (Horizontal Scroll) --- */
+        .hghlnds__wrapper { height: 100vh; display: flex; flex-wrap: nowrap; background: var(--color-surface); will-change: transform; }
+        .hghlnds__panel { min-width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; padding: 5vw; position: relative; }
+        .hghlnds__bg-text { position: absolute; font-family: var(--font-display); font-size: clamp(10rem, 35vw, 35rem); color: rgba(255,255,255,0.02); white-space: nowrap; pointer-events: none; }
         
-        /* DISCOGRAPHY */
-        .discography { min-height: 100vh; padding: 10vw 5vw; background: var(--bg); }
-        .section-title { font-family: var(--font-head); font-size: 8rem; margin-bottom: 5rem; text-transform: uppercase; }
-        .track-list { list-style: none; border-top: 2px solid #222; }
+        .hghlnds__content { display: flex; gap: 4rem; align-items: center; z-index: 1; width: 100%; max-width: 1400px; }
+        .hghlnds__img { width: 40%; height: 60vh; object-fit: cover; filter: grayscale(100%); border: 1px solid #333; will-change: transform, opacity; }
+        .hghlnds__text { width: 60%; }
+        .hghlnds__heading { font-family: var(--font-display); font-size: clamp(2.5rem, 7vw, 6rem); line-height: 1; margin-bottom: 1.5rem; text-transform: uppercase; }
+        .hghlnds__desc { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--color-text-muted); max-width: 600px; line-height: 1.6; }
+
+        /* Mobile HGHLNDS Fixes */
+        @media (max-width: 768px) {
+            .hghlnds__wrapper { height: auto; flex-direction: column; }
+            .hghlnds__panel { height: auto; min-height: 100vh; padding: 15vh 5vw; }
+            .hghlnds__content { flex-direction: column !important; text-align: center; gap: 2rem; }
+            .hghlnds__img { width: 100%; height: 40vh; }
+            .hghlnds__text { width: 100%; }
+        }
+
+        /* --- DISCOGRAPHY --- */
+        .discography { min-height: 100vh; padding: 15vw 5vw 10vw 5vw; background: var(--color-bg); }
+        .discography__title { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 8rem); margin-bottom: clamp(3rem, 6vw, 5rem); text-transform: uppercase; line-height: 0.9; }
+        .track-list { border-top: 2px solid #222; }
+        
         .track-item {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 2.5rem 0; border-bottom: 2px solid #222; position: relative;
-            overflow: hidden;
+            padding: clamp(1.5rem, 4vw, 2.5rem) 0; border-bottom: 2px solid #222;
+            position: relative; overflow: hidden; will-change: transform, opacity;
         }
-        .track-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(56,142,60,0.1));
-            transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 0;
+        .track-item__bg {
+            position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(56,142,60,0.1));
+            transform: translateY(100%); transition: transform 0.4s ease; z-index: 0;
         }
-        .track-item:hover .track-bg { transform: translateY(0); }
-        .track-name { font-family: var(--font-head); font-size: 4rem; z-index: 1; transition: padding-left 0.4s; }
-        .track-item:hover .track-name { color: var(--green); padding-left: 2rem; }
-        .track-meta { font-family: var(--font-tech); color: #666; font-size: 1rem; z-index: 1; text-align: right; }
-        .track-type { display: block; color: var(--text); font-weight: bold; margin-bottom: 5px; }
-
-        /* RAP BATTLES (PINNED STACKING CARDS) */
-        .battles { background: #111; padding-top: 10vh; }
-        .battle-container { height: 100vh; position: relative; display: flex; justify-content: center; align-items: center; }
-        .battle-header { position: absolute; top: 10%; text-align: center; width: 100%; z-index: 10; }
-        .battle-header h2 { font-family: var(--font-head); font-size: 8rem; color: var(--red); text-shadow: 0 0 20px rgba(211,47,47,0.4); }
+        .track-item:hover .track-item__bg, .track-item:focus-visible .track-item__bg { transform: translateY(0); }
         
-        .card-stack { position: relative; width: 50vw; height: 50vh; perspective: 1000px; }
+        .track-item__name { font-family: var(--font-display); font-size: clamp(1.5rem, 5vw, 4rem); z-index: 1; transition: padding-left 0.4s, color 0.3s; }
+        .track-item:hover .track-item__name { color: var(--color-accent-green); padding-left: 2rem; }
+        
+        .track-item__meta { font-family: var(--font-tech); color: var(--color-text-muted); font-size: clamp(0.65rem, 1.5vw, 1rem); z-index: 1; text-align: right; }
+        .track-item__type { display: block; color: var(--color-text-main); font-weight: bold; margin-bottom: 0.5rem; }
+
+        /* Mobile Discography Fixes */
+        @media (max-width: 768px) {
+            .track-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .track-item__meta { text-align: left; }
+            .track-item:hover .track-item__name { padding-left: 1rem; }
+        }
+
+        /* --- RAP BATTLES (Pinned Stack) --- */
+        .battles { background: var(--color-surface); padding-top: 10vh; }
+        .battles__container { height: 100vh; position: relative; display: flex; justify-content: center; align-items: center; }
+        .battles__header { position: absolute; top: 10%; text-align: center; width: 100%; z-index: 10; padding: 0 5vw; }
+        .battles__header h2 { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 8rem); color: var(--color-accent-red); text-shadow: 0 0 30px rgba(211,47,47,0.2); text-transform: uppercase; }
+        
+        .battles__stack { position: relative; width: 90vw; max-width: 600px; height: 50vh; }
+        
+        /* Fixed opaque cards so they NEVER visually conflict transparently */
         .battle-card {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: #050505; border: 2px solid #333; padding: 3rem;
+            background: var(--color-surface-card); border: 2px solid #222;
+            padding: clamp(1.5rem, 5vw, 3rem);
             display: flex; flex-direction: column; justify-content: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8); transform-origin: center bottom;
+            box-shadow: 0 -20px 40px rgba(0,0,0,0.9); /* Shadows cast UP to separate stacked cards */
+            will-change: transform, opacity;
         }
-        .battle-card h3 { font-family: var(--font-head); font-size: 4rem; margin-bottom: 1rem; }
-        .battle-card p { font-size: 1.2rem; color: #aaa; }
-        .b-stats { font-family: var(--font-tech); color: var(--red); margin-top: auto; font-size: 1.2rem; }
 
-        /* FOOTER */
-        .footer { padding: 10vw 5vw 2vw 5vw; background: #000; text-align: center; }
-        .huge-footer { font-family: var(--font-head); font-size: 12vw; line-height: 0.8; margin-bottom: 2rem; }
-        .huge-footer span { display: block; -webkit-text-stroke: 2px #333; color: transparent; transition: 0.3s; }
-        .huge-footer span:hover { color: var(--text); -webkit-text-stroke: 0px; text-shadow: 0 0 30px rgba(255,255,255,0.5); }
-        .footer-bottom { font-family: var(--font-tech); font-size: 0.8rem; color: #555; margin-top: 5rem; letter-spacing: 2px; }
+        .battle-card h3 { font-family: var(--font-display); font-size: clamp(1.8rem, 6vw, 3.5rem); margin-bottom: 1rem; text-transform: uppercase; }
+        .battle-card p { font-size: clamp(0.9rem, 2vw, 1.1rem); color: #aaa; line-height: 1.5; }
+        .battle-card__stats { font-family: var(--font-tech); color: var(--color-accent-red); margin-top: auto; font-size: clamp(0.7rem, 2vw, 1rem); padding-top: 2rem; }
+
+        @media (max-width: 768px) {
+            .battles__stack { height: 60vh; margin-top: 15vh; }
+        }
+
+        /* --- FOOTER --- */
+        .footer { padding: 15vw 5vw 5vw 5vw; background: #000; text-align: center; }
+        .footer__cta { font-family: var(--font-display); font-size: clamp(4rem, 15vw, 15rem); line-height: 0.85; margin-bottom: 3rem; display: block; }
+        .footer__cta span { display: block; -webkit-text-stroke: 2px #333; color: transparent; transition: color 0.3s, -webkit-text-stroke 0.3s, text-shadow 0.3s; }
+        .footer__cta:hover span, .footer__cta:focus-visible span { color: var(--color-text-main); -webkit-text-stroke: 0px; text-shadow: 0 0 30px rgba(255,255,255,0.3); }
+        .footer__legal { font-family: var(--font-tech); font-size: clamp(0.5rem, 1.5vw, 0.75rem); color: #555; margin-top: 4rem; letter-spacing: 2px; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
-    <div class="cursor" id="cursor"></div>
-    <div class="noise"></div>
+    <!-- Visual Overlays -->
+    <div class="cursor" id="custom-cursor" aria-hidden="true"></div>
+    <div class="noise-overlay" aria-hidden="true"></div>
 
-    <!-- PRELOADER -->
-    <div id="preloader">
+    <!-- Preloader -->
+    <div id="preloader" role="alert" aria-busy="true">
         <div class="loader-text">SMICCOPHISTO</div>
-        <div class="loader-bar" id="loaderBar"></div>
+        <div class="loader-progress" id="loader-bar"></div>
     </div>
 
-    <!-- 1. HERO SECTION -->
-    <section class="hero" id="hero">
-        <img src="https://images.unsplash.com/photo-1508973379184-7517410fb0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Hip Hop Vibe" class="hero-bg-img">
-        <div class="hero-content">
-            <h1 class="hero-title">
-                <span class="h-line"><div class="h-stroke">SMICC</div></span>
-                <span class="h-line"><div class="h-red">SO DOPE</div></span>
-            </h1>
-            <p class="hero-sub">THE PHILIPPINE RAP PHENOMENON</p>
-        </div>
-    </section>
-
-    <!-- MARQUEE -->
-    <div class="marquee-container">
-        <div class="marquee-content interactable">
-            <span>SMICCOPHISTO</span> <span>//</span>
-            <span>HGHLNDS 4114</span> <span>//</span>
-            <span>STREET GOSPEL</span> <span>//</span>
-            <span>RAP BATTLES</span> <span>//</span>
-            <span>SMICCOPHISTO</span> <span>//</span>
-            <span>HGHLNDS 4114</span> <span>//</span>
-        </div>
-    </div>
-
-    <!-- 2. HGHLNDS 4114 (HORIZONTAL SCROLLING) -->
-    <section class="hghlnds" id="hghlnds">
-        <div class="hghlnds-wrapper" id="hghWrapper">
+    <!-- Main Content -->
+    <main id="main-content">
+        
+        <!-- 1. Hero Section -->
+        <section class="hero" id="hero">
+            <img src="https://images.unsplash.com/photo-1508973379184-7517410fb0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
+                 alt="Gritty urban background texture" class="hero__bg" fetchpriority="high">
             
-            <div class="hgh-panel">
-                <div class="hgh-bg-text">4114</div>
-                <div class="hgh-content">
-                    <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="hgh-img">
-                    <div class="hgh-text-box">
-                        <h2 style="color: var(--green);">HGHLNDS 4114</h2>
-                        <p>The collective movement. We aren't just making tracks; we are architecting the sound of the highlands. Pure, unfiltered, and aggressive authenticity built from the ground up.</p>
+            <div class="hero__content">
+                <h1 class="hero__title">
+                    <span class="hero__line"><span class="hero__text-stroke">SMICC</span></span>
+                    <span class="hero__line"><span class="hero__text-fill">SO DOPE</span></span>
+                </h1>
+                <span class="hero__subtitle">THE PHILIPPINE RAP PHENOMENON</span>
+            </div>
+        </section>
+
+        <!-- Marquee Separator -->
+        <aside class="marquee" aria-hidden="true">
+            <div class="marquee__content interactable">
+                <span>SMICCOPHISTO</span> <span>//</span>
+                <span>HGHLNDS 4114</span> <span>//</span>
+                <span>STREET GOSPEL</span> <span>//</span>
+                <span>RAP BATTLES</span> <span>//</span>
+                <span>SMICCOPHISTO</span> <span>//</span>
+                <span>HGHLNDS 4114</span> <span>//</span>
+            </div>
+        </aside>
+
+        <!-- 2. HGHLNDS 4114 (Horizontal Scroll) -->
+        <section class="hghlnds" id="hghlnds">
+            <div class="hghlnds__wrapper" id="hgh-wrapper">
+                <article class="hghlnds__panel">
+                    <div class="hghlnds__bg-text" aria-hidden="true">4114</div>
+                    <div class="hghlnds__content">
+                        <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                             alt="HGHLNDS crew" class="hghlnds__img" loading="lazy">
+                        <div class="hghlnds__text">
+                            <h2 class="hghlnds__heading" style="color: var(--color-accent-green);">HGHLNDS 4114</h2>
+                            <p class="hghlnds__desc">The collective movement. We aren't just making tracks; we are architecting the sound of the highlands. Pure, unfiltered, and aggressive authenticity built from the ground up.</p>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </article>
 
-            <div class="hgh-panel">
-                <div class="hgh-bg-text">CREW</div>
-                <div class="hgh-content" style="flex-direction: row-reverse;">
-                    <img src="https://images.unsplash.com/photo-1493225457124-a1a2b292bdc1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="hgh-img" style="border-color: var(--red);">
-                    <div class="hgh-text-box">
-                        <h2 class="h-stroke">THE CYPHER</h2>
-                        <p>Iron sharpens iron. When Smiccophisto and the 4114 crew step into the booth, the dynamic shifts. It’s a relentless barrage of heavy bars and monumental beats.</p>
+                <article class="hghlnds__panel">
+                    <div class="hghlnds__bg-text" aria-hidden="true">CREW</div>
+                    <div class="hghlnds__content" style="flex-direction: row-reverse;">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a1a2b292bdc1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Live hip-hop performance" class="hghlnds__img" style="border-color: var(--color-accent-red);" loading="lazy">
+                        <div class="hghlnds__text">
+                            <h2 class="hghlnds__heading" style="-webkit-text-stroke: 1px var(--color-text-main); color: transparent;">THE CYPHER</h2>
+                            <p class="hghlnds__desc">Iron sharpens iron. When Smiccophisto and the 4114 crew step into the booth, the dynamic shifts. It’s a relentless barrage of heavy bars and monumental beats.</p>
+                        </div>
                     </div>
-                </div>
+                </article>
             </div>
+        </section>
 
-        </div>
-    </section>
-
-    <!-- 3. DISCOGRAPHY -->
-    <section class="discography" id="music">
-        <h2 class="section-title">THE <br> DISCOGRAPHY</h2>
-        <ul class="track-list interactable">
-            <li class="track-item">
-                <div class="track-bg"></div>
-                <div class="track-name">STREET GOSPEL</div>
-                <div class="track-meta"><span class="track-type">SOLO</span> PROD. 4114</div>
-            </li>
-            <li class="track-item">
-                <div class="track-bg"></div>
-                <div class="track-name">HIGHLAND MOBBIN'</div>
-                <div class="track-meta"><span class="track-type">COLLAB</span> FT. HGHLNDS</div>
-            </li>
-            <li class="track-item">
-                <div class="track-bg"></div>
-                <div class="track-name">MIDNIGHT VENOM</div>
-                <div class="track-meta"><span class="track-type">SOLO</span> SINGLE</div>
-            </li>
-            <li class="track-item">
-                <div class="track-bg"></div>
-                <div class="track-name">TRENCH WARFARE</div>
-                <div class="track-meta"><span class="track-type">COLLAB</span> STREET ANTHEM</div>
-            </li>
-            <li class="track-item">
-                <div class="track-bg"></div>
-                <div class="track-name">SMICCOPHISTO FREESTYLE</div>
-                <div class="track-meta"><span class="track-type">SOLO</span> RAW MIC</div>
-            </li>
-        </ul>
-    </section>
-
-    <!-- 4. RAP BATTLES (PINNED STACKING CARDS) -->
-    <section class="battles" id="battles">
-        <div class="battle-container" id="battleContainer">
-            <div class="battle-header">
-                <h2>THE ARENA</h2>
-                <p style="font-family: var(--font-tech); color: #fff; margin-top: 10px;">WHERE WORDS BECOME WEAPONS</p>
-            </div>
+        <!-- 3. Discography -->
+        <section class="discography" id="music">
+            <h2 class="discography__title">THE <br> DISCOGRAPHY</h2>
             
-            <div class="card-stack">
-                <div class="battle-card b-card-1">
-                    <h3>TACTICAL PEN GAME</h3>
-                    <p>Smicc So Dope approaches the battle stage like a chessboard. Every bar is calculated, breaking down opponents angle by angle without relying on cheap gimmicks.</p>
-                    <div class="b-stats">STATUS: UNDISPUTED</div>
-                </div>
-                <div class="battle-card b-card-2" style="border-color: var(--red);">
-                    <h3 style="color: var(--red);">AGGRESSIVE DELIVERY</h3>
-                    <p>The stage presence is suffocating. Tested in the harshest battle environments in the Philippines, Smiccophisto brings a venomous energy that dominates the room.</p>
-                    <div class="b-stats">LETHALITY: MAXIMUM</div>
-                </div>
-                <div class="battle-card b-card-3" style="border-color: var(--green);">
-                    <h3 style="color: var(--green);">CROWD CONTROL</h3>
-                    <p>It's not just about rapping; it's about shifting the momentum. Knowing exactly when to punchline and when to let the crowd react.</p>
-                    <div class="b-stats">IMPACT: FLAWLESS</div>
+            <ul class="track-list">
+                <li class="track-item interactable" tabindex="0">
+                    <div class="track-item__bg"></div>
+                    <div class="track-item__name">STREET GOSPEL</div>
+                    <div class="track-item__meta"><span class="track-item__type">SOLO</span> PROD. 4114</div>
+                </li>
+                <li class="track-item interactable" tabindex="0">
+                    <div class="track-item__bg"></div>
+                    <div class="track-item__name">HIGHLAND MOBBIN'</div>
+                    <div class="track-item__meta"><span class="track-item__type">COLLAB</span> FT. HGHLNDS</div>
+                </li>
+                <li class="track-item interactable" tabindex="0">
+                    <div class="track-item__bg"></div>
+                    <div class="track-item__name">MIDNIGHT VENOM</div>
+                    <div class="track-item__meta"><span class="track-item__type">SOLO</span> SINGLE</div>
+                </li>
+                <li class="track-item interactable" tabindex="0">
+                    <div class="track-item__bg"></div>
+                    <div class="track-item__name">TRENCH WARFARE</div>
+                    <div class="track-item__meta"><span class="track-item__type">COLLAB</span> STREET ANTHEM</div>
+                </li>
+                <li class="track-item interactable" tabindex="0">
+                    <div class="track-item__bg"></div>
+                    <div class="track-item__name">SMICC FREESTYLE</div>
+                    <div class="track-item__meta"><span class="track-item__type">SOLO</span> RAW MIC</div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 4. Rap Battles (Fixed Cascading Stack) -->
+        <section class="battles" id="battles">
+            <div class="battles__container" id="battle-container">
+                <header class="battles__header">
+                    <h2>THE ARENA</h2>
+                    <p style="font-family: var(--font-tech); color: #fff; margin-top: 10px;">WHERE WORDS BECOME WEAPONS</p>
+                </header>
+                
+                <div class="battles__stack">
+                    <article class="battle-card">
+                        <h3>TACTICAL PEN GAME</h3>
+                        <p>Smicc So Dope approaches the battle stage like a chessboard. Every bar is calculated, breaking down opponents angle by angle without relying on cheap gimmicks.</p>
+                        <div class="battle-card__stats">STATUS: UNDISPUTED</div>
+                    </article>
+                    
+                    <article class="battle-card" style="border-color: var(--color-accent-red);">
+                        <h3 style="color: var(--color-accent-red);">AGGRESSIVE DELIVERY</h3>
+                        <p>The stage presence is suffocating. Tested in the harshest battle environments in the Philippines, Smiccophisto brings a venomous energy that dominates the room.</p>
+                        <div class="battle-card__stats">LETHALITY: MAXIMUM</div>
+                    </article>
+                    
+                    <article class="battle-card" style="border-color: var(--color-accent-green);">
+                        <h3 style="color: var(--color-accent-green);">CROWD CONTROL</h3>
+                        <p>It's not just about rapping; it's about shifting the momentum. Knowing exactly when to punchline and when to let the crowd react.</p>
+                        <div class="battle-card__stats">IMPACT: FLAWLESS</div>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 5. FOOTER -->
-    <section class="footer">
-        <div class="huge-footer interactable">
-            <span>BOOK</span>
-            <span>SMICC</span>
-            <span>NOW.</span>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2026 SMICC SO DOPE / SMICCOPHISTO. HGHLNDS 4114. DESIGNED FOR GREATNESS.
-        </div>
-    </section>
+    </main>
 
-    <!-- ANIMATION LOGIC (GSAP) -->
+    <!-- 5. Footer -->
+    <footer class="footer">
+        <a href="#" class="footer__cta interactable" aria-label="Book Smicc Now">
+            <span aria-hidden="true">BOOK</span>
+            <span aria-hidden="true">SMICC</span>
+            <span aria-hidden="true">NOW.</span>
+        </a>
+        <div class="footer__legal">
+            &copy; <script>document.write(new Date().getFullYear())</script> SMICC SO DOPE / SMICCOPHISTO. HGHLNDS 4114. ENGINEERED FOR GREATNESS.
+        </div>
+    </footer>
+
+    <!-- Animation Logic -->
     <script>
-        // Custom Cursor Logic
-        const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        document.querySelectorAll('.interactable, .track-item').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('active-green'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('active-green'));
-        });
-
-        // Initialize GSAP only AFTER entire page loads (Guarantees calculations are correct)
-        window.addEventListener("load", () => {
+        (() => {
             gsap.registerPlugin(ScrollTrigger);
 
-            // --- Preloader Animation ---
-            const tlPreloader = gsap.timeline();
-            tlPreloader.to("#loaderBar", { width: "100%", duration: 1.5, ease: "expo.inOut" })
-                       .to(".loader-text", { opacity: 0, y: -50, duration: 0.5 }, "+=0.2")
-                       .to("#preloader", { y: "-100vh", duration: 1, ease: "power4.inOut" })
-                       .add(initScrollAnimations, "-=0.5"); // Start main animations before preloader finishes leaving
+            // 1. Performant Custom Cursor
+            const cursor = document.getElementById('custom-cursor');
+            const xTo = gsap.quickTo(cursor, "left", { duration: 0.15, ease: "power3" });
+            const yTo = gsap.quickTo(cursor, "top", { duration: 0.15, ease: "power3" });
 
-            function initScrollAnimations() {
-                
-                // --- 1. Hero Reveal ---
-                gsap.from(".hero-title span div", {
-                    y: 200, skewY: 20, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power4.out"
-                });
-                gsap.from(".hero-sub", { opacity: 0, y: 30, duration: 1, delay: 0.8 });
-                
-                // Hero Parallax on Scroll
-                gsap.to(".hero-bg-img", {
-                    y: 200, opacity: 0,
-                    scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true }
-                });
-                gsap.to(".hero-title", {
-                    y: -150, scale: 0.9,
-                    scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true }
-                });
+            window.addEventListener('mousemove', (e) => {
+                xTo(e.clientX);
+                yTo(e.clientY);
+            });
 
-                // --- 2. HGHLNDS 4114 Horizontal Scroll Hijack ---
-                const hghWrapper = document.getElementById("hghWrapper");
-                const panels = gsap.utils.toArray(".hgh-panel");
-                
-                gsap.to(panels, {
-                    xPercent: -100 * (panels.length - 1),
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: "#hghlnds",
-                        pin: true,
-                        scrub: 1,
-                        start: "top top",
-                        end: () => "+=" + hghWrapper.offsetWidth
-                    }
-                });
+            document.querySelectorAll('.interactable').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('is-active'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('is-active'));
+            });
 
-                // Internal Panel animations
-                panels.forEach((panel, i) => {
-                    gsap.from(panel.querySelector(".hgh-img"), {
-                        scale: 0.5, rotation: 10, opacity: 0,
-                        scrollTrigger: {
-                            trigger: panel,
-                            containerAnimation: gsap.getById("hghlnds-pin"), // Link to horizontal scroll
-                            start: "left center",
-                            toggleActions: "play none none reverse"
-                        }
+            // 2. Master Animations
+            window.addEventListener("load", () => {
+                
+                // Preloader Sequence
+                gsap.timeline({ onComplete: initMainAnimations })
+                    .to("#loader-bar", { width: "100%", duration: 1.2, ease: "expo.inOut" })
+                    .to(".loader-text", { opacity: 0, y: -20, duration: 0.4 }, "+=0.1")
+                    .to("#preloader", { yPercent: -100, duration: 1, ease: "power4.inOut" }, "-=0.2")
+                    .set("#preloader", { display: "none" });
+
+                function initMainAnimations() {
+                    let ctx = gsap.context(() => {
+                        
+                        // Hero Reveal
+                        gsap.from(".hero__text-stroke, .hero__text-fill", {
+                            y: 100, skewY: 10, opacity: 0, duration: 1.2, stagger: 0.1, ease: "power4.out"
+                        });
+                        gsap.from(".hero__subtitle", { opacity: 0, y: 15, duration: 1, delay: 0.6 });
+                        
+                        gsap.to(".hero__bg", {
+                            y: "15%", opacity: 0,
+                            scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true }
+                        });
+
+                        // HGHLNDS Desktop Pinning logic
+                        let mm = gsap.matchMedia();
+                        mm.add("(min-width: 769px)", () => {
+                            const hghWrapper = document.getElementById("hgh-wrapper");
+                            const hghPanels = gsap.utils.toArray(".hghlnds__panel");
+                            
+                            let hScroll = gsap.to(hghPanels, {
+                                xPercent: -100 * (hghPanels.length - 1),
+                                ease: "none",
+                                scrollTrigger: {
+                                    trigger: "#hghlnds", pin: true, scrub: 1,
+                                    start: "top top", end: () => "+=" + hghWrapper.offsetWidth
+                                }
+                            });
+
+                            hghPanels.forEach((panel) => {
+                                gsap.from(panel.querySelector(".hghlnds__img"), {
+                                    scale: 0.9, opacity: 0, rotation: 3,
+                                    scrollTrigger: {
+                                        trigger: panel, containerAnimation: hScroll,
+                                        start: "left 75%", toggleActions: "play none none reverse"
+                                    }
+                                });
+                            });
+                        });
+
+                        // Discography Reveal
+                        gsap.from(".discography__title", {
+                            x: -50, opacity: 0, duration: 1, ease: "power3.out",
+                            scrollTrigger: { trigger: "#music", start: "top 75%" }
+                        });
+
+                        gsap.utils.toArray(".track-item").forEach((track, i) => {
+                            gsap.from(track, {
+                                x: i % 2 === 0 ? 30 : -30, opacity: 0, duration: 0.8, ease: "back.out(1.2)",
+                                scrollTrigger: { trigger: track, start: "top 85%" }
+                            });
+                        });
+
+                        // 🔴 FIXED BUG: Cascading Deck-of-Cards Stack (No transparent overlaps)
+                        const battleCards = gsap.utils.toArray(".battle-card");
+                        gsap.set(battleCards, { y: window.innerHeight, opacity: 0 });
+
+                        ScrollTrigger.create({
+                            trigger: "#battle-container",
+                            pin: true,
+                            start: "top top",
+                            end: "+=200%", 
+                            scrub: 1,
+                            animation: gsap.to(battleCards, {
+                                // Instead of scaling them into each other, we physically stagger their Y axis
+                                // This guarantees you see the tops of the previous cards, perfectly opaque.
+                                y: (index) => index * 45, 
+                                opacity: 1,
+                                scale: 1, // Fixed scale keeps dimensions crisp
+                                stagger: 0.3,
+                                ease: "power3.out"
+                            })
+                        });
+                        
+                        // Footer Reveal
+                        gsap.from(".footer__cta span", {
+                            y: 80, opacity: 0, stagger: 0.1, duration: 1, ease: "power4.out",
+                            scrollTrigger: { trigger: ".footer", start: "top 85%" }
+                        });
                     });
-                });
-
-                // --- 3. Discography Aggressive Reveal ---
-                gsap.from(".section-title", {
-                    x: -200, opacity: 0, duration: 1, ease: "expo.out",
-                    scrollTrigger: { trigger: "#music", start: "top 70%" }
-                });
-
-                gsap.utils.toArray(".track-item").forEach((track, i) => {
-                    gsap.from(track, {
-                        x: i % 2 === 0 ? 100 : -100, // Come from alternate sides
-                        opacity: 0,
-                        duration: 0.8,
-                        ease: "back.out(1.5)",
-                        scrollTrigger: { trigger: track, start: "top 85%" }
-                    });
-                });
-
-                // --- 4. Rap Battles Card Stacking (Pinned Section) ---
-                const cards = gsap.utils.toArray(".battle-card");
-                
-                // Set initial state for cards
-                gsap.set(cards, { y: 800, rotationX: 45, opacity: 0, scale: 0.8 });
-
-                ScrollTrigger.create({
-                    trigger: "#battleContainer",
-                    pin: true,
-                    start: "top top",
-                    end: "+=200%", // The user scrolls 200% of viewport height while pinned
-                    animation: gsap.to(cards, {
-                        y: 0,
-                        rotationX: 0,
-                        op
+                    
+                    ScrollTrigger.refresh();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
