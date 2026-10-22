@@ -1,283 +1,594 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Official portfolio of Smicc So Dope (Smiccophisto) - Philippine Hip-Hop Artist, HGHLNDS 4114 Member.">
-<title>SMICC SO DOPE | SMICCOPHISTO Official</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Syncopate:wght@400;700&family=Manrope:wght@300;500;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<noscript><style>#preloader{display:none}</style></noscript>
-<style>
-:root{--bg:#030303;--surface:#0a0a0a;--card:#080808;--text:#f0f0f0;--muted:#888;--red:#D32F2F;--green:#388E3C;
---display:'Anton',sans-serif;--tech:'Syncopate',sans-serif;--body:'Manrope',sans-serif}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;cursor:none}
-body{background:var(--bg);color:var(--text);font-family:var(--body);overflow-x:hidden;overscroll-behavior-y:none;-webkit-font-smoothing:antialiased}
-ul{list-style:none}a{text-decoration:none;color:inherit}
-@media (pointer:coarse){*,*::before,*::after{cursor:auto!important}.cursor{display:none!important}}
-:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Official portfolio of Smicc So Dope (Smiccophisto) - Philippine Hip-Hop Artist, HGHLNDS 4114 Member.">
+    <title>SMICC SO DOPE | SMICCOPHISTO Official</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Syncopate:wght@400;700&family=Manrope:wght@300;500;800&display=swap" rel="stylesheet">
 
-.cursor{width:20px;height:20px;border:2px solid var(--red);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transition:width .3s,height .3s,background-color .3s,border-color .3s}
-.cursor.is-active{width:64px;height:64px;border-color:var(--green);background:rgba(56,142,60,.12);backdrop-filter:blur(2px)}
-.noise{position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.05;background:url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)"/%3E%3C/svg%3E')}
-.progress{position:fixed;top:0;left:0;width:100%;height:4px;z-index:9997;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--red),var(--green))}
-#preloader{position:fixed;inset:0;background:var(--bg);z-index:10000;display:flex;align-items:center;justify-content:center;flex-direction:column}
-.loader-text{font-family:var(--display);font-size:clamp(1.5rem,6vw,4rem);line-height:1.2;color:transparent;-webkit-text-stroke:1px var(--text)}
-.loader-progress{width:0;height:3px;background:var(--green);margin-top:24px}
-.ch{display:inline-block;will-change:transform}
+    <!-- GSAP Core & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-section{position:relative;width:100vw;overflow:hidden}
-.hero{height:100vh;display:flex;align-items:center;justify-content:center;padding:0 5vw;isolation:isolate}
-.hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.25;filter:grayscale(100%) contrast(120%);z-index:-1}
-.hero__content{position:relative;text-align:center;width:100%}
-.hero__title{font-family:var(--display);font-size:clamp(4rem,15vw,15rem);line-height:.85;text-transform:uppercase;word-wrap:break-word}
-.hero__line{display:block;overflow:hidden;padding:.12em 0;margin:-.12em 0}
-.hero__line>span{display:inline-block}
-.hero__stroke{color:transparent;-webkit-text-stroke:2px var(--text)}
-.hero__fill{color:var(--red)}
-.hero__subtitle{font-family:var(--tech);font-size:clamp(.7rem,2.5vw,1.2rem);letter-spacing:.3em;color:var(--green);margin-top:2rem;display:inline-block}
+    <style>
+        /* =========================================
+           1. CSS VARIABLES
+           ========================================= */
+        :root {
+            --color-bg: #030303;
+            --color-surface: #0a0a0a;
+            --color-surface-card: #080808;
+            --color-text-main: #f0f0f0;
+            --color-text-muted: #888888;
+            --color-accent-red: #D32F2F;
+            --color-accent-green: #388E3C;
+            
+            --font-display: 'Anton', sans-serif;
+            --font-tech: 'Syncopate', sans-serif;
+            --font-body: 'Manrope', sans-serif;
+        }
 
-.marquee{background:var(--red);color:var(--bg);padding:clamp(1rem,3vw,1.5rem) 0;font-family:var(--display);font-size:clamp(1.5rem,5vw,3rem);white-space:nowrap;overflow:hidden;display:flex;align-items:center;width:105%;margin-left:-2.5%;z-index:50;position:relative}
-.marquee--alt{background:var(--green);margin-top:-1rem}
-.marquee__content{display:flex;gap:3rem;flex:none;will-change:transform}
+        /* =========================================
+           2. BASE RESETS
+           ========================================= */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
 
-.hghlnds__wrapper{height:100vh;display:flex;flex-wrap:nowrap;background:var(--surface)}
-.hghlnds__panel{min-width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;padding:5vw;position:relative}
-.hghlnds__bg-text{position:absolute;font-family:var(--display);font-size:clamp(10rem,35vw,35rem);color:rgba(255,255,255,.03);white-space:nowrap;pointer-events:none}
-.hghlnds__content{display:flex;gap:4rem;align-items:center;z-index:1;width:100%;max-width:1400px}
-.hghlnds__img{width:40%;height:60vh;object-fit:cover;filter:grayscale(100%);border:1px solid #333}
-.hghlnds__text{width:60%}
-.hghlnds__heading{font-family:var(--display);font-size:clamp(2.5rem,7vw,6rem);line-height:1;margin-bottom:1.5rem;text-transform:uppercase}
-.hghlnds__desc{font-size:clamp(1rem,2vw,1.25rem);color:var(--muted);max-width:600px;line-height:1.6}
-@media (max-width:768px){
-.hghlnds__wrapper{height:auto;flex-direction:column}
-.hghlnds__panel{height:auto;min-height:100vh;padding:15vh 5vw}
-.hghlnds__content{flex-direction:column!important;text-align:center;gap:2rem}
-.hghlnds__img{width:100%;height:40vh}.hghlnds__text{width:100%}}
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            overscroll-behavior-y: none;
+            -webkit-font-smoothing: antialiased;
+        }
 
-.discography{min-height:100vh;padding:15vw 5vw 10vw;background:var(--bg)}
-.discography__title{font-family:var(--display);font-size:clamp(3rem,10vw,8rem);margin-bottom:clamp(3rem,6vw,5rem);text-transform:uppercase;line-height:.9}
-.track-list{border-top:2px solid #222}
-.track-item{display:flex;justify-content:space-between;align-items:center;padding:clamp(1.5rem,4vw,2.5rem) 0;border-bottom:2px solid #222;position:relative;overflow:hidden}
-.track-item__bg{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(56,142,60,.12));transform:translateY(100%);transition:transform .4s ease}
-.track-item:hover .track-item__bg,.track-item:focus-visible .track-item__bg{transform:none}
-.track-item__name{font-family:var(--display);font-size:clamp(1.5rem,5vw,4rem);z-index:1;transition:padding-left .4s,color .3s}
-.track-item:hover .track-item__name,.track-item:focus-visible .track-item__name{color:var(--green);padding-left:2rem}
-.track-item__meta{font-family:var(--tech);color:var(--muted);font-size:clamp(.65rem,1.5vw,1rem);z-index:1;text-align:right}
-.track-item__type{display:block;color:var(--text);font-weight:700;margin-bottom:.5rem}
-@media (max-width:768px){.track-item{flex-direction:column;align-items:flex-start;gap:.5rem}.track-item__meta{text-align:left}}
+        ul { list-style: none; }
+        a { text-decoration: none; color: inherit; }
 
-.battles{background:var(--surface);padding-top:10vh}
-.battles__container{height:100vh;position:relative;display:flex;justify-content:center;align-items:center}
-.battles__header{position:absolute;top:10%;text-align:center;width:100%;z-index:10;padding:0 5vw}
-.battles__header h2{font-family:var(--display);font-size:clamp(3rem,10vw,8rem);color:var(--red);text-shadow:0 0 30px rgba(211,47,47,.25);text-transform:uppercase}
-.battles__stack{position:relative;width:90vw;max-width:600px;height:50vh}
-.battle-card{position:absolute;inset:0;background:var(--card);border:2px solid #222;padding:clamp(1.5rem,5vw,3rem);display:flex;flex-direction:column;justify-content:center;box-shadow:0 -20px 40px rgba(0,0,0,.9)}
-.battle-card h3{font-family:var(--display);font-size:clamp(1.8rem,6vw,3.5rem);margin-bottom:1rem;text-transform:uppercase}
-.battle-card p{font-size:clamp(.9rem,2vw,1.1rem);color:#aaa;line-height:1.5}
-.battle-card__stats{font-family:var(--tech);color:var(--red);margin-top:auto;font-size:clamp(.7rem,2vw,1rem);padding-top:2rem}
-@media (max-width:768px){.battles__stack{height:60vh;margin-top:15vh}}
+        @media (pointer: coarse) {
+            *, *::before, *::after { cursor: auto !important; }
+            .cursor { display: none !important; }
+        }
 
-.footer{padding:15vw 5vw 5vw;background:#000;text-align:center;display:flex;flex-direction:column;align-items:center}
-.footer__cta{font-family:var(--display);font-size:clamp(4rem,15vw,15rem);line-height:.85;margin-bottom:2rem;display:block}
-.footer__cta span{display:block;-webkit-text-stroke:2px #333;color:transparent;transition:color .3s,-webkit-text-stroke .3s,text-shadow .3s}
-.footer__cta:hover span,.footer__cta:focus-visible span{color:var(--text);-webkit-text-stroke:0;text-shadow:0 0 30px rgba(255,255,255,.3)}
-.footer__socials{display:flex;gap:clamp(1rem,4vw,3rem);justify-content:center;flex-wrap:wrap;margin-top:2rem;width:100%;max-width:800px}
-.footer__socials a{font-family:var(--tech);font-size:clamp(.8rem,2vw,1.2rem);color:var(--muted);position:relative;text-transform:uppercase;letter-spacing:2px;transition:color .3s;padding:5px 0;display:inline-block}
-.footer__socials a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--red);transition:width .3s cubic-bezier(.16,1,.3,1)}
-.footer__socials a:hover,.footer__socials a:focus-visible{color:var(--text)}
-.footer__socials a:hover::after,.footer__socials a:focus-visible::after{width:100%}
-.footer__socials a:nth-child(even)::after{background:var(--green)}
-.footer__legal{font-family:var(--tech);font-size:clamp(.5rem,1.5vw,.75rem);color:#555;margin-top:4rem;letter-spacing:2px;text-transform:uppercase}
-</style>
+        /* =========================================
+           3. GLOBAL ELEMENTS
+           ========================================= */
+        .cursor {
+            width: 20px; height: 20px;
+            border: 2px solid var(--color-accent-red);
+            border-radius: 50%;
+            position: fixed; top: 0; left: 0;
+            pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+            will-change: transform;
+        }
+
+        .cursor.is-active {
+            width: 60px; height: 60px;
+            border-color: var(--color-accent-green);
+            background-color: rgba(56, 142, 60, 0.1);
+            backdrop-filter: blur(2px);
+        }
+
+        .noise-overlay {
+            position: fixed; inset: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 9998; opacity: 0.04;
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)"/%3E%3C/svg%3E');
+        }
+
+        #preloader {
+            position: fixed; inset: 0;
+            background: var(--color-bg); z-index: 10000;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+        }
+
+        .loader-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 6vw, 4rem); 
+            line-height: 1.2;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--color-text-main);
+            text-transform: uppercase;
+        }
+
+        .loader-progress {
+            width: 0%; height: 2px;
+            background: var(--color-accent-green);
+            margin-top: 24px;
+        }
+
+        /* =========================================
+           4. SECTIONS
+           ========================================= */
+        section { position: relative; width: 100vw; overflow: hidden; }
+
+        /* --- HERO --- */
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; padding: 0 5vw; position: relative; }
+        
+        /* Low-Resource CSS Smoke Background (Pushed to the very back) */
+        .smoke-container {
+            position: absolute;
+            inset: 0;
+            z-index: -2; /* Deep background */
+            overflow: hidden;
+            background-color: var(--color-bg);
+        }
+        .smoke-blob {
+            position: absolute;
+            filter: blur(100px); /* Massive blur for smoke effect */
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: floatSmoke 15s infinite alternate ease-in-out;
+            will-change: transform;
+        }
+        .smoke-blob:nth-child(1) {
+            width: 70vw; height: 70vw;
+            background: rgba(120, 120, 120, 0.2); /* Grey smoke */
+            top: -10%; left: -10%;
+        }
+        .smoke-blob:nth-child(2) {
+            width: 60vw; height: 60vw;
+            background: rgba(211, 47, 47, 0.18); /* Red smoke */
+            bottom: -20%; right: -10%;
+            animation-duration: 22s;
+            animation-direction: alternate-reverse;
+        }
+        .smoke-blob:nth-child(3) {
+            width: 60vw; height: 60vw;
+            background: rgba(56, 142, 60, 0.18); /* Green smoke */
+            top: 40%; left: 20%;
+            animation-duration: 28s;
+        }
+
+        @keyframes floatSmoke {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(8vw, 10vh) scale(1.15); }
+            100% { transform: translate(-8vw, -5vh) scale(0.9); }
+        }
+
+        .hero__content { position: relative; z-index: 10; text-align: center; width: 100%; pointer-events: none; }
+        
+        .hero__title {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 15vw, 15rem);
+            line-height: 0.85; text-transform: uppercase;
+            word-wrap: break-word;
+        }
+        
+        .hero__line { 
+            display: block; 
+            overflow: hidden; 
+            padding: 0.12em 0; 
+            margin: -0.12em 0;
+        }
+        
+        .hero__text-stroke { color: transparent; -webkit-text-stroke: 2px var(--color-text-main); display: inline-block; }
+        .hero__text-fill { color: var(--color-accent-red); display: inline-block; }
+        
+        .hero__subtitle {
+            font-family: var(--font-tech);
+            font-size: clamp(0.7rem, 2.5vw, 1.2rem);
+            letter-spacing: 0.3em; color: var(--color-accent-green);
+            margin-top: 2rem; display: inline-block;
+        }
+
+        /* --- OVERLAPPING MARQUEE (Moved to lower edge) --- */
+        .marquee {
+            position: absolute;
+            bottom: 15%; /* Slices across the bottom leg of the text, keeping name visible */
+            top: auto;
+            left: -5vw;
+            width: 110vw;
+            background: var(--color-accent-red); 
+            color: var(--color-bg);
+            padding: clamp(1rem, 3vw, 1.5rem) 0;
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            white-space: nowrap; overflow: hidden;
+            display: flex; align-items: center;
+            transform: rotate(-3deg);
+            z-index: 20; /* Sits above the text */
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6); /* Drop shadow creates depth over text */
+        }
+        .marquee__content { display: flex; gap: 3rem; animation: scrollMarquee 20s linear infinite; will-change: transform; pointer-events: auto; }
+        @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* --- HGHLNDS 4114 (Horizontal Scroll) --- */
+        .hghlnds__wrapper { height: 100vh; display: flex; flex-wrap: nowrap; background: var(--color-surface); will-change: transform; }
+        .hghlnds__panel { min-width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; padding: 5vw; position: relative; }
+        .hghlnds__bg-text { position: absolute; font-family: var(--font-display); font-size: clamp(10rem, 35vw, 35rem); color: rgba(255,255,255,0.02); white-space: nowrap; pointer-events: none; }
+        
+        .hghlnds__content { display: flex; gap: 4rem; align-items: center; z-index: 1; width: 100%; max-width: 1400px; }
+        .hghlnds__img { width: 40%; height: 60vh; object-fit: cover; filter: grayscale(100%); border: 1px solid #333; will-change: transform, opacity; }
+        .hghlnds__text { width: 60%; }
+        .hghlnds__heading { font-family: var(--font-display); font-size: clamp(2.5rem, 7vw, 6rem); line-height: 1; margin-bottom: 1.5rem; text-transform: uppercase; }
+        .hghlnds__desc { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--color-text-muted); max-width: 600px; line-height: 1.6; }
+
+        @media (max-width: 768px) {
+            .hghlnds__wrapper { height: auto; flex-direction: column; }
+            .hghlnds__panel { height: auto; min-height: 100vh; padding: 15vh 5vw; }
+            .hghlnds__content { flex-direction: column !important; text-align: center; gap: 2rem; }
+            .hghlnds__img { width: 100%; height: 40vh; }
+            .hghlnds__text { width: 100%; }
+        }
+
+        /* --- DISCOGRAPHY --- */
+        .discography { min-height: 100vh; padding: 15vw 5vw 10vw 5vw; background: var(--color-bg); }
+        .discography__title { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 8rem); margin-bottom: clamp(3rem, 6vw, 5rem); text-transform: uppercase; line-height: 0.9; }
+        .track-list { border-top: 2px solid #222; }
+        
+        .track-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: clamp(1.5rem, 4vw, 2.5rem) 0; border-bottom: 2px solid #222;
+            position: relative; overflow: hidden; will-change: transform, opacity;
+        }
+        .track-item__bg {
+            position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(56,142,60,0.1));
+            transform: translateY(100%); transition: transform 0.4s ease; z-index: 0;
+        }
+        .track-item:hover .track-item__bg, .track-item:focus-visible .track-item__bg { transform: translateY(0); }
+        
+        .track-item__name { font-family: var(--font-display); font-size: clamp(1.5rem, 5vw, 4rem); z-index: 1; transition: padding-left 0.4s, color 0.3s; }
+        .track-item:hover .track-item__name { color: var(--color-accent-green); padding-left: 2rem; }
+        
+        .track-item__meta { font-family: var(--font-tech); color: var(--color-text-muted); font-size: clamp(0.65rem, 1.5vw, 1rem); z-index: 1; text-align: right; }
+        .track-item__type { display: block; color: var(--color-text-main); font-weight: bold; margin-bottom: 0.5rem; }
+
+        @media (max-width: 768px) {
+            .track-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .track-item__meta { text-align: left; }
+            .track-item:hover .track-item__name { padding-left: 1rem; }
+        }
+
+        /* --- RAP BATTLES --- */
+        .battles { background: var(--color-surface); padding-top: 10vh; }
+        .battles__container { height: 100vh; position: relative; display: flex; justify-content: center; align-items: center; }
+        .battles__header { position: absolute; top: 10%; text-align: center; width: 100%; z-index: 10; padding: 0 5vw; }
+        .battles__header h2 { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 8rem); color: var(--color-accent-red); text-shadow: 0 0 30px rgba(211,47,47,0.2); text-transform: uppercase; }
+        
+        .battles__stack { position: relative; width: 90vw; max-width: 600px; height: 50vh; }
+        
+        .battle-card {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--color-surface-card); border: 2px solid #222;
+            padding: clamp(1.5rem, 5vw, 3rem);
+            display: flex; flex-direction: column; justify-content: center;
+            box-shadow: 0 -20px 40px rgba(0,0,0,0.9);
+            will-change: transform, opacity;
+        }
+
+        .battle-card h3 { font-family: var(--font-display); font-size: clamp(1.8rem, 6vw, 3.5rem); margin-bottom: 1rem; text-transform: uppercase; }
+        .battle-card p { font-size: clamp(0.9rem, 2vw, 1.1rem); color: #aaa; line-height: 1.5; }
+        .battle-card__stats { font-family: var(--font-tech); color: var(--color-accent-red); margin-top: auto; font-size: clamp(0.7rem, 2vw, 1rem); padding-top: 2rem; }
+
+        @media (max-width: 768px) {
+            .battles__stack { height: 60vh; margin-top: 15vh; }
+        }
+
+        /* --- FOOTER & SOCIALS --- */
+        .footer { padding: 15vw 5vw 5vw 5vw; background: #000; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .footer__cta { font-family: var(--font-display); font-size: clamp(4rem, 15vw, 15rem); line-height: 0.85; margin-bottom: 2rem; display: block; }
+        .footer__cta span { display: block; -webkit-text-stroke: 2px #333; color: transparent; transition: color 0.3s, -webkit-text-stroke 0.3s, text-shadow 0.3s; }
+        .footer__cta:hover span, .footer__cta:focus-visible span { color: var(--color-text-main); -webkit-text-stroke: 0px; text-shadow: 0 0 30px rgba(255,255,255,0.3); }
+        
+        .footer__socials { display: flex; gap: clamp(1rem, 4vw, 3rem); justify-content: center; flex-wrap: wrap; margin-top: 2rem; width: 100%; max-width: 800px; }
+        .footer__socials a {
+            font-family: var(--font-tech); font-size: clamp(0.8rem, 2vw, 1.2rem);
+            color: var(--color-text-muted); position: relative; text-transform: uppercase;
+            letter-spacing: 2px; transition: color 0.3s; padding-bottom: 5px;
+        }
+        .footer__socials a::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 0%; height: 2px; background: var(--color-accent-red);
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .footer__socials a:hover, .footer__socials a:focus-visible { color: var(--color-text-main); }
+        .footer__socials a:hover::after, .footer__socials a:focus-visible::after { width: 100%; }
+        .footer__socials a:nth-child(even):after { background: var(--color-accent-green); }
+
+        .footer__legal { font-family: var(--font-tech); font-size: clamp(0.5rem, 1.5vw, 0.75rem); color: #555; margin-top: 4rem; letter-spacing: 2px; text-transform: uppercase; }
+    </style>
 </head>
 <body>
-<div class="cursor" id="cursor" aria-hidden="true"></div>
-<div class="noise" aria-hidden="true"></div>
-<div class="progress" aria-hidden="true"></div>
 
-<div id="preloader" role="alert" aria-busy="true">
-  <div class="loader-text">SMICCOPHISTO</div>
-  <div class="loader-progress" id="loader-bar"></div>
-</div>
+    <!-- Visual Overlays -->
+    <div class="cursor" id="custom-cursor" aria-hidden="true"></div>
+    <div class="noise-overlay" aria-hidden="true"></div>
 
-<main>
-  <section class="hero" id="hero">
-    <img src="https://images.unsplash.com/photo-1508973379184-7517410fb0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Gritty urban background texture" class="hero__bg" fetchpriority="high">
-    <div class="hero__content">
-      <h1 class="hero__title">
-        <span class="hero__line"><span class="hero__stroke">SMICC</span></span>
-        <span class="hero__line"><span class="hero__fill">SO DOPE</span></span>
-      </h1>
-      <span class="hero__subtitle">THE PHILIPPINE RAP PHENOMENON</span>
+    <!-- Preloader -->
+    <div id="preloader" role="alert" aria-busy="true">
+        <div class="loader-text">SMICCOPHISTO</div>
+        <div class="loader-progress" id="loader-bar"></div>
     </div>
-  </section>
 
-  <aside class="marquee" aria-hidden="true">
-    <div class="marquee__content interactable">
-      <span>SMICCOPHISTO</span><span>//</span><span>HGHLNDS 4114</span><span>//</span><span>STREET GOSPEL</span><span>//</span><span>RAP BATTLES</span><span>//</span>
-    </div>
-  </aside>
+    <!-- Main Content -->
+    <main id="main-content">
+        
+        <!-- 1. Hero Section -->
+        <section class="hero" id="hero">
+            
+            <!-- Pure CSS Low-Resource Smoke Animation (Now in the deep background) -->
+            <div class="smoke-container">
+                <div class="smoke-blob"></div>
+                <div class="smoke-blob"></div>
+                <div class="smoke-blob"></div>
+            </div>
+            
+            <div class="hero__content">
+                <h1 class="hero__title">
+                    <span class="hero__line"><span class="hero__text-stroke">SMICC</span></span>
+                    <span class="hero__line"><span class="hero__text-fill">SO DOPE</span></span>
+                </h1>
+                <span class="hero__subtitle">THE PHILIPPINE RAP PHENOMENON</span>
+            </div>
 
-  <section class="hghlnds" id="hghlnds">
-    <div class="hghlnds__wrapper" id="hgh-wrapper">
-      <article class="hghlnds__panel">
-        <div class="hghlnds__bg-text" aria-hidden="true">4114</div>
-        <div class="hghlnds__content">
-          <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="HGHLNDS crew" class="hghlnds__img" loading="lazy">
-          <div class="hghlnds__text">
-            <h2 class="hghlnds__heading" style="color:var(--green)">HGHLNDS 4114</h2>
-            <p class="hghlnds__desc">The collective movement. We aren’t just making tracks; we are architecting the sound of the highlands. Pure, unfiltered, and aggressive authenticity built from the ground up.</p>
-          </div>
+            <!-- Overlapping Marquee inside Hero (Moved to lower edge) -->
+            <aside class="marquee" aria-hidden="true">
+                <div class="marquee__content interactable">
+                    <span>SMICCOPHISTO</span> <span>//</span>
+                    <span>HGHLNDS 4114</span> <span>//</span>
+                    <span>STREET GOSPEL</span> <span>//</span>
+                    <span>RAP BATTLES</span> <span>//</span>
+                    <span>SMICCOPHISTO</span> <span>//</span>
+                    <span>HGHLNDS 4114</span> <span>//</span>
+                </div>
+            </aside>
+        </section>
+
+        <!-- 2. HGHLNDS 4114 -->
+        <section class="hghlnds" id="hghlnds">
+            <div class="hghlnds__wrapper" id="hgh-wrapper">
+                <article class="hghlnds__panel">
+                    <div class="hghlnds__bg-text" aria-hidden="true">4114</div>
+                    <div class="hghlnds__content">
+                        <!-- Atmospheric Hip-Hop Crowd Image -->
+                        <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Live hip-hop concert crowd representing Philippine rap scene" class="hghlnds__img" loading="lazy">
+                        <div class="hghlnds__text">
+                            <h2 class="hghlnds__heading" style="color: var(--color-accent-green);">HGHLNDS 4114</h2>
+                            <p class="hghlnds__desc">The collective movement. We aren't just making tracks; we are architecting the sound of the highlands. Pure, unfiltered, and aggressive authenticity built from the ground up.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="hghlnds__panel">
+                    <div class="hghlnds__bg-text" aria-hidden="true">CREW</div>
+                    <div class="hghlnds__content" style="flex-direction: row-reverse;">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a1a2b292bdc1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Live hip-hop performance" class="hghlnds__img" style="border-color: var(--color-accent-red);" loading="lazy">
+                        <div class="hghlnds__text">
+                            <h2 class="hghlnds__heading" style="-webkit-text-stroke: 1px var(--color-text-main); color: transparent;">THE CYPHER</h2>
+                            <p class="hghlnds__desc">Iron sharpens iron. When Smiccophisto and the 4114 crew step into the booth, the dynamic shifts. It’s a relentless barrage of heavy bars and monumental beats.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 3. Discography -->
+        <section class="discography" id="music">
+            <h2 class="discography__title">THE <br> DISCOGRAPHY</h2>
+            
+            <ul class="track-list">
+                <li class="track-item interactable" tabindex="0">
+                    <div class="track-item__bg"></div>
+                    <div class="track-item__name">STREET GOSPEL</div>
+                    <div class="track-item__meta"><span class="track-item__type">SOLO</span> PROD. 4114</div>
+                </li>
+                <li class="track-item interactable" tabindex="0">
+                    <div class="track-item__bg"></div>
+                    <div class="track-item__name">HIGHLAND MOBBIN'</div>
+                    <div class="track-item__meta"><span class="track-item__type">COLLAB</span> FT. HGHLNDS</div>
+                </li>
+                <li class="track-item interactable" tabindex="0">
+                    <div class="track-item__bg"></div>
+                    <div class="track-item__name">MIDNIGHT VENOM</div>
+                    <div class="track-item__meta"><span class="track-item__type">SOLO</span> SINGLE</div>
+                </li>
+                <li class="track-item interactable" tabindex="0">
+                    <div class="track-item__bg"></div>
+                    <div class="track-item__name">TRENCH WARFARE</div>
+                    <div class="track-item__meta"><span class="track-item__type">COLLAB</span> STREET ANTHEM</div>
+                </li>
+                <li class="track-item interactable" tabindex="0">
+                    <div class="track-item__bg"></div>
+                    <div class="track-item__name">SMICC FREESTYLE</div>
+                    <div class="track-item__meta"><span class="track-item__type">SOLO</span> RAW MIC</div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 4. Rap Battles -->
+        <section class="battles" id="battles">
+            <div class="battles__container" id="battle-container">
+                <header class="battles__header">
+                    <h2>THE ARENA</h2>
+                    <p style="font-family: var(--font-tech); color: #fff; margin-top: 10px;">WHERE WORDS BECOME WEAPONS</p>
+                </header>
+                
+                <div class="battles__stack">
+                    <article class="battle-card">
+                        <h3>TACTICAL PEN GAME</h3>
+                        <p>Smicc So Dope approaches the battle stage like a chessboard. Every bar is calculated, breaking down opponents angle by angle without relying on cheap gimmicks.</p>
+                        <div class="battle-card__stats">STATUS: UNDISPUTED</div>
+                    </article>
+                    
+                    <article class="battle-card" style="border-color: var(--color-accent-red);">
+                        <h3 style="color: var(--color-accent-red);">AGGRESSIVE DELIVERY</h3>
+                        <p>The stage presence is suffocating. Tested in the harshest battle environments in the Philippines, Smiccophisto brings a venomous energy that dominates the room.</p>
+                        <div class="battle-card__stats">LETHALITY: MAXIMUM</div>
+                    </article>
+                    
+                    <article class="battle-card" style="border-color: var(--color-accent-green);">
+                        <h3 style="color: var(--color-accent-green);">CROWD CONTROL</h3>
+                        <p>It's not just about rapping; it's about shifting the momentum. Knowing exactly when to punchline and when to let the crowd react.</p>
+                        <div class="battle-card__stats">IMPACT: FLAWLESS</div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 5. Footer & Socials -->
+    <footer class="footer">
+        <a href="mailto:booking@smiccophisto.com" class="footer__cta interactable" aria-label="Book Smicc Now">
+            <span aria-hidden="true">BOOK</span>
+            <span aria-hidden="true">SMICC</span>
+            <span aria-hidden="true">NOW.</span>
+        </a>
+
+        <div class="footer__socials">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="interactable">INSTAGRAM</a>
+            <a href="https://spotify.com" target="_blank" rel="noopener noreferrer" class="interactable">SPOTIFY</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="interactable">YOUTUBE</a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="interactable">FACEBOOK</a>
         </div>
-      </article>
-      <article class="hghlnds__panel">
-        <div class="hghlnds__bg-text" aria-hidden="true">CREW</div>
-        <div class="hghlnds__content" style="flex-direction:row-reverse">
-          <img src="https://images.unsplash.com/photo-1493225457124-a1a2b292bdc1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Live hip-hop performance" class="hghlnds__img" style="border-color:var(--red)" loading="lazy">
-          <div class="hghlnds__text">
-            <h2 class="hghlnds__heading" style="-webkit-text-stroke:1px var(--text);color:transparent">THE CYPHER</h2>
-            <p class="hghlnds__desc">Iron sharpens iron. When Smiccophisto and the 4114 crew step into the booth, the dynamic shifts. It’s a relentless barrage of heavy bars and monumental beats.</p>
-          </div>
+
+        <div class="footer__legal">
+            &copy; <script>document.write(new Date().getFullYear())</script> SMICC SO DOPE / SMICCOPHISTO. HGHLNDS 4114. ENGINEERED FOR GREATNESS.
         </div>
-      </article>
-    </div>
-  </section>
+    </footer>
 
-  <section class="discography" id="music">
-    <h2 class="discography__title">THE <br> DISCOGRAPHY</h2>
-    <ul class="track-list">
-      <li class="track-item interactable" tabindex="0"><div class="track-item__bg"></div><div class="track-item__name">STREET GOSPEL</div><div class="track-item__meta"><span class="track-item__type">SOLO</span> PROD. 4114</div></li>
-      <li class="track-item interactable" tabindex="0"><div class="track-item__bg"></div><div class="track-item__name">HIGHLAND MOBBIN’</div><div class="track-item__meta"><span class="track-item__type">COLLAB</span> FT. HGHLNDS</div></li>
-      <li class="track-item interactable" tabindex="0"><div class="track-item__bg"></div><div class="track-item__name">MIDNIGHT VENOM</div><div class="track-item__meta"><span class="track-item__type">SOLO</span> SINGLE</div></li>
-      <li class="track-item interactable" tabindex="0"><div class="track-item__bg"></div><div class="track-item__name">TRENCH WARFARE</div><div class="track-item__meta"><span class="track-item__type">COLLAB</span> STREET ANTHEM</div></li>
-      <li class="track-item interactable" tabindex="0"><div class="track-item__bg"></div><div class="track-item__name">SMICC FREESTYLE</div><div class="track-item__meta"><span class="track-item__type">SOLO</span> RAW MIC</div></li>
-    </ul>
-  </section>
+    <!-- Animation Logic -->
+    <script>
+        (() => {
+            gsap.registerPlugin(ScrollTrigger);
 
-  <aside class="marquee marquee--alt" aria-hidden="true">
-    <div class="marquee__content">
-      <span>5 TRACKS DEEP</span><span>//</span><span>OPEN FOR FEATURES</span><span>//</span><span>BATTLE READY</span><span>//</span><span>HGHLNDS 4114 REPRESENT</span><span>//</span>
-    </div>
-  </aside>
+            // Custom Cursor Logic
+            const cursor = document.getElementById('custom-cursor');
+            const xTo = gsap.quickTo(cursor, "left", { duration: 0.15, ease: "power3" });
+            const yTo = gsap.quickTo(cursor, "top", { duration: 0.15, ease: "power3" });
 
-  <section class="battles" id="battles">
-    <div class="battles__container" id="battle-container">
-      <header class="battles__header">
-        <h2>THE ARENA</h2>
-        <p style="font-family:var(--tech);color:#fff;margin-top:10px">WHERE WORDS BECOME WEAPONS</p>
-      </header>
-      <div class="battles__stack">
-        <article class="battle-card"><h3>TACTICAL PEN GAME</h3><p>Smicc So Dope approaches the battle stage like a chessboard. Every bar is calculated, breaking down opponents angle by angle without relying on cheap gimmicks.</p><div class="battle-card__stats">STATUS: UNDISPUTED</div></article>
-        <article class="battle-card"><h3>CROWD CONTROL</h3><p>Timing, punchlines and presence. When the room turns, it turns for Smiccophisto.</p><div class="battle-card__stats">STATUS: STAGE READY</div></article>
-        <article class="battle-card"><h3>ZERO MERCY</h3><p>Final round, no safety net. Every verse lands like a closing argument.</p><div class="battle-card__stats">STATUS: UNBROKEN</div></article>
-      </div>
-    </div>
-  </section>
+            window.addEventListener('mousemove', (e) => {
+                xTo(e.clientX);
+                yTo(e.clientY);
+            });
 
-  <footer class="footer" id="contact">
-    <a href="#" class="footer__cta interactable" aria-label="Link up"><span>LET’S</span><span>LINK UP</span></a>
-    <nav class="footer__socials" aria-label="Social links">
-      <a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Spotify</a><a href="#">Facebook</a><a href="#">TikTok</a>
-    </nav>
-    <p class="footer__legal">© 2026 Smicc So Dope // HGHLNDS 4114</p>
-  </footer>
-</main>
+            document.querySelectorAll('.interactable').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('is-active'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('is-active'));
+            });
 
-<script>
-(()=>{
-const $=s=>document.querySelector(s),$$=s=>gsap.utils.toArray(s);
-if(matchMedia('(prefers-reduced-motion: reduce)').matches){$('#preloader').remove();return}
-gsap.registerPlugin(ScrollTrigger);
-document.body.style.overflow='hidden';
+            // Master Initialization
+            window.addEventListener("load", () => {
+                
+                let ctx = gsap.context(() => {
 
-/* ---------- helpers ---------- */
-const split=el=>{[...el.childNodes].forEach(n=>{if(n.nodeType===3){const f=document.createDocumentFragment();
- [...n.textContent].forEach(c=>{if(!c.trim())return f.append(' ');const s=document.createElement('span');s.className='ch';s.textContent=c;f.append(s)});n.replaceWith(f)}});
- return el.querySelectorAll('.ch')};
+                    const masterTl = gsap.timeline();
 
-/* ---------- cursor + magnetic links ---------- */
-const cur=$('#cursor');gsap.set(cur,{xPercent:-50,yPercent:-50});
-const cx=gsap.quickTo(cur,'x',{duration:.25,ease:'power3'}),cy=gsap.quickTo(cur,'y',{duration:.25,ease:'power3'});
-addEventListener('mousemove',e=>{cx(e.clientX);cy(e.clientY)});
-$$('a,.interactable').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('is-active'));el.addEventListener('mouseleave',()=>cur.classList.remove('is-active'))});
-$$('.footer__socials a').forEach(a=>{const mx=gsap.quickTo(a,'x',{duration:.5,ease:'elastic.out(1,.4)'}),my=gsap.quickTo(a,'y',{duration:.5,ease:'elastic.out(1,.4)'});
- a.addEventListener('mousemove',e=>{const r=a.getBoundingClientRect();mx((e.clientX-r.left-r.width/2)*.4);my((e.clientY-r.top-r.height/2)*.6)});
- a.addEventListener('mouseleave',()=>{mx(0);my(0)})});
+                    masterTl
+                        .to("#loader-bar", { width: "100%", duration: 1.2, ease: "expo.inOut" })
+                        .to(".loader-text", { opacity: 0, y: -20, duration: 0.4 }, "+=0.1")
+                        .to("#preloader", { yPercent: -100, duration: 1, ease: "power4.inOut" }, "-=0.2")
+                        // Introduce Hero Text seamlessly
+                        .from(".hero__text-stroke, .hero__text-fill", {
+                            y: 100, skewY: 10, opacity: 0, duration: 1.2, stagger: 0.1, ease: "power4.out"
+                        }, "-=0.6")
+                        .from(".hero__subtitle", { 
+                            opacity: 0, y: 15, duration: 1 
+                        }, "-=0.8")
+                        // Marquee slides into view last
+                        .from(".marquee", { 
+                            opacity: 0, x: -50, duration: 1, ease: "power3.out"
+                        }, "-=0.8")
+                        .set("#preloader", { display: "none" }) // Cleanup DOM
+                        .add(initScrollAnimations); 
+                    
+                    function initScrollAnimations() {
+                        // Smoke Parallax fade out
+                        gsap.to(".smoke-container", {
+                            y: "15%", opacity: 0,
+                            scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true }
+                        });
 
-/* ---------- scroll progress bar ---------- */
-gsap.to('.progress',{scaleX:1,ease:'none',scrollTrigger:{trigger:document.documentElement,start:'top top',end:'bottom bottom',scrub:.3}});
+                        // HGHLNDS Pinning
+                        let mm = gsap.matchMedia();
+                        mm.add("(min-width: 769px)", () => {
+                            const hghWrapper = document.getElementById("hgh-wrapper");
+                            const hghPanels = gsap.utils.toArray(".hghlnds__panel");
+                            
+                            let hScroll = gsap.to(hghPanels, {
+                                xPercent: -100 * (hghPanels.length - 1),
+                                ease: "none",
+                                scrollTrigger: {
+                                    trigger: "#hghlnds", pin: true, scrub: 1,
+                                    start: "top top", end: () => "+=" + hghWrapper.offsetWidth
+                                }
+                            });
 
-/* ---------- intro (plays once) ---------- */
-gsap.timeline({onComplete:()=>{$('#preloader').remove();document.body.style.overflow='';ScrollTrigger.refresh()}})
- .to('#loader-bar',{width:'min(60vw,420px)',duration:1.3,ease:'power2.inOut'})
- .to('.loader-text',{scale:1.2,opacity:0,duration:.5,ease:'power2.in'})
- .to('#preloader',{clipPath:'inset(0 0 100% 0)',duration:.9,ease:'power4.inOut'})
- .from('.hero__line>span',{yPercent:125,rotate:9,duration:1.2,stagger:.14,ease:'power4.out'},'-=.45')
- .from('.hero__subtitle',{yPercent:250,duration:.9,ease:'power3.out'},'-=.6');
+                            hghPanels.forEach((panel) => {
+                                gsap.from(panel.querySelector(".hghlnds__img"), {
+                                    scale: 0.9, opacity: 0, rotation: 3,
+                                    scrollTrigger: {
+                                        trigger: panel, containerAnimation: hScroll,
+                                        start: "left 75%", toggleActions: "play none none reverse"
+                                    }
+                                });
+                            });
+                        });
 
-/* ---------- hero: tears apart as you scroll, rebuilds on the way up ---------- */
-gsap.timeline({scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:1}})
- .to('.hero__line:nth-child(1)',{xPercent:-30,rotate:-4},0)
- .to('.hero__line:nth-child(2)',{xPercent:30,rotate:4},0)
- .to('.hero__title',{scale:1.3,opacity:.15},0)
- .to('.hero__subtitle',{letterSpacing:'1em',opacity:0},0)
- .to('.hero__bg',{scale:1.5,yPercent:25},0);
+                        // Discography Reveal
+                        gsap.from(".discography__title", {
+                            x: -50, opacity: 0, duration: 1, ease: "power3.out",
+                            scrollTrigger: { trigger: "#music", start: "top 75%" }
+                        });
 
-/* ---------- tickers: scroll speed boosts them, scroll direction flips them, velocity rumbles + skews ---------- */
-const bands=$$('.marquee'),mc=bands.map(b=>{const c=b.querySelector('.marquee__content');c.innerHTML+=c.innerHTML;return c});
-gsap.set(bands,{rotation:i=>i?1.5:-2});
-const xs=mc.map(c=>gsap.quickSetter(c,'x','px')),ys=bands.map(b=>gsap.quickSetter(b,'y','px'));
-const sk=gsap.quickSetter($$('.track-item__name,.battles__header h2'),'skewY','deg'),clamp=gsap.utils.clamp(-10,10);
-let H=[];const meas=()=>{H=mc.map(c=>c.children[c.children.length/2].offsetLeft-c.children[0].offsetLeft)};
-addEventListener('resize',meas);document.fonts.ready.then(meas);meas();
-const P={v:0,dir:1,x:mc.map(()=>0)};
-ScrollTrigger.create({onUpdate:s=>{P.dir=s.direction;const v=s.getVelocity();if(Math.abs(v)>Math.abs(P.v))P.v=v}});
-gsap.ticker.add((t,dt)=>{
- dt=Math.min(dt,50);const a=Math.abs(P.v);P.v*=.9;sk(clamp(P.v/-220));
- const amp=Math.min(a/180,7);
- mc.forEach((c,i)=>{if(!H[i])return;const d=i?-1:1;
-  P.x[i]=gsap.utils.wrap(-H[i],0,P.x[i]-(70+a/3)*P.dir*d*dt/1000);xs[i](P.x[i]);ys[i]((Math.random()-.5)*amp)})});
+                        gsap.utils.toArray(".track-item").forEach((track, i) => {
+                            gsap.from(track, {
+                                x: i % 2 === 0 ? 30 : -30, opacity: 0, duration: 0.8, ease: "back.out(1.2)",
+                                scrollTrigger: { trigger: track, start: "top 85%" }
+                            });
+                        });
 
-/* ---------- HGHLNDS: pinned horizontal scroll (desktop), scrubbed reveals (mobile) ---------- */
-const mm=gsap.matchMedia();
-mm.add('(min-width: 769px)',()=>{
- const w=$('#hgh-wrapper'),dist=()=>w.scrollWidth-innerWidth;
- const t=gsap.to(w,{x:()=>-dist(),ease:'none',scrollTrigger:{trigger:'#hghlnds',pin:true,start:'top top',end:()=>'+='+dist()*1.5,scrub:1,invalidateOnRefresh:true,anticipatePin:1}});
- const [a,b]=$$('.hghlnds__panel'),st=(p,s,e)=>({trigger:p,containerAnimation:t,start:s,end:e,scrub:true});
- gsap.to(a.querySelector('.hghlnds__img'),{xPercent:-30,rotate:3,scale:.9,ease:'none',scrollTrigger:st(a,'left left','right left')});
- gsap.to(a.querySelector('.hghlnds__text'),{x:-160,opacity:.1,ease:'none',scrollTrigger:st(a,'left left','right left')});
- gsap.to(a.querySelector('.hghlnds__bg-text'),{xPercent:-40,ease:'none',scrollTrigger:st(a,'left left','right left')});
- gsap.from(b.querySelector('.hghlnds__img'),{xPercent:60,rotate:8,scale:1.15,ease:'none',scrollTrigger:st(b,'left right','left left')});
- gsap.from(b.querySelector('.hghlnds__text'),{x:220,opacity:0,skewX:-12,ease:'none',scrollTrigger:st(b,'left right','left left')});
- gsap.from(b.querySelector('.hghlnds__bg-text'),{xPercent:60,ease:'none',scrollTrigger:st(b,'left right','left left')});
-});
-mm.add('(max-width: 768px)',()=>{
- $$('.hghlnds__img,.hghlnds__text').forEach((el,i)=>gsap.from(el,{y:90,opacity:0,rotate:i%2?3:-3,scrollTrigger:{trigger:el,start:'top 95%',end:'top 55%',scrub:1}}));
-});
+                        // Rap Battles Card Stack 
+                        const battleCards = gsap.utils.toArray(".battle-card");
+                        gsap.set(battleCards, { y: window.innerHeight, opacity: 0 });
 
-/* ---------- discography: letters slam in, rows swing in from alternating sides ---------- */
-gsap.from(split($('.discography__title')),{yPercent:120,rotate:()=>gsap.utils.random(-35,35),opacity:0,stagger:.04,ease:'back.out(2)',scrollTrigger:{trigger:'.discography__title',start:'top 92%',end:'top 35%',scrub:1}});
-$$('.track-item').forEach((el,i)=>gsap.from(el,{xPercent:i%2?70:-70,rotate:i%2?3:-3,opacity:0,scrollTrigger:{trigger:el,start:'top 105%',end:'top 65%',scrub:1}}));
+                        ScrollTrigger.create({
+                            trigger: "#battle-container",
+                            pin: true,
+                            start: "top top",
+                            end: "+=200%", 
+                            scrub: 1,
+                            animation: gsap.to(battleCards, {
+                                y: (index) => index * 45,
+                                opacity: 1,
+                                scale: 1, 
+                                stagger: 0.3,
+                                ease: "power3.out"
+                            })
+                        });
+                        
+                        // Footer & Socials
+                        const footerTl = gsap.timeline({
+                            scrollTrigger: { trigger: ".footer", start: "top 85%" }
+                        });
+                        
+                        footerTl.from(".footer__cta span", {
+                            y: 80, opacity: 0, stagger: 0.1, duration: 1, ease: "power4.out"
+                        })
+                        .from(".footer__socials a", {
+                            y: 20, opacity: 0, stagger: 0.1, duration: 0.6, ease: "power3.out"
+                        }, "-=0.5");
 
-/* ---------- arena: pinned card stack, each card slams on top as you scroll, peels off as you scroll back ---------- */
-const cards=$$('.battle-card'),rots=[-2,2.5,-1.5];
-gsap.set(cards[0],{rotate:rots[0]});
-const bt=gsap.timeline({defaults:{ease:'power3.out'},scrollTrigger:{trigger:'#battle-container',start:'top top',end:'+=250%',pin:true,scrub:1,anticipatePin:1}});
-bt.fromTo('.battles__header h2',{scale:.75,opacity:.2},{scale:1,opacity:1,duration:.6},0);
-cards.forEach((c,i)=>{if(!i)return;
- bt.fromTo(c,{yPercent:130,rotate:i%2?14:-14},{yPercent:0,rotate:rots[i],duration:1})
-   .to(cards[i-1],{scale:.92,yPercent:-5,opacity:.35,duration:1},'<')});
-
-/* ---------- footer: giant letters scatter in, socials rise ---------- */
-const ft={trigger:'.footer',start:'top 90%',end:'bottom bottom',scrub:1};
-gsap.from(split($('.footer__cta span:nth-child(1)')),{yPercent:110,rotate:()=>gsap.utils.random(-25,25),opacity:0,stagger:.05,ease:'back.out(2)',scrollTrigger:ft});
-gsap.from(split($('.footer__cta span:nth-child(2)')),{yPercent:110,rotate:()=>gsap.utils.random(-25,25),opacity:0,stagger:.05,ease:'back.out(2)',scrollTrigger:ft});
-gsap.from('.footer__socials a',{y:50,opacity:0,stagger:.1,scrollTrigger:ft});
-})();
-</script>
+                        ScrollTrigger.refresh();
+                    }
+                });
+            });
+        })();
+    </script>
 </body>
 </html>
