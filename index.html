@@ -117,45 +117,46 @@
         /* --- HERO --- */
         .hero { height: 100vh; display: flex; align-items: center; justify-content: center; padding: 0 5vw; position: relative; }
         
-        /* Low-Resource CSS Smoke Background (Pushed to the very back) */
+        /* Low-Resource CSS Smoke Background */
         .smoke-container {
             position: absolute;
             inset: 0;
-            z-index: -2; /* Deep background */
+            z-index: 0;
             overflow: hidden;
             background-color: var(--color-bg);
+            opacity: 0.6;
         }
         .smoke-blob {
             position: absolute;
-            filter: blur(100px); /* Massive blur for smoke effect */
+            filter: blur(80px);
             border-radius: 50%;
-            opacity: 0.6;
-            animation: floatSmoke 15s infinite alternate ease-in-out;
+            opacity: 0.5;
+            animation: floatSmoke 20s infinite alternate ease-in-out;
             will-change: transform;
         }
         .smoke-blob:nth-child(1) {
-            width: 70vw; height: 70vw;
-            background: rgba(120, 120, 120, 0.2); /* Grey smoke */
-            top: -10%; left: -10%;
+            width: 80vw; height: 80vw;
+            background: rgba(150, 150, 150, 0.15);
+            top: -20%; left: -20%;
         }
         .smoke-blob:nth-child(2) {
             width: 60vw; height: 60vw;
-            background: rgba(211, 47, 47, 0.18); /* Red smoke */
-            bottom: -20%; right: -10%;
-            animation-duration: 22s;
+            background: rgba(211, 47, 47, 0.1); /* Faint Red Smoke */
+            bottom: -10%; right: -10%;
+            animation-duration: 25s;
             animation-direction: alternate-reverse;
         }
         .smoke-blob:nth-child(3) {
-            width: 60vw; height: 60vw;
-            background: rgba(56, 142, 60, 0.18); /* Green smoke */
-            top: 40%; left: 20%;
-            animation-duration: 28s;
+            width: 70vw; height: 70vw;
+            background: rgba(56, 142, 60, 0.08); /* Faint Green Smoke */
+            top: 30%; left: 30%;
+            animation-duration: 30s;
         }
 
         @keyframes floatSmoke {
             0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(8vw, 10vh) scale(1.15); }
-            100% { transform: translate(-8vw, -5vh) scale(0.9); }
+            50% { transform: translate(5vw, 5vh) scale(1.1); }
+            100% { transform: translate(-5vw, -10vh) scale(0.9); }
         }
 
         .hero__content { position: relative; z-index: 10; text-align: center; width: 100%; pointer-events: none; }
@@ -184,11 +185,10 @@
             margin-top: 2rem; display: inline-block;
         }
 
-        /* --- OVERLAPPING MARQUEE (Moved to lower edge) --- */
+        /* --- OVERLAPPING MARQUEE --- */
         .marquee {
             position: absolute;
-            bottom: 15%; /* Slices across the bottom leg of the text, keeping name visible */
-            top: auto;
+            top: 55%; /* Overlaps precisely over the main text */
             left: -5vw;
             width: 110vw;
             background: var(--color-accent-red); 
@@ -198,9 +198,9 @@
             font-size: clamp(1.5rem, 5vw, 3rem);
             white-space: nowrap; overflow: hidden;
             display: flex; align-items: center;
-            transform: rotate(-3deg);
+            transform: translateY(-50%) rotate(-3deg);
             z-index: 20; /* Sits above the text */
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6); /* Drop shadow creates depth over text */
+            box-shadow: 0 10px 40px rgba(211,47,47,0.3);
         }
         .marquee__content { display: flex; gap: 3rem; animation: scrollMarquee 20s linear infinite; will-change: transform; pointer-events: auto; }
         @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -319,7 +319,7 @@
         <!-- 1. Hero Section -->
         <section class="hero" id="hero">
             
-            <!-- Pure CSS Low-Resource Smoke Animation (Now in the deep background) -->
+            <!-- Pure CSS Low-Resource Smoke Animation -->
             <div class="smoke-container">
                 <div class="smoke-blob"></div>
                 <div class="smoke-blob"></div>
@@ -334,7 +334,7 @@
                 <span class="hero__subtitle">THE PHILIPPINE RAP PHENOMENON</span>
             </div>
 
-            <!-- Overlapping Marquee inside Hero (Moved to lower edge) -->
+            <!-- Overlapping Marquee inside Hero -->
             <aside class="marquee" aria-hidden="true">
                 <div class="marquee__content interactable">
                     <span>SMICCOPHISTO</span> <span>//</span>
@@ -353,7 +353,7 @@
                 <article class="hghlnds__panel">
                     <div class="hghlnds__bg-text" aria-hidden="true">4114</div>
                     <div class="hghlnds__content">
-                        <!-- Atmospheric Hip-Hop Crowd Image -->
+                        <!-- Updated to an atmospheric Hip-Hop Crowd Image -->
                         <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
                              alt="Live hip-hop concert crowd representing Philippine rap scene" class="hghlnds__img" loading="lazy">
                         <div class="hghlnds__text">
@@ -500,7 +500,7 @@
                         .from(".hero__subtitle", { 
                             opacity: 0, y: 15, duration: 1 
                         }, "-=0.8")
-                        // Marquee slides into view last
+                        // Marquee slides into view last to add the overlapping effect
                         .from(".marquee", { 
                             opacity: 0, x: -50, duration: 1, ease: "power3.out"
                         }, "-=0.8")
