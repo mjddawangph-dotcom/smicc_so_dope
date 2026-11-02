@@ -1,54 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#07110c" />
-  <meta name="description"
-        content="SMICCOPHISTO. Smicc So Dope. HGHLNDS 4114. Videos, latest drop, and contact." />
+  <!-- ========== METADATA / BEGIN ========== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080a09">
+  <meta name="description" content="SMICCOPHISTO. Smicc So Dope. HGHLNDS 4114. Music, visuals, and bookings.">
   <title>SMICCOPHISTO — HGHLNDS 4114</title>
+  <!-- ========== METADATA / END ========== -->
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet" />
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.css" />
-
+  <!-- ========== ALL STYLES / BEGIN ========== -->
   <style>
+    /* ===== DESIGN TOKENS / BEGIN ===== */
     :root {
-      --black: #050907;
-      --green-black: #07110c;
-      --forest: #102a1d;
-      --green: #335e3d;
-      --accent: #b9d68a;
-      --white: #eeeFE5;
-      --muted: #8d9d90;
-      --line: rgba(196, 218, 190, .18);
-      --display: "Barlow Condensed", Impact, sans-serif;
-      --body: "DM Sans", Arial, sans-serif;
-      --gutter: clamp(22px, 5vw, 90px);
+      color-scheme: dark;
+      --black: #080a09;
+      --panel: #101412;
+      --paper: #eeeae0;
+      --muted: #a3aaa4;
+      --green: #234c39;
+      --green-bright: #91bc8d;
+      --red: #5c1d26;
+      --red-bright: #c35860;
+      --line: rgba(238,234,224,.15);
+      --page: min(90vw,1440px);
+      --display: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      --body: Arial, Helvetica, sans-serif;
     }
+    /* ===== DESIGN TOKENS / END ===== */
 
+    /* ===== GLOBAL RESET / ACCESSIBILITY / BEGIN ===== */
     * { box-sizing: border-box; }
-    html { scroll-padding-top: 90px; }
+    html { scroll-padding-top: 30px; }
     body {
       margin: 0;
       background: var(--black);
-      color: var(--white);
+      color: var(--paper);
       font-family: var(--body);
       -webkit-font-smoothing: antialiased;
-      overflow-x: clip;
     }
-    ::selection { background: var(--accent); color: var(--black); }
     a { color: inherit; text-decoration: none; }
     button { font: inherit; color: inherit; }
-    button, a { -webkit-tap-highlight-color: transparent; }
-    button { cursor: pointer; }
+    a, button { -webkit-tap-highlight-color: transparent; }
     img { display: block; max-width: 100%; }
-    button:focus-visible, a:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 6px;
+    ::selection { background: var(--red); color: white; }
+    :focus-visible { outline: 2px solid var(--green-bright); outline-offset: 5px; }
+    .page-width { width: var(--page); margin-inline: auto; }
+    .section-space { padding-block: clamp(80px,11vw,160px); }
+    .text-green { color: var(--green-bright); }
+    .text-red { color: var(--red-bright); }
+    .outline-text { color: transparent; -webkit-text-stroke: 1px var(--paper); }
+    .micro-label, .eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .17em;
+    }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 26px;
+      color: var(--muted);
+    }
+    .eyebrow i { width: 7px; height: 7px; background: var(--red-bright); }
+    .status-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green-bright);
+      box-shadow: 0 0 12px rgba(145,188,141,.55);
     }
     .sr-only {
       position: absolute;
@@ -57,788 +79,590 @@
       padding: 0;
       margin: -1px;
       overflow: hidden;
-      clip: rect(0, 0, 0, 0);
+      clip: rect(0,0,0,0);
       white-space: nowrap;
-      border: 0;
     }
-    .skip {
+    .skip-link {
       position: fixed;
       top: 12px;
       left: 12px;
-      z-index: 200;
-      padding: 12px 18px;
-      background: var(--accent);
+      z-index: 1000;
+      padding: 14px 20px;
+      background: var(--paper);
       color: var(--black);
       transform: translateY(-160%);
     }
-    .skip:focus { transform: translateY(0); }
+    .skip-link:focus { transform: translateY(0); }
+    /* ===== GLOBAL RESET / ACCESSIBILITY / END ===== */
 
-    /* A static SVG texture: no expensive animated noise filter. */
-    .grain {
+    /* ===== FILM GRAIN / BEGIN ===== */
+    .film-grain {
       position: fixed;
       inset: 0;
-      z-index: 90;
+      z-index: 80;
       pointer-events: none;
-      opacity: .055;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.91' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' opacity='.8' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+      opacity: .045;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
     }
-    .progress {
-      position: fixed;
-      z-index: 110;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: left;
-    }
-    .nav {
+    /* ===== FILM GRAIN / END ===== */
+
+    /* ===== HEADER / BEGIN ===== */
+    .site-header {
       position: absolute;
-      z-index: 30;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 92px;
-      padding: 0 var(--gutter);
+      inset: 0 0 auto;
+      z-index: 20;
+      width: var(--page);
+      min-height: 90px;
+      margin-inline: auto;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       border-bottom: 1px solid var(--line);
     }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font: 800 24px/.9 var(--display);
-      letter-spacing: -.04em;
-    }
-    .logo-mark {
-      width: 30px;
-      height: 30px;
-      background: var(--accent);
-      color: var(--black);
-      display: grid;
-      place-items: center;
-      font: 900 24px/1 var(--display);
-      transform: skew(-9deg);
-    }
-    .nav-links { display: flex; gap: clamp(12px, 3vw, 42px); }
-    .nav-links a {
+    .wordmark { font-family: var(--display); font-size: 43px; letter-spacing: -.08em; }
+    .wordmark-dot { color: var(--red-bright); }
+    .site-header nav { display: flex; align-items: center; gap: 8px; }
+    .site-header nav a {
       min-height: 44px;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      font-size: 10px;
-      letter-spacing: .15em;
+      padding: 12px 16px;
+      font-size: 11px;
+      font-weight: 700;
       text-transform: uppercase;
+      letter-spacing: .07em;
     }
-    .nav-links a:hover { color: var(--accent); }
-    .nav-links .nav-contact { color: var(--accent); }
+    .site-header nav a:hover { color: var(--green-bright); }
+    .nav-contact { border: 1px solid var(--line); margin-left: 12px; }
+    .nav-contact span { margin-left: 22px; }
+    .header-coordinate { font-size: 10px; font-weight: 700; letter-spacing: .12em; }
+    /* ===== HEADER / END ===== */
 
-    .eyebrow {
-      margin: 0;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--accent);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-    }
-    .eyebrow::before {
-      content: "";
-      width: 7px;
-      height: 7px;
-      flex: 0 0 auto;
-      background: currentColor;
-    }
+    /* ===== HERO / PARALLAX LAYERS / BEGIN ===== */
     .hero {
       position: relative;
-      isolation: isolate;
-      min-height: 850px;
-      min-height: max(780px, 100svh);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 170px var(--gutter) 36px;
+      height: 100svh;
+      min-height: 740px;
       overflow: hidden;
-      background: var(--green-black);
+      isolation: isolate;
+      display: flex;
+      align-items: center;
     }
+    .hero-backdrop, .hero-shade, .hero-grid { position: absolute; inset: 0; }
+    .hero-backdrop { z-index: -1; overflow: hidden; }
     .hero-image {
       position: absolute;
-      inset: -12% -3%;
-      z-index: -4;
-      width: 106%;
+      inset: -12%;
+      width: 124%;
       height: 124%;
+      max-width: none;
       object-fit: cover;
-      opacity: .44;
-      filter: grayscale(1);
+      opacity: .25;
+      filter: grayscale(1) contrast(1.3);
+      will-change: transform;
     }
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -2;
+    .hero-shade {
       background:
-        linear-gradient(0deg, #07110c 2%, transparent 66%),
-        linear-gradient(90deg, rgba(5, 14, 9, .85), rgba(9, 31, 19, .24)),
-        linear-gradient(0deg, rgba(8, 38, 22, .5), rgba(8, 38, 22, .5));
+        linear-gradient(0deg,var(--black),transparent 45%,rgba(8,10,9,.4)),
+        linear-gradient(90deg,rgba(8,10,9,.85),transparent 75%);
+    }
+    .hero-grid {
+      opacity: .3;
+      background-image: linear-gradient(90deg,var(--line) 1px,transparent 1px);
+      background-size: 25% 100%;
     }
     .smoke {
       position: absolute;
-      width: 80vw;
-      height: 80vw;
-      top: -32vw;
-      right: -30vw;
-      z-index: -1;
+      width: 65vw;
+      height: 65vw;
+      min-width: 450px;
+      min-height: 450px;
       border-radius: 50%;
-      pointer-events: none;
-      background: radial-gradient(ellipse, rgba(98, 139, 79, .18), transparent 65%);
-      animation: drift 18s ease-in-out infinite alternate;
+      will-change: transform;
     }
-    .smoke.second {
-      top: 20%;
-      right: 10%;
-      opacity: .5;
-      animation-delay: -8s;
+    .smoke-green {
+      top: -30%;
+      right: -15%;
+      background: radial-gradient(ellipse,rgba(35,76,57,.55),transparent 65%);
+      animation: smoke-drift 19s ease-in-out infinite alternate;
     }
-    @keyframes drift {
-      to { transform: translate(-10%, 15%) scale(1.15); }
+    .smoke-red {
+      bottom: -48%;
+      left: -20%;
+      background: radial-gradient(ellipse,rgba(92,29,38,.65),transparent 65%);
+      animation: smoke-drift 24s ease-in-out infinite alternate-reverse;
     }
-    .hero-topline {
+    @keyframes smoke-drift {
+      from { transform: translate3d(-4%,2%,0) scale(.95); }
+      to { transform: translate3d(10%,-8%,0) scale(1.15); }
+    }
+    .hero-content { position: relative; padding-top: 65px; }
+    .hero-topline, .hero-bottomline, .hero-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: clamp(40px, 9vh, 110px);
     }
-    .edition {
-      color: var(--muted);
-      font-size: 10px;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-    }
+    .hero-topline { font-size: 11px; font-weight: 700; letter-spacing: .16em; }
+    .hero-topline .status-dot { margin-right: 9px; }
     .hero-title {
-      position: relative;
-      margin: 0 0 12px;
-      font: 900 clamp(65px, 13.1vw, 240px)/.8 var(--display);
-      letter-spacing: -.045em;
+      font-family: var(--display);
+      font-size: clamp(55px,11.3vw,182px);
+      font-weight: 900;
+      line-height: .94;
+      letter-spacing: -.04em;
+      margin: 36px 0;
       white-space: nowrap;
+      will-change: transform,opacity;
     }
-    .hero-title .letter {
-      display: inline-block;
-      will-change: auto;
-    }
-    .hero-subline {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding-top: 25px;
-    }
-    .alias {
+    .hero-char { display: inline-block; will-change: transform,opacity; }
+    .hero-statement {
       margin: 0;
-      color: var(--accent);
-      font: 600 clamp(24px, 3.2vw, 48px)/1 var(--display);
-      text-transform: uppercase;
+      font-size: clamp(14px,1.5vw,22px);
+      line-height: 1.35;
+      letter-spacing: -.02em;
+      font-weight: 700;
     }
-    .hero-code {
-      margin: 0;
-      text-align: right;
-      font: 800 clamp(36px, 4.7vw, 70px)/.85 var(--display);
-      letter-spacing: -.025em;
-    }
-    .hero-code small {
-      display: block;
-      margin-top: 12px;
-      font: 400 9px/1.5 var(--body);
-      letter-spacing: .22em;
-      color: var(--muted);
-    }
-    .hero-bottom {
-      margin-top: 90px;
-      padding-top: 25px;
-      border-top: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-    .hero-note {
-      max-width: 280px;
-      margin: 0;
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.8;
-    }
-    .cta {
+    .hero-statement span { color: var(--muted); }
+    .button {
+      min-height: 54px;
+      padding: 18px 25px;
       display: inline-flex;
       align-items: center;
       justify-content: space-between;
-      gap: 30px;
-      min-height: 52px;
-      padding: 0 22px;
-      border: 1px solid var(--line);
+      gap: 44px;
+      font-size: 11px;
+      letter-spacing: .07em;
       text-transform: uppercase;
-      letter-spacing: .13em;
-      font-size: 10px;
-      background: rgba(5, 9, 7, .25);
+      font-weight: 700;
     }
-    .cta:hover { border-color: var(--accent); color: var(--accent); }
-    .cta.solid {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: var(--black);
-    }
-    .cta .arrow { font-size: 21px; }
-    .scroll-note {
-      display: flex;
-      align-items: center;
-      gap: 16px;
+    .button-light { background: var(--paper); color: var(--black); }
+    .button span { transition: transform .25s ease; }
+    .button:hover span { transform: translate(3px,-3px); }
+    .hero-footer { position: absolute; bottom: 32px; left: 5%; }
+    .scroll-cue { display: flex; align-items: center; gap: 25px; min-height: 44px; font-size: 11px; }
+    .hero-side-label {
+      position: absolute;
+      right: 14px;
+      top: 43%;
+      writing-mode: vertical-rl;
       font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: .18em;
+      letter-spacing: .2em;
       color: var(--muted);
     }
-    .scroll-note span { color: var(--accent); font-size: 22px; }
+    /* ===== HERO / PARALLAX LAYERS / END ===== */
 
-    .section-heading {
+    /* ===== MARQUEE / BEGIN ===== */
+    .marquee { overflow: hidden; padding: 22px 0; border-block: 1px solid var(--line); background: #0f1913; }
+    .marquee-track {
       display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 24px;
-      margin-bottom: 35px;
+      width: max-content;
+      will-change: transform;
+      font-family: var(--display);
+      font-size: clamp(28px,4vw,58px);
+      line-height: 1;
+      white-space: nowrap;
     }
-    .section-heading h2 {
-      margin: 14px 0 0;
-      font: 800 clamp(52px, 7vw, 100px)/.88 var(--display);
-      letter-spacing: -.025em;
-      text-transform: uppercase;
+    .marquee-track span { padding-right: 25px; }
+    .marquee-track b { padding-inline: 24px; color: var(--red-bright); font-family: var(--body); font-size: .65em; }
+    /* ===== MARQUEE / END ===== */
+
+    /* ===== SECTION HEADINGS / BEGIN ===== */
+    .section-heading { margin-bottom: 58px; }
+    .section-heading h2, .about-section h2, .footer-top h2 {
+      font-family: var(--display);
+      font-size: clamp(56px,7.5vw,115px);
+      line-height: .94;
+      letter-spacing: -.02em;
+      margin: 0;
     }
-    .section-note {
-      color: var(--muted);
-      font-size: 10px;
-      line-height: 1.9;
-      letter-spacing: .08em;
-      text-align: right;
-      text-transform: uppercase;
-    }
-    .latest {
-      position: relative;
-      padding: 90px var(--gutter) 80px;
-      overflow: hidden;
-      background:
-        radial-gradient(ellipse at 50% 50%, #153522 0, transparent 65%),
-        var(--green-black);
-    }
+    .section-heading p { margin: 22px 0 0; color: var(--muted); font-size: 13px; }
+    /* ===== SECTION HEADINGS / END ===== */
+
+    /* ===== LATEST DROP / PINNED STAGE / BEGIN ===== */
+    .latest-section { padding-bottom: 0; }
     .latest-stage {
       position: relative;
-      max-width: 1080px;
-      margin: auto;
-    }
-    .latest-frame { position: relative; z-index: 2; }
-    .side-word {
-      position: absolute;
-      z-index: 0;
-      top: 15%;
-      font: 900 clamp(90px, 13vw, 210px)/1 var(--display);
-      color: rgba(185, 214, 138, .08);
-      white-space: nowrap;
-      pointer-events: none;
-    }
-    .side-word.left { left: -15%; transform: rotate(-90deg); }
-    .side-word.right { right: -20%; top: 55%; transform: rotate(90deg); }
-    .latest-caption {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      padding-top: 24px;
-      font-size: 10px;
-      color: var(--muted);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-    .latest-caption strong { color: var(--accent); font-weight: 500; }
-
-    /* Thumbnail facades; no iframe is loaded until activated. */
-    .video {
-      position: relative;
-      aspect-ratio: 16 / 9;
+      height: 100svh;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
       overflow: hidden;
-      background: #102319;
-      border: 1px solid rgba(185, 214, 138, .24);
-      box-shadow: 0 0 45px rgba(67, 116, 55, .08);
+      isolation: isolate;
     }
-    .video:hover {
-      border-color: rgba(185, 214, 138, .65);
-      box-shadow: 0 0 45px rgba(67, 116, 55, .16);
-    }
-    .video-button {
+    .latest-orbit {
       position: absolute;
       inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+      pointer-events: none;
+      z-index: -1;
+      opacity: .12;
+      will-change: transform;
+    }
+    .orbit-line { font-family: var(--display); font-size: clamp(120px,20vw,320px); line-height: .8; padding-left: 2vw; }
+    .orbit-line:nth-child(2) { text-align: right; padding-right: 2vw; }
+    .latest-player-wrap { width: min(76vw,1000px); }
+    .player-kicker, .player-caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 9px;
+      letter-spacing: .13em;
+      font-weight: 700;
+    }
+    .player-kicker { margin-bottom: 15px; }
+    .player-kicker .status-dot { margin-right: 7px; }
+    .player-caption { margin-top: 16px; color: var(--muted); }
+    /* ===== LATEST DROP / PINNED STAGE / END ===== */
+
+    /* ===== VIDEO GRID / THUMBNAILS / INLINE PLAYERS / BEGIN ===== */
+    .video-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 48px 28px; }
+    .video-card { min-width: 0; }
+    .video-frame {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: var(--panel);
+      border: 1px solid rgba(145,188,141,.24);
+      overflow: hidden;
+      isolation: isolate;
+      will-change: transform,clip-path;
+    }
+    .video-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--green-bright);
+      box-shadow: inset 0 0 26px rgba(145,188,141,.1);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+      z-index: 3;
+    }
+    .video-frame:hover::after, .video-frame:focus-within::after, .video-frame.is-playing::after { opacity: .8; }
+    .video-trigger {
+      display: block;
       width: 100%;
       height: 100%;
       border: 0;
       padding: 0;
-      background: transparent;
+      background: var(--panel);
       text-align: left;
-      overflow: hidden;
+      cursor: pointer;
     }
-    .video-button img {
+    .video-trigger img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: .76;
-      filter: saturate(.55);
-      transition: transform .7s cubic-bezier(.2, .7, .2, 1);
+      filter: saturate(.5) contrast(1.12);
+      transition: transform .7s cubic-bezier(.2,.7,.2,1);
     }
-    .video-button:hover img { transform: scale(1.045); }
-    .video-button::after {
-      content: "";
+    .video-trigger:hover img { transform: scale(1.045); }
+    .video-shade { position: absolute; inset: 0; background: linear-gradient(0deg,rgba(0,0,0,.65),transparent 75%); pointer-events: none; }
+    .video-play {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, rgba(3, 13, 7, .8), transparent 65%);
-      pointer-events: none;
-    }
-    .play {
-      position: absolute;
-      z-index: 2;
-      top: 50%;
       left: 50%;
-      width: clamp(58px, 7vw, 90px);
-      aspect-ratio: 1;
+      top: 50%;
+      width: 66px;
+      height: 66px;
       display: grid;
       place-items: center;
-      border: 1px solid rgba(238, 239, 229, .5);
+      transform: translate(-50%,-50%);
+      border: 1px solid rgba(238,234,224,.6);
+      background: rgba(8,10,9,.55);
       border-radius: 50%;
-      background: rgba(6, 18, 11, .62);
-      transform: translate(-50%, -50%);
-      transition: transform .3s ease;
+      pointer-events: none;
     }
-    .play svg { width: 19px; margin-left: 4px; fill: var(--white); }
-    .video-button:hover .play {
-      transform: translate(-50%, -50%) scale(1.1);
-      color: var(--accent);
+    .video-play::before {
+      content: "";
+      border-left: 13px solid var(--paper);
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      margin-left: 4px;
     }
-    .video-label {
+    .video-number { position: absolute; top: 16px; left: 16px; padding: 7px 9px; background: rgba(8,10,9,.7); font-size: 9px; letter-spacing: .1em; }
+    .video-bottom {
       position: absolute;
-      z-index: 3;
-      left: 22px;
-      bottom: 20px;
-      font-size: 9px;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--white);
-    }
-    .video-tag {
-      position: absolute;
-      z-index: 3;
+      bottom: 18px;
+      left: 18px;
       right: 18px;
-      top: 18px;
-      background: var(--accent);
-      color: var(--black);
-      padding: 7px 10px;
-      font-size: 8px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-    }
-    .video iframe {
-      display: block;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      position: absolute;
-      inset: 0;
-    }
-
-    .marquee {
-      padding: 28px 0 32px;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      overflow: hidden;
-      background: var(--forest);
-    }
-    .marquee-track {
       display: flex;
-      width: max-content;
-      gap: 24px;
-      font: 800 clamp(48px, 7vw, 100px)/1 var(--display);
-      letter-spacing: -.02em;
-      color: var(--accent);
-    }
-    .marquee-track span { white-space: nowrap; }
-    .marquee-track b { color: #5e8057; font-weight: inherit; }
-
-    .archive { padding: 100px var(--gutter); }
-    .archive-count {
-      display: flex;
-      gap: 9px;
-      align-items: center;
-      font-size: 10px;
-      color: var(--muted);
-    }
-    .archive-count span {
-      padding: 6px 9px;
-      border: 1px solid var(--line);
-      color: var(--accent);
-    }
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 42px 26px;
-    }
-    .card-meta {
-      display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 15px;
-      padding-top: 16px;
-    }
-    .card-meta h3 {
-      margin: 0;
-      font: 700 25px/1 var(--display);
-      text-transform: uppercase;
-      letter-spacing: .015em;
-    }
-    .card-meta span {
       font-size: 9px;
-      color: var(--muted);
+      font-weight: 700;
       letter-spacing: .12em;
     }
-    .archive-bottom {
-      margin-top: 44px;
-      display: flex;
-      justify-content: center;
-    }
+    .video-meta { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 17px; }
+    .video-meta h3 { margin: 0; font-size: 12px; letter-spacing: .06em; }
+    .video-meta span { color: var(--muted); font-size: 10px; }
+    .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; cursor: auto; }
+    .video-frame.is-playing { will-change: auto; }
+    .no-script { display: grid; gap: 16px; }
+    /* ===== VIDEO GRID / THUMBNAILS / INLINE PLAYERS / END ===== */
 
+    /* ===== HGHLNDS TERRITORY / BEGIN ===== */
     .territory {
       position: relative;
-      isolation: isolate;
-      min-height: 760px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 90px var(--gutter);
-      background: #0c1f14;
+      min-height: 650px;
+      height: 100svh;
       overflow: hidden;
-    }
-    .territory::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background:
-        linear-gradient(90deg, transparent calc(50% - .5px), var(--line) 50%, transparent calc(50% + .5px)),
-        radial-gradient(ellipse at center, #25483255, transparent 70%);
-    }
-    .territory .eyebrow { justify-content: center; }
-    .territory-type {
-      position: relative;
-      z-index: 1;
-      margin: 45px 0 20px;
-      text-align: center;
-      font: 900 clamp(90px, 22vw, 340px)/.73 var(--display);
-      letter-spacing: -.035em;
-      color: var(--accent);
-    }
-    .territory-type span { display: block; }
-    .territory-type .postcode {
-      color: transparent;
-      -webkit-text-stroke: 1px var(--accent);
-      margin-top: 20px;
-    }
-    .territory-foot {
-      position: relative;
-      z-index: 4;
       display: flex;
-      justify-content: space-between;
-      margin-top: 52px;
-      color: var(--muted);
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: .18em;
-    }
-    .territory-image {
-      position: absolute;
-      z-index: 3;
-      width: 28%;
-      aspect-ratio: 16 / 10;
-      object-fit: cover;
-      border: 1px solid var(--line);
-      filter: grayscale(1);
-      opacity: .3;
-      pointer-events: none;
-    }
-    .territory-image.one {
-      left: 4%;
-      top: 28%;
-      transform: rotate(-8deg);
-    }
-    .territory-image.two {
-      right: 3%;
-      bottom: 18%;
-      transform: rotate(9deg);
-    }
-
-    .about {
-      padding: 110px var(--gutter);
-      display: grid;
-      grid-template-columns: 1fr 1.7fr;
-      gap: 70px;
-      border-bottom: 1px solid var(--line);
-    }
-    .about-label h2 {
-      margin: 18px 0 0;
-      font: 800 60px/.95 var(--display);
-      text-transform: uppercase;
-    }
-    .about-copy h3 {
-      margin: 0 0 28px;
-      font: 700 clamp(38px, 4.7vw, 70px)/1.05 var(--display);
-      letter-spacing: -.02em;
-      text-transform: uppercase;
-    }
-    .about-copy h3 em { font-style: normal; color: var(--accent); }
-    .about-copy p {
-      max-width: 580px;
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.95;
-      color: var(--muted);
-    }
-    .about-signature {
-      margin-top: 35px;
-      color: var(--accent);
-      font: 600 28px/1 var(--display);
-      transform: rotate(-3deg);
-      transform-origin: left;
-    }
-    .footer {
-      position: relative;
-      padding: 80px var(--gutter) 28px;
-      background: var(--green-black);
-    }
-    .footer-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 30px;
-      margin-bottom: 55px;
-    }
-    .footer h2 {
-      margin: 18px 0 0;
-      font: 800 clamp(64px, 9vw, 140px)/.85 var(--display);
-      letter-spacing: -.03em;
-    }
-    .footer-links {
-      display: flex;
-      gap: 30px;
       align-items: center;
-      flex-wrap: wrap;
+      background: radial-gradient(ellipse at 75% 65%,rgba(92,29,38,.35),transparent 55%),#14251b;
+      border-block: 1px solid var(--line);
     }
-    .footer-links a, .placeholder {
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-    }
-    .placeholder { color: var(--muted); }
-    .contact-placeholder {
-      margin: 0 0 36px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.8;
-    }
-    .contact-placeholder strong { color: var(--accent); font-weight: 500; }
-    .footer-bottom {
-      padding-top: 22px;
-      border-top: 1px solid var(--line);
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      color: var(--muted);
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: .13em;
-    }
+    .territory-inner { position: relative; }
+    .territory-title { margin: 0; display: flex; flex-direction: column; font-family: var(--display); line-height: .82; letter-spacing: -.025em; will-change: transform,opacity; }
+    .territory-title span { font-size: clamp(65px,14.5vw,220px); }
+    .territory-title strong { font-size: clamp(150px,28vw,440px); font-weight: inherit; color: transparent; -webkit-text-stroke: 1px var(--green-bright); }
+    .territory-bottom { display: flex; justify-content: space-between; margin-top: 35px; font-size: 10px; letter-spacing: .1em; }
+    .territory-cross { position: absolute; right: 0; top: 30%; color: var(--red-bright); font-size: clamp(60px,10vw,140px); font-weight: 200; will-change: transform; }
+    /* ===== HGHLNDS TERRITORY / END ===== */
 
-    /* Tip is anchored to the spring position; the shaft has 3D shading. */
-    #pen-cursor {
+    /* ===== ABOUT / BEGIN ===== */
+    .about-section { display: grid; grid-template-columns: 1fr 1fr; gap: 8vw; }
+    .about-copy { align-self: end; max-width: 560px; }
+    .about-lead { font-size: clamp(22px,2.7vw,40px); letter-spacing: -.045em; line-height: 1.15; margin: 0 0 26px; }
+    .about-copy > p:not(.about-lead) { color: var(--muted); font-size: 14px; line-height: 1.8; margin-bottom: 28px; }
+    .text-link { min-height: 44px; display: inline-flex; align-items: center; gap: 38px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; border-bottom: 1px solid var(--green-bright); }
+    /* ===== ABOUT / END ===== */
+
+    /* ===== CONTACT / FOOTER / BEGIN ===== */
+    .site-footer { padding: 90px 0 30px; border-top: 1px solid var(--line); background: radial-gradient(ellipse at 10% 100%,rgba(92,29,38,.25),transparent 65%),#0c0d0c; }
+    .footer-top { padding-bottom: 80px; }
+    .booking-link { display: inline-flex; align-items: center; gap: 30px; min-height: 48px; margin-top: 34px; font-size: clamp(18px,3vw,40px); letter-spacing: -.035em; }
+    .booking-link span { color: var(--red-bright); }
+    .placeholder-note { color: var(--muted); font-size: 11px; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; padding-top: 28px; border-top: 1px solid var(--line); }
+    .footer-brand { font-family: var(--display); font-size: 25px; }
+    .social-links { display: flex; align-items: center; gap: 24px; font-size: 11px; }
+    .social-links a { display: inline-flex; align-items: center; min-height: 44px; }
+    .social-placeholder { color: var(--muted); }
+    /* ===== CONTACT / FOOTER / END ===== */
+
+    /* ===== DESKTOP 3D PEN CURSOR / BEGIN ===== */
+    #cursor-trail { position: fixed; inset: 0; z-index: 100; pointer-events: none; display: none; }
+    #custom-cursor {
       position: fixed;
-      z-index: 150;
-      top: 0;
       left: 0;
-      width: 34px;
-      height: 132px;
+      top: 0;
+      width: 0;
+      height: 0;
+      z-index: 101;
       pointer-events: none;
       opacity: 0;
-      transform-origin: 17px 123px;
-      --ink: #b9d68a;
-      filter: drop-shadow(5px 8px 4px rgba(0, 0, 0, .45));
+      perspective: 500px;
+      will-change: transform;
     }
-    #pen-cursor.active { --ink: #e0ffad; }
-    #pen-cursor svg { width: 100%; height: 100%; overflow: visible; }
-    #pen-cursor .ink { fill: var(--ink); }
-    @media (hover: hover) and (pointer: fine) {
-      html.pen-enabled,
-      html.pen-enabled a,
-      html.pen-enabled button { cursor: none; }
+    .has-pen, .has-pen a, .has-pen button { cursor: none; }
+    .has-pen #cursor-trail { display: block; }
+    #custom-cursor.is-visible { opacity: 1; }
+    .pen-shell {
+      position: absolute;
+      width: 17px;
+      height: 100px;
+      left: -8.5px;
+      bottom: 0;
+      transform-origin: 50% 100%;
+      transform-style: preserve-3d;
+      will-change: transform,opacity;
     }
+    .pen {
+      position: absolute;
+      inset: 0 0 13px;
+      border-radius: 7px 7px 3px 3px;
+      background: linear-gradient(90deg,#080c09,#28513b 21%,#709777 35%,#172b20 48%,#090e0b 80%,#476650);
+      border: 1px solid #729078;
+      box-shadow: 5px 5px 10px rgba(0,0,0,.5);
+    }
+    .pen-clip { position: absolute; right: 2px; top: 7px; width: 3px; height: 34px; border-radius: 3px; background: linear-gradient(90deg,#656a64,#eeeae0,#454b45); transform: translateZ(3px); }
+    .pen-band { position: absolute; left: -1px; right: -1px; bottom: 9px; height: 5px; background: linear-gradient(90deg,#421018,#b55b5d,#3c151b); }
+    .pen-nib { position: absolute; left: 2px; right: 2px; bottom: -13px; height: 14px; clip-path: polygon(0 0,100% 0,50% 100%); background: linear-gradient(90deg,#676d61,#eeeae0 45%,#4c5249); }
+    .play-cursor {
+      position: absolute;
+      top: -27px;
+      left: -27px;
+      width: 54px;
+      height: 54px;
+      border: 1px solid var(--green-bright);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(17,36,24,.85);
+      box-shadow: 0 0 24px rgba(145,188,141,.25);
+      opacity: 0;
+      transform: scale(.65);
+      transition: transform .2s ease,opacity .2s ease;
+    }
+    .play-cursor span { margin-left: 4px; border-left: 11px solid var(--green-bright); border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
+    #custom-cursor.is-play .pen-shell { opacity: 0; }
+    #custom-cursor.is-play .play-cursor { opacity: 1; transform: scale(1); }
+    /* ===== DESKTOP 3D PEN CURSOR / END ===== */
 
-    @media (min-width: 1600px) {
-      .hero-title { font-size: 13.2vw; }
+    /* ===== RGB SPLIT / SLICING GLITCH / BEGIN ===== */
+    #custom-cursor.is-glitching .pen { animation: pen-glitch .22s steps(1) both; }
+    #custom-cursor.is-glitching .pen::before,
+    #custom-cursor.is-glitching .pen::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+    #custom-cursor.is-glitching .pen::before { background: rgba(224,52,74,.65); animation: rgb-red .22s steps(1) both; }
+    #custom-cursor.is-glitching .pen::after { background: rgba(70,227,187,.6); animation: rgb-green .22s steps(1) both; }
+    @keyframes pen-glitch {
+      0%,100% { clip-path: inset(0); transform: translateX(0); opacity: 1; }
+      20% { clip-path: inset(12% 0 48%); transform: translateX(-7px); }
+      40% { clip-path: inset(58% 0 8%); transform: translateX(8px); opacity: .5; }
+      60% { clip-path: inset(0 0 65%); transform: translateX(-5px); }
+      80% { clip-path: inset(20% 0 15%); transform: translateX(4px); opacity: .8; }
     }
-    @media (max-width: 900px) {
-      .hero { min-height: 760px; }
-      .hero-bottom { margin-top: 65px; }
-      .scroll-note { display: none; }
-      .about { grid-template-columns: 1fr; gap: 38px; }
-      .territory { min-height: 620px; }
-      .footer-top { align-items: start; flex-direction: column; }
-      .side-word { display: none; }
+    @keyframes rgb-red {
+      0%,100% { opacity: 0; transform: translateX(0); }
+      25%,70% { opacity: .8; transform: translateX(-6px); clip-path: inset(15% 0 50%); }
+      50% { opacity: .5; transform: translateX(5px); clip-path: inset(55% 0 5%); }
     }
-    @media (max-width: 600px) {
-      .nav { height: 78px; }
-      .logo { font-size: 19px; }
-      .logo-mark { width: 25px; height: 25px; font-size: 21px; }
-      .nav-links { gap: 14px; }
-      .nav-links a { font-size: 9px; letter-spacing: .07em; }
-      .nav-links .nav-about { display: none; }
-      .hero { min-height: 700px; min-height: 94svh; padding-top: 145px; }
-      .hero-topline { margin-bottom: 80px; }
-      .edition { display: none; }
-      .hero-title { font-size: 13vw; }
-      .hero-subline { padding-top: 20px; }
-      .hero-code { font-size: 36px; }
-      .hero-code small { font-size: 7px; }
-      .alias { font-size: 23px; }
-      .hero-bottom {
-        align-items: start;
-        flex-direction: column;
-        margin-top: 65px;
-        gap: 22px;
-      }
-      .hero-note { max-width: 240px; }
-      .hero-bottom .cta { width: 100%; }
-      .latest, .archive { padding: 65px var(--gutter); }
-      .section-heading { align-items: start; }
-      .section-heading h2 { font-size: 53px; }
-      .section-note { display: none; }
-      .latest-caption { font-size: 8px; letter-spacing: .06em; }
+    @keyframes rgb-green {
+      0%,100% { opacity: 0; transform: translateX(0); }
+      30%,75% { opacity: .8; transform: translateX(7px); clip-path: inset(45% 0 10%); }
+      55% { opacity: .6; transform: translateX(-5px); clip-path: inset(5% 0 65%); }
+    }
+    /* ===== RGB SPLIT / SLICING GLITCH / END ===== */
+
+    /* ===== LENIS BASE STYLES / BEGIN ===== */
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+    /* ===== LENIS BASE STYLES / END ===== */
+
+    /* ===== TABLET / MOBILE / BEGIN ===== */
+    @media (max-width: 1024px) {
+      .header-coordinate { display: none; }
+      .hero { min-height: 660px; }
+      .latest-player-wrap { width: 88vw; }
+      .latest-stage { min-height: 500px; }
+    }
+    @media (max-width: 640px) {
+      .site-header { min-height: 78px; }
+      .wordmark { font-size: 34px; }
+      .site-header nav { gap: 0; }
+      .site-header nav a { font-size: 9px; padding-inline: 10px; }
+      .nav-contact { margin-left: 3px; }
+      .nav-contact span { display: none; }
+      .hero { min-height: 620px; height: 92svh; }
+      .hero-content { padding-top: 35px; }
+      .hero-topline { font-size: 8px; letter-spacing: .09em; }
+      .hero-title { font-size: 11.1vw; margin-block: 30px; }
+      .hero-bottomline { align-items: flex-start; gap: 24px; flex-direction: column; }
+      .hero-statement { font-size: 20px; }
+      .hero-footer { bottom: 22px; }
+      .hero-footer > .micro-label:last-child, .hero-side-label { display: none; }
+      .section-heading { margin-bottom: 38px; }
+      .latest-stage { height: 78svh; min-height: 410px; }
+      .latest-player-wrap { width: 90vw; }
+      .player-kicker, .player-caption { font-size: 8px; letter-spacing: .06em; }
       .video-grid { grid-template-columns: 1fr; gap: 32px; }
-      .video-label { left: 15px; bottom: 15px; font-size: 8px; }
-      .video-tag { right: 12px; top: 12px; }
-      .card-meta h3 { font-size: 23px; }
-      .territory { min-height: 500px; padding: 65px var(--gutter); }
-      .territory-type { font-size: 23vw; }
-      .territory-image { width: 37%; opacity: .22; }
-      .territory-image.one { top: 31%; }
-      .territory-foot { font-size: 7px; letter-spacing: .1em; }
-      .about { padding: 65px var(--gutter); }
-      .about-label h2 { font-size: 47px; }
-      .about-copy h3 { font-size: 39px; }
-      .footer { padding-top: 65px; }
-      .footer h2 { font-size: 20vw; }
-      .footer-links { gap: 22px; }
-      .footer-bottom { font-size: 8px; line-height: 1.7; }
+      .video-play { width: 58px; height: 58px; }
+      .territory { height: 78svh; min-height: 500px; }
+      .territory-title span { font-size: 14.5vw; }
+      .territory-title strong { font-size: 34vw; }
+      .territory-bottom { gap: 18px; font-size: 8px; line-height: 1.5; }
+      .territory-cross { top: 32%; }
+      .about-section { grid-template-columns: 1fr; gap: 42px; }
+      .about-lead { font-size: 30px; }
+      .site-footer { padding-top: 70px; }
+      .footer-top { padding-bottom: 55px; }
+      .footer-bottom { align-items: flex-start; flex-direction: column; gap: 15px; }
+      .social-links { gap: 20px; flex-wrap: wrap; }
     }
-    @media (hover: none), (pointer: coarse) {
-      #pen-cursor { display: none !important; }
+    /* Touch devices keep native touch behavior; scroll effects remain active. */
+    @media (max-width: 1024px), (any-pointer: coarse), (hover: none) {
+      #custom-cursor, #cursor-trail { display: none !important; }
+      .has-pen, .has-pen a, .has-pen button { cursor: auto; }
     }
+    /* ===== TABLET / MOBILE / END ===== */
+
+    /* ===== REDUCED MOTION / BEGIN ===== */
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .hero-image, .hero-title, .hero-char, .latest-orbit,
+      .territory-title, .territory-cross, .marquee-track, .video-frame, .smoke {
+        will-change: auto;
       }
-      #pen-cursor { display: none !important; }
-      html.pen-enabled,
-      html.pen-enabled a { cursor: auto; }
-      html.pen-enabled button { cursor: pointer; }
+      #custom-cursor, #cursor-trail { display: none !important; }
+      .has-pen, .has-pen a, .has-pen button { cursor: auto; }
     }
+    /* ===== REDUCED MOTION / END ===== */
   </style>
+  <!-- ========== ALL STYLES / END ========== -->
 </head>
 
 <body>
-  <a class="skip" href="#main">Skip to content</a>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="progress" aria-hidden="true"></div>
+  <!-- ========== ACCESSIBILITY / CURSOR MARKUP / BEGIN ========== -->
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="film-grain" aria-hidden="true"></div>
+  <canvas id="cursor-trail" aria-hidden="true"></canvas>
+  <div id="custom-cursor" aria-hidden="true">
+    <div class="pen-shell">
+      <div class="pen">
+        <span class="pen-clip"></span>
+        <span class="pen-band"></span>
+        <span class="pen-nib"></span>
+      </div>
+    </div>
+    <div class="play-cursor"><span></span></div>
+  </div>
+  <!-- ========== ACCESSIBILITY / CURSOR MARKUP / END ========== -->
 
-  <header class="nav">
-    <a class="logo" href="#home" aria-label="SMICCOPHISTO home">
-      <span class="logo-mark" aria-hidden="true">S</span>
-      SMICC.
-    </a>
-    <nav class="nav-links" aria-label="Main navigation">
-      <a href="#videos">Videos</a>
-      <a class="nav-about" href="#about">The artist</a>
-      <a class="nav-contact" href="#contact">Get in touch ↗</a>
+  <!-- ========== HEADER / BEGIN ========== -->
+  <header class="site-header">
+    <a class="wordmark" href="#home" aria-label="SMICCOPHISTO home">S<span class="wordmark-dot">.</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="#latest">Latest</a>
+      <a href="#visuals">Visuals</a>
+      <a href="#about">About</a>
+      <a class="nav-contact" href="#contact">Contact <span aria-hidden="true">↗</span></a>
     </nav>
+    <span class="header-coordinate">HGHLNDS / 4114</span>
   </header>
+  <!-- ========== HEADER / END ========== -->
 
   <main id="main">
+    <!-- ========== HERO SECTION / BEGIN ========== -->
     <section class="hero" id="home" aria-labelledby="hero-title">
-      <img
-        class="hero-image"
-        src="https://img.youtube.com/vi/3juj9OwWz0Q/maxresdefault.jpg"
-        data-video-id="3juj9OwWz0Q"
-        alt=""
-        fetchpriority="high"
-        decoding="async"
-      />
-      <div class="smoke" aria-hidden="true"></div>
-      <div class="smoke second" aria-hidden="true"></div>
-
-      <div class="hero-topline">
-        <p class="eyebrow">HGHLNDS 4114 / Represent</p>
-        <span class="edition">Independent spirit. Unfiltered sound.</span>
+      <div class="hero-backdrop" aria-hidden="true">
+        <!-- EDIT: Replace this thumbnail with an authorized artist portrait. -->
+        <img class="hero-image"
+          src="https://i.ytimg.com/vi/3juj9OwWz0Q/hqdefault.jpg"
+          alt="" fetchpriority="high" decoding="async">
+        <div class="hero-shade"></div>
+        <div class="smoke smoke-green"></div>
+        <div class="smoke smoke-red"></div>
+        <div class="hero-grid"></div>
       </div>
 
-      <h1 class="hero-title" id="hero-title">SMICCOPHISTO</h1>
-
-      <div class="hero-subline">
-        <p class="alias">“Smicc So Dope”</p>
-        <p class="hero-code">
-          HGHLNDS 4114
-          <small>THE NAME. THE SOUND. THE HOME.</small>
-        </p>
-      </div>
-
-      <div class="hero-bottom">
-        <p class="hero-note">
-          Straight from HGHLNDS 4114.<br />
-          No filter. No compromise. Just Smicc.
-        </p>
-        <a class="cta solid" href="#latest">
-          Watch the latest drop <span class="arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="scroll-note" href="#latest">
-          Scroll to explore <span aria-hidden="true">↓</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="latest" id="latest" aria-labelledby="latest-title">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">01 / In rotation</p>
-          <h2 id="latest-title">Latest drop<span style="color:var(--accent)">.</span></h2>
+      <div class="hero-content page-width">
+        <div class="hero-topline">
+          <span><i class="status-dot"></i> SMICC SO DOPE</span>
+          <span>HGHLNDS MADE.</span>
         </div>
-        <div class="section-note">Turn it up.<br />Let it speak for itself.</div>
-      </div>
 
-      <div class="latest-stage">
-        <span class="side-word left" aria-hidden="true">SMICC SO DOPE</span>
-        <span class="side-word right" aria-hidden="true">4114 FOREVER</span>
-        <div class="latest-frame" id="latest-video"></div>
-        <div class="latest-caption">
-          <strong>SMICCOPHISTO / Featured release</strong>
-          <span>Sound on. World off. ↗</span>
+        <!-- EDIT: Main hero heading. JavaScript creates the character spans. -->
+        <h1 class="hero-title" id="hero-title">SMICCOPHISTO</h1>
+
+        <div class="hero-bottomline">
+          <p class="hero-statement">NO SOFT EDGES.<br><span>ALL SMICC.</span></p>
+          <a class="button button-light" href="#latest">Watch the latest <span aria-hidden="true">↗</span></a>
         </div>
       </div>
-    </section>
 
+      <div class="hero-footer page-width">
+        <span class="micro-label">01 / THE INTRO</span>
+        <a class="scroll-cue" href="#latest">Scroll to enter <span aria-hidden="true">↓</span></a>
+        <span class="micro-label">SOUND ON. WORLD OFF.</span>
+      </div>
+      <span class="hero-side-label" aria-hidden="true">SMICCOPHISTO — HGHLNDS 4114</span>
+    </section>
+    <!-- ========== HERO SECTION / END ========== -->
+
+    <!-- ========== SCROLL-LINKED MARQUEE / BEGIN ========== -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
         <span>SMICCOPHISTO <b>✦</b> HGHLNDS 4114 <b>✦</b> SMICC SO DOPE <b>✦</b></span>
@@ -846,670 +670,916 @@
         <span>SMICCOPHISTO <b>✦</b> HGHLNDS 4114 <b>✦</b> SMICC SO DOPE <b>✦</b></span>
       </div>
     </div>
+    <!-- ========== SCROLL-LINKED MARQUEE / END ========== -->
 
-    <section class="archive" id="videos" aria-labelledby="archive-title">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">02 / The visual archive</p>
-          <h2 id="archive-title">Press play.</h2>
-        </div>
-        <div class="archive-count"><span>06</span> VIDEOS / NO SKIPS</div>
+    <!-- ========== LATEST DROP / BEGIN ========== -->
+    <section class="latest-section section-space" id="latest" aria-labelledby="latest-title">
+      <div class="section-heading page-width">
+        <span class="eyebrow"><i></i> 02 / IN ROTATION</span>
+        <h2 id="latest-title">THE LATEST<span class="text-red">.</span></h2>
+        <p>Press play. Let it speak.</p>
       </div>
 
+      <div class="latest-stage">
+        <div class="latest-orbit" aria-hidden="true">
+          <span class="orbit-line">SMICC</span>
+          <span class="orbit-line outline-text">SO DOPE</span>
+          <span class="orbit-line">4114</span>
+        </div>
+
+        <div class="latest-player-wrap">
+          <div class="player-kicker">
+            <span><i class="status-dot"></i> FEATURED VISUAL</span>
+            <span>SMICCOPHISTO / 01</span>
+          </div>
+
+          <!-- JavaScript renders VIDEOS[0] inside this container. -->
+          <div id="latest-player"></div>
+
+          <div class="player-caption">
+            <span>SMICC SO DOPE</span>
+            <span>HGHLNDS 4114 <span class="text-green">↗</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ========== LATEST DROP / END ========== -->
+
+    <!-- ========== VIDEO LIBRARY / BEGIN ========== -->
+    <section class="visuals-section section-space page-width" id="visuals" aria-labelledby="visuals-title">
+      <div class="section-heading">
+        <span class="eyebrow"><i></i> 03 / THE ARCHIVE</span>
+        <h2 id="visuals-title">LOUDER<br><span class="outline-text">IN MOTION.</span></h2>
+        <p>Six visuals. One name. No skips.</p>
+      </div>
+
+      <!-- EDIT: Add/remove entries in the VIDEOS array, not here. -->
       <div class="video-grid" id="video-grid"></div>
 
       <noscript>
-        <p>Enable JavaScript for inline video playback, or watch on YouTube:</p>
-        <p><a href="https://www.youtube.com/watch?v=3juj9OwWz0Q">Latest drop</a></p>
-        <p><a href="https://www.youtube.com/watch?v=YoxvA3OOb4s">Visual 02</a></p>
-        <p><a href="https://www.youtube.com/watch?v=NJq3QVEfVbw">Visual 03</a></p>
-        <p><a href="https://www.youtube.com/watch?v=AzBvqdVXxr8">Visual 04</a></p>
-        <p><a href="https://www.youtube.com/watch?v=jyrdGdsNc9g">Visual 05</a></p>
-        <p><a href="https://www.youtube.com/watch?v=BLrG_YBL4zA">Visual 06</a></p>
+        <div class="no-script">
+          <p>Enable JavaScript for inline players and scroll effects.</p>
+          <a href="https://www.youtube.com/watch?v=3juj9OwWz0Q">Latest Drop</a>
+          <a href="https://www.youtube.com/watch?v=YoxvA3OOb4s">Visual 02</a>
+          <a href="https://www.youtube.com/watch?v=NJq3QVEfVbw">Visual 03</a>
+          <a href="https://www.youtube.com/watch?v=AzBvqdVXxr8">Visual 04</a>
+          <a href="https://www.youtube.com/watch?v=jyrdGdsNc9g">Visual 05</a>
+          <a href="https://www.youtube.com/watch?v=BLrG_YBL4zA">Visual 06</a>
+        </div>
       </noscript>
+    </section>
+    <!-- ========== VIDEO LIBRARY / END ========== -->
 
-      <div class="archive-bottom">
-        <a class="cta"
-           href="https://www.youtube.com/@smiccsodope"
-           target="_blank" rel="noopener noreferrer">
-          More on YouTube <span class="arrow" aria-hidden="true">↗</span>
+    <!-- ========== HGHLNDS PINNED GRAPHIC / BEGIN ========== -->
+    <section class="territory" aria-labelledby="territory-title">
+      <div class="territory-inner page-width">
+        <span class="eyebrow"><i></i> NOT JUST A NUMBER.</span>
+        <h2 class="territory-title" id="territory-title">
+          <span>HGHLNDS</span>
+          <strong>4114</strong>
+        </h2>
+        <div class="territory-bottom">
+          <span>WHERE THE ROOTS RUN DEEP.</span>
+          <span>WHERE THE SOUND HITS DIFFERENT.</span>
+        </div>
+        <div class="territory-cross" aria-hidden="true">+</div>
+      </div>
+    </section>
+    <!-- ========== HGHLNDS PINNED GRAPHIC / END ========== -->
+
+    <!-- ========== ABOUT SECTION / BEGIN ========== -->
+    <section class="about-section section-space page-width" id="about" aria-labelledby="about-title">
+      <div>
+        <span class="eyebrow"><i></i> 04 / BEHIND THE NAME</span>
+        <h2 id="about-title">SMICC<br>SO <span class="text-green">DOPE.</span></h2>
+      </div>
+
+      <!-- EDIT: Artist bio and channel CTA. -->
+      <div class="about-copy">
+        <p class="about-lead">Rooted in HGHLNDS 4114.<br>Moving on his own frequency.</p>
+        <p>
+          SMICCOPHISTO — aka Smicc So Dope — reps HGHLNDS 4114
+          with a sound and presence that refuse to blend in.
+          This is the home of the visuals, the energy, and the next chapter.
+        </p>
+        <a class="text-link" href="https://www.youtube.com/@smiccsodope"
+          target="_blank" rel="noopener noreferrer">
+          Enter the channel <span aria-hidden="true">↗</span>
         </a>
       </div>
     </section>
+    <!-- ========== ABOUT SECTION / END ========== -->
 
-    <section class="territory" aria-labelledby="territory-title">
-      <p class="eyebrow">Never forget where it started</p>
-      <h2 class="territory-type" id="territory-title">
-        <span>HGHLNDS</span>
-        <span class="postcode">4114</span>
-      </h2>
-      <img class="territory-image one"
-           src="https://img.youtube.com/vi/NJq3QVEfVbw/maxresdefault.jpg"
-           data-video-id="NJq3QVEfVbw"
-           alt="" loading="lazy" decoding="async" />
-      <img class="territory-image two"
-           src="https://img.youtube.com/vi/BLrG_YBL4zA/maxresdefault.jpg"
-           data-video-id="BLrG_YBL4zA"
-           alt="" loading="lazy" decoding="async" />
-      <div class="territory-foot">
-        <span>More than a postcode.</span>
-        <span>Part of the DNA. / 4114</span>
-      </div>
-    </section>
+    <!-- ========== CONTACT / FOOTER / BEGIN ========== -->
+    <footer class="site-footer" id="contact">
+      <div class="page-width">
+        <div class="footer-top">
+          <span class="eyebrow"><i></i> 05 / MAKE CONTACT</span>
+          <h2>LET’S MAKE<br><span class="outline-text">SOME NOISE.</span></h2>
 
-    <section class="about" id="about" aria-labelledby="about-title">
-      <div class="about-label">
-        <p class="eyebrow">03 / Behind the name</p>
-        <h2 id="about-title">The artist.</h2>
+          <!-- EDIT: Replace both email text and mailto before launch. -->
+          <a class="booking-link" href="mailto:booking@example.com">
+            booking@example.com <span aria-hidden="true">↗</span>
+          </a>
+          <p class="placeholder-note">Booking email placeholder — replace before launch.</p>
+        </div>
+
+        <div class="footer-bottom">
+          <a class="footer-brand" href="#home">SMICCOPHISTO</a>
+          <div class="social-links">
+            <a href="https://www.youtube.com/@smiccsodope"
+              target="_blank" rel="noopener noreferrer">YouTube ↗</a>
+
+            <!-- EDIT: Replace this span with an anchor to the real Instagram. -->
+            <span class="social-placeholder">Instagram / coming soon</span>
+          </div>
+          <span class="micro-label">© <span id="copyright-year">2026</span> / HGHLNDS 4114</span>
+        </div>
       </div>
-      <div class="about-copy">
-        <h3>Smicc So Dope.<br /><em>HGHLNDS to the core.</em></h3>
-        <p>
-          SMICCOPHISTO — aka Smicc So Dope — reps HGHLNDS 4114 with
-          a sound and presence that are unmistakably his own.
-          This is the home of the visuals, the drops, and the world
-          behind the name. Same roots. No compromise.
-        </p>
-        <div class="about-signature">SMICC SO DOPE / 4114</div>
-      </div>
-    </section>
+    </footer>
+    <!-- ========== CONTACT / FOOTER / END ========== -->
   </main>
 
-  <footer class="footer" id="contact">
-    <div class="footer-top">
-      <div>
-        <p class="eyebrow">04 / Connect</p>
-        <h2>LET’S TALK<span style="color:var(--accent)">.</span></h2>
-      </div>
-      <div class="footer-links">
-        <a href="https://www.youtube.com/@smiccsodope"
-           target="_blank" rel="noopener noreferrer">YouTube ↗</a>
-        <!-- Replace this span with the real Instagram profile link. -->
-        <span class="placeholder">Instagram / coming soon</span>
-      </div>
-    </div>
+  <p id="player-status" class="sr-only" role="status" aria-live="polite"></p>
 
-    <!-- Replace with a verified booking address before publishing. -->
-    <p class="contact-placeholder">
-      Bookings / collaborations<br />
-      <strong>booking@example.com</strong> — placeholder
-    </p>
-
-    <div class="footer-bottom">
-      <span>© <span id="year"></span> SMICCOPHISTO</span>
-      <span>HGHLNDS 4114. Always.</span>
-      <a href="#home">Back to top ↑</a>
-    </div>
-  </footer>
-
-  <div id="pen-cursor" aria-hidden="true">
-    <svg viewBox="0 0 34 132" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="barrel" x1="0" x2="1">
-          <stop offset="0" stop-color="#060b08"/>
-          <stop offset=".28" stop-color="#284636"/>
-          <stop offset=".45" stop-color="#6a8272"/>
-          <stop offset=".56" stop-color="#203c2b"/>
-          <stop offset="1" stop-color="#030705"/>
-        </linearGradient>
-        <linearGradient id="metal" x1="0" x2="1">
-          <stop offset="0" stop-color="#657b69"/>
-          <stop offset=".4" stop-color="#edf2dd"/>
-          <stop offset=".65" stop-color="#a0b49b"/>
-          <stop offset="1" stop-color="#384f3d"/>
-        </linearGradient>
-      </defs>
-      <rect x="11" y="9" width="12" height="86" rx="5" fill="url(#barrel)"/>
-      <rect x="11" y="8" width="12" height="7" rx="2" fill="url(#metal)"/>
-      <rect x="14" y="2" width="6" height="8" rx="2" fill="url(#metal)"/>
-      <path d="M22 17h3v29c0 4-2 6-4 7V20z" fill="url(#metal)"/>
-      <rect class="ink" x="11" y="64" width="12" height="3" rx="1"/>
-      <rect x="11" y="86" width="12" height="9" rx="2" fill="url(#metal)"/>
-      <path d="M11 95h12l-4 22h-4z" fill="url(#metal)"/>
-      <path d="M15 117h4l-2 7z" fill="#e6eddc"/>
-      <circle class="ink" cx="17" cy="123" r="1.7"/>
-      <path d="M14 18v42" stroke="#ccd9c1" stroke-opacity=".28" stroke-width="1"/>
-    </svg>
-  </div>
-
+  <!-- ========== CDN JAVASCRIPT / BEGIN ========== -->
+  <!-- External dependencies only. All custom code is in the script below. -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js"></script>
+  <!-- ========== CDN JAVASCRIPT / END ========== -->
 
+  <!-- ========== ALL CUSTOM JAVASCRIPT / BEGIN ========== -->
   <script>
     (() => {
       "use strict";
 
-      const videos = [
-        { url: "https://www.youtube.com/watch?v=3juj9OwWz0Q", title: "Latest drop" },
-        { url: "https://www.youtube.com/watch?v=YoxvA3OOb4s", title: "Visual 02" },
-        { url: "https://www.youtube.com/watch?v=NJq3QVEfVbw", title: "Visual 03" },
-        { url: "https://www.youtube.com/watch?v=AzBvqdVXxr8", title: "Visual 04" },
-        { url: "https://www.youtube.com/watch?v=jyrdGdsNc9g", title: "Visual 05" },
-        { url: "https://www.youtube.com/watch?v=BLrG_YBL4zA", title: "Visual 06" }
-      ].map(video => ({
-        ...video,
-        id: new URL(video.url).searchParams.get("v")
-      }));
-
-      document.getElementById("year").textContent = new Date().getFullYear();
-
-      /* Same video ID only: fall back to a smaller thumbnail if needed. */
-      function installThumbnailFallback(img) {
-        img.addEventListener("load", () => {
-          if (img.naturalWidth < 300 && !img.dataset.fallback) {
-            img.dataset.fallback = "true";
-            img.src = `https://img.youtube.com/vi/${img.dataset.videoId}/hqdefault.jpg`;
-          }
-        });
-
-        img.addEventListener("error", () => {
-          if (!img.dataset.fallback) {
-            img.dataset.fallback = "true";
-            img.src = `https://img.youtube.com/vi/${img.dataset.videoId}/hqdefault.jpg`;
-          } else {
-            img.style.opacity = "0";
-          }
-        });
-
-        if (img.complete && img.naturalWidth > 0 && img.naturalWidth < 300) {
-          img.dataset.fallback = "true";
-          img.src = `https://img.youtube.com/vi/${img.dataset.videoId}/hqdefault.jpg`;
+      // ===== CONFIGURATION / BEGIN =====
+      const CONFIG = {
+        mobileBreakpoint: 1024,
+        scroll: {
+          desktopLerp: 0.085,
+          mobileLerp: 0.12,
+          scrub: 0.8,
+          mobileScrub: 0.45,
+          latestPinDistance: 1.15,
+          mobileLatestPinDistance: 0.7,
+          territoryPinDistance: 0.9,
+          mobileTerritoryPinDistance: 0.55,
+          characterDuration: 0.9,
+          characterStagger: 0.035
+        },
+        cursor: {
+          spring: 0.12,
+          damping: 0.72,
+          trailLength: 22,
+          glitchDuration: 220
         }
-      }
+      };
+      // ===== CONFIGURATION / END =====
 
-      let activeVideo = null;
+      // ===== VIDEO LIBRARY / BEGIN =====
+      // Exact supplied links. Labels are editable UI labels, not video titles.
+      // The first entry is always used as Latest Drop.
+      const VIDEOS = [
+        { url: "https://www.youtube.com/watch?v=3juj9OwWz0Q", label: "LATEST DROP" },
+        { url: "https://www.youtube.com/watch?v=YoxvA3OOb4s", label: "VISUAL 02" },
+        { url: "https://www.youtube.com/watch?v=NJq3QVEfVbw", label: "VISUAL 03" },
+        { url: "https://www.youtube.com/watch?v=AzBvqdVXxr8", label: "VISUAL 04" },
+        { url: "https://www.youtube.com/watch?v=jyrdGdsNc9g", label: "VISUAL 05" },
+        { url: "https://www.youtube.com/watch?v=BLrG_YBL4zA", label: "VISUAL 06" }
+      ];
+      // ===== VIDEO LIBRARY / END =====
 
-      function createVideo(video, featured = false) {
-        const frame = document.createElement("div");
-        frame.className = "video";
-        frame.dataset.source = video.url;
-
-        function mountFacade() {
-          frame.replaceChildren();
-
-          const button = document.createElement("button");
-          button.type = "button";
-          button.className = "video-button";
-          button.setAttribute("aria-label", `Play ${video.title} by SMICCOPHISTO`);
-
-          const image = document.createElement("img");
-          image.src = `https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`;
-          image.dataset.videoId = video.id;
-          image.alt = "";
-          image.loading = "lazy";
-          image.decoding = "async";
-          image.width = 1280;
-          image.height = 720;
-          installThumbnailFallback(image);
-
-          const play = document.createElement("span");
-          play.className = "play";
-          play.setAttribute("aria-hidden", "true");
-          play.innerHTML =
-            '<svg viewBox="0 0 24 24"><path d="M5 3v18l16-9z"/></svg>';
-
-          const label = document.createElement("span");
-          label.className = "video-label";
-          label.textContent = "SMICCOPHISTO / " + video.title;
-
-          button.append(image, play, label);
-
-          if (featured) {
-            const tag = document.createElement("span");
-            tag.className = "video-tag";
-            tag.textContent = "Latest drop";
-            button.append(tag);
-          }
-
-          button.addEventListener("click", () => {
-            /* Stop the previous inline player instead of overlapping audio. */
-            if (activeVideo && activeVideo.frame !== frame) {
-              activeVideo.reset();
-            }
-
-            const iframe = document.createElement("iframe");
-            iframe.src =
-              `https://www.youtube.com/embed/${video.id}?autoplay=1&playsinline=1&rel=0`;
-            iframe.title = `${video.title} — SMICCOPHISTO`;
-            iframe.loading = "lazy";
-            iframe.allow =
-              "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-            iframe.allowFullscreen = true;
-            iframe.referrerPolicy = "strict-origin-when-cross-origin";
-
-            frame.replaceChildren(iframe);
-            activeVideo = { frame, reset: mountFacade };
-            iframe.focus();
-          });
-
-          frame.append(button);
-        }
-
-        mountFacade();
-        return frame;
-      }
-
-      document.getElementById("latest-video").append(createVideo(videos[0], true));
-
-      const grid = document.getElementById("video-grid");
-      videos.forEach((video, index) => {
-        const article = document.createElement("article");
-        article.className = "video-card";
-
-        const meta = document.createElement("div");
-        meta.className = "card-meta";
-
-        const title = document.createElement("h3");
-        title.textContent = video.title;
-
-        const number = document.createElement("span");
-        number.textContent = `${String(index + 1).padStart(2, "0")} / SMICC SO DOPE`;
-
-        meta.append(title, number);
-        article.append(createVideo(video, index === 0), meta);
-        grid.append(article);
-      });
-
-      document.querySelectorAll("img[data-video-id]").forEach(img => {
-        /* The facades already have fallback handlers. */
-        if (!img.closest(".video")) installThumbnailFallback(img);
-      });
-
+      // ===== SHARED STATE / DEVICE DETECTION / BEGIN =====
+      const $ = (selector, context = document) => context.querySelector(selector);
+      const 
+$$
+= (selector, context = document) => [...context.querySelectorAll(selector)];
       const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+      const coarsePointer = matchMedia("(any-pointer: coarse)");
       const finePointer = matchMedia("(hover: hover) and (pointer: fine)");
-      const desktop = matchMedia("(min-width: 901px)");
-      let lenis = null;
-      let lenisTick = null;
 
-      /* Native touch scrolling stays native. No wheel/touch blockers. */
-      function stopSmoothScroll() {
-        if (lenisTick && window.gsap) gsap.ticker.remove(lenisTick);
-        if (lenis) lenis.destroy();
-        lenis = null;
-        lenisTick = null;
+      let lenis = null;
+      let scrollCleanup = () => {};
+      let cursorCleanup = () => {};
+      let resizeTimer;
+      let activePlayer = null;
+      let hideCursorForPlayer = () => {};
+
+      function isMobileDevice() {
+        const narrow = innerWidth <= CONFIG.mobileBreakpoint;
+        const touch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+        // Conservative: touchscreen laptops also retain their native cursor.
+        return narrow || touch || coarsePointer.matches;
       }
 
-      function updateSmoothScroll() {
-        stopSmoothScroll();
+      function updateDeviceClass() {
+        document.documentElement.classList.toggle("is-touch-device", isMobileDevice());
+      }
+      // ===== SHARED STATE / DEVICE DETECTION / END =====
 
-        if (
-          !reducedMotion.matches &&
-          finePointer.matches &&
-          window.Lenis &&
-          window.gsap &&
-          window.ScrollTrigger
-        ) {
+      // ===== VIDEO COMPONENT BUILDER / BEGIN =====
+      function getVideoId(url) {
+        const id = new URL(url).searchParams.get("v");
+        if (!id || !/^[a-zA-Z0-9_-]{11}$/.test(id)) {
+          throw new Error("Invalid YouTube video URL: " + url);
+        }
+        return id;
+      }
+
+      function buildVideo(video, index, featured = false) {
+        const id = getVideoId(video.url);
+        const number = String(index + 1).padStart(2, "0");
+        const card = document.createElement("article");
+        card.className = featured ? "video-card featured-card" : "video-card";
+
+        const frame = document.createElement("div");
+        frame.className = "video-frame";
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "video-trigger";
+        button.setAttribute("aria-label", "Play " + video.label + " by SMICCOPHISTO");
+
+        const image = document.createElement("img");
+        image.src = "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
+        image.alt = "";
+        image.width = 480;
+        image.height = 360;
+        image.loading = "lazy";
+        image.decoding = "async";
+
+        const shade = document.createElement("span");
+        shade.className = "video-shade";
+        shade.setAttribute("aria-hidden", "true");
+
+        const play = document.createElement("span");
+        play.className = "video-play";
+        play.setAttribute("aria-hidden", "true");
+
+        const badge = document.createElement("span");
+        badge.className = "video-number";
+        badge.textContent = featured ? "LATEST DROP" : "VISUAL / " + number;
+
+        const bottom = document.createElement("span");
+        bottom.className = "video-bottom";
+        bottom.setAttribute("aria-hidden", "true");
+        bottom.innerHTML = "<span>SMICCOPHISTO</span><span>PLAY ↗</span>";
+
+        button.append(image, shade, play, badge, bottom);
+        frame.append(button);
+        card.append(frame);
+
+        if (!featured) {
+          const meta = document.createElement("div");
+          meta.className = "video-meta";
+          const title = document.createElement("h3");
+          title.textContent = video.label;
+          const credit = document.createElement("span");
+          credit.textContent = "SMICC SO DOPE";
+          meta.append(title, credit);
+          card.append(meta);
+        }
+
+        // ===== CLICK-TO-LOAD IFRAME / BEGIN =====
+        button.addEventListener("click", () => {
+          const keyboardActivated = document.activeElement === button;
+
+          // Only one player exists at once: selecting another restores its thumbnail.
+          if (activePlayer) activePlayer.restore();
+
+          const iframe = document.createElement("iframe");
+          iframe.title = video.label + " — SMICCOPHISTO";
+          iframe.loading = "lazy";
+          iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+          iframe.allowFullscreen = true;
+          iframe.referrerPolicy = "strict-origin-when-cross-origin";
+          iframe.tabIndex = 0;
+          iframe.src = "https://www.youtube-nocookie.com/embed/" + id +
+            "?autoplay=1&playsinline=1&rel=0";
+
+          const player = {
+            restore() {
+              iframe.src = "about:blank";
+              frame.classList.remove("is-playing");
+              frame.replaceChildren(button);
+              if (activePlayer === player) activePlayer = null;
+            }
+          };
+
+          activePlayer = player;
+          frame.classList.add("is-playing");
+          frame.replaceChildren(iframe);
+          hideCursorForPlayer();
+
+          $("#player-status").textContent = video.label + ": inline player opened.";
+
+          iframe.addEventListener("load", () => {
+            if (keyboardActivated && iframe.isConnected) {
+              iframe.focus({ preventScroll: true });
+            }
+          }, { once: true });
+
+          iframe.addEventListener("pointerenter", hideCursorForPlayer);
+        });
+        // ===== CLICK-TO-LOAD IFRAME / END =====
+
+        return card;
+      }
+
+      function renderVideos() {
+        if (VIDEOS.length) $("#latest-player").append(buildVideo(VIDEOS[0], 0, true));
+        const fragment = document.createDocumentFragment();
+        VIDEOS.forEach((video, index) => fragment.append(buildVideo(video, index)));
+        $("#video-grid").append(fragment);
+      }
+      // ===== VIDEO COMPONENT BUILDER / END =====
+
+      // ===== ACCESSIBLE HERO CHARACTER SPLIT / BEGIN =====
+      function splitHeroTitle() {
+        const title = $(".hero-title");
+        const text = title.textContent.trim();
+        title.setAttribute("aria-label", text);
+        title.textContent = "";
+
+        for (const character of text) {
+          const span = document.createElement("span");
+          span.className = "hero-char";
+          span.textContent = character;
+          span.setAttribute("aria-hidden", "true");
+          title.append(span);
+        }
+      }
+      // ===== ACCESSIBLE HERO CHARACTER SPLIT / END =====
+
+      // ===== LENIS / SCROLLTRIGGER SETUP / BEGIN =====
+      function setupScroll() {
+        scrollCleanup();
+        lenis = null;
+        updateDeviceClass();
+
+        const mobile = isMobileDevice();
+        if (!window.gsap || !window.ScrollTrigger || reducedMotion.matches) {
+          // Content remains visible if CDNs fail or reduced motion is requested.
+          scrollCleanup = () => {};
+          return;
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+        let tickerCallback = null;
+
+        if (window.Lenis) {
           lenis = new Lenis({
-            lerp: .085,
+            autoRaf: false,
+            lerp: mobile ? CONFIG.scroll.mobileLerp : CONFIG.scroll.desktopLerp,
             smoothWheel: true,
-            syncTouch: false,
-            anchors: true
+            syncTouch: true,
+            syncTouchLerp: CONFIG.scroll.mobileLerp,
+            touchInertiaExponent: 1.7
           });
+
           lenis.on("scroll", ScrollTrigger.update);
-          lenisTick = time => lenis.raf(time * 1000);
-          gsap.ticker.add(lenisTick);
+          tickerCallback = time => lenis.raf(time * 1000);
+          gsap.ticker.add(tickerCallback);
           gsap.ticker.lagSmoothing(0);
         }
-      }
 
-      if (window.gsap && window.ScrollTrigger) {
-        gsap.registerPlugin(ScrollTrigger);
-        updateSmoothScroll();
-
-        const heading = document.querySelector(".hero-title");
-        heading.setAttribute("aria-label", heading.textContent);
-        const word = heading.textContent;
-        heading.replaceChildren();
-
-        [...word].forEach(letter => {
-          const span = document.createElement("span");
-          span.className = "letter";
-          span.setAttribute("aria-hidden", "true");
-          span.textContent = letter;
-          heading.append(span);
-        });
-
-        const mm = gsap.matchMedia();
-
-        mm.add({
-          motion: "(prefers-reduced-motion: no-preference)",
-          desktop: "(min-width: 901px)",
-          mobile: "(max-width: 900px)"
-        }, context => {
-          if (!context.conditions.motion) return;
-
-          const isDesktop = context.conditions.desktop;
-
-          gsap.from(".hero-title .letter", {
+        const scrub = mobile ? CONFIG.scroll.mobileScrub : CONFIG.scroll.scrub;
+        const context = gsap.context(() => {
+          // ===== HERO ENTRANCE / BEGIN =====
+          gsap.from(".hero-char", {
             yPercent: 115,
             opacity: 0,
             rotation: 3,
-            stagger: .035,
-            duration: 1.05,
-            ease: "power4.out",
-            delay: .12
-          });
-
-          gsap.from(".hero-topline, .hero-subline, .hero-bottom", {
-            y: 24,
-            opacity: 0,
-            stagger: .12,
-            duration: .8,
-            delay: .45,
+            duration: CONFIG.scroll.characterDuration,
+            stagger: CONFIG.scroll.characterStagger,
             ease: "power3.out"
           });
-
-          const heroScroll = {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: true
-          };
-
-          gsap.to(".hero-image", {
-            yPercent: isDesktop ? 18 : 8,
-            ease: "none",
-            scrollTrigger: heroScroll
+          gsap.from(".hero-topline, .hero-bottomline, .hero-footer", {
+            y: 24, opacity: 0, duration: .8,
+            delay: .3, stagger: .12, ease: "power2.out"
           });
+          // ===== HERO ENTRANCE / END =====
 
-          gsap.to(".hero-title", {
-            y: isDesktop ? -110 : -35,
-            opacity: .15,
-            ease: "none",
-            scrollTrigger: heroScroll
-          });
-
-          gsap.from(".latest-frame", {
-            clipPath: "inset(100% 0% 0% 0%)",
-            opacity: .3,
-            duration: 1.2,
-            ease: "power3.out",
+          // ===== HERO SCROLL PARALLAX / BEGIN =====
+          gsap.timeline({
             scrollTrigger: {
-              trigger: ".latest",
-              start: "top 78%",
-              once: true
+              trigger: ".hero", start: "top top", end: "bottom top", scrub
+            }
+          })
+            .to(".hero-image", { yPercent: 18, scale: 1.07, ease: "none" }, 0)
+            .to(".hero-title", { yPercent: -35, scale: 1.035, opacity: .15, ease: "none" }, 0)
+            .to(".hero-bottomline", { y: mobile ? -35 : -70, opacity: 0, ease: "none" }, 0)
+            .to(".hero-topline", { y: -20, opacity: 0, ease: "none" }, 0);
+          // ===== HERO SCROLL PARALLAX / END =====
+
+          // ===== MARQUEE SCROLL / BEGIN =====
+          gsap.fromTo(".marquee-track", { xPercent: -8 }, {
+            xPercent: -35,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".marquee", start: "top bottom", end: "bottom top", scrub
             }
           });
+          // ===== MARQUEE SCROLL / END =====
 
-          if (isDesktop) {
-            const latestTimeline = gsap.timeline({
-              scrollTrigger: {
-                trigger: ".latest",
-                start: "top top",
-                end: "+=65%",
-                scrub: .5,
-                pin: true,
-                anticipatePin: 1
-              }
-            });
-
-            latestTimeline
-              .to(".side-word.left", { y: -190, opacity: .45, ease: "none" }, 0)
-              .to(".side-word.right", { y: 160, opacity: .45, ease: "none" }, 0)
-              .to(".latest .section-heading", { y: -30, opacity: .35 }, 0)
-              .to(".latest-caption", { y: 24, opacity: .5 }, 0);
-          }
-
-          /* Movement is mapped to vertical scroll, not a time loop. */
-          gsap.to(".marquee-track", {
-            x: () => -Math.min(window.innerWidth * .9, 1300),
-            ease: "none",
+          // ===== LATEST DROP PIN / BEGIN =====
+          gsap.timeline({
             scrollTrigger: {
-              trigger: ".marquee",
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
+              trigger: ".latest-stage",
+              start: "top top",
+              end: () => "+=" + Math.round(innerHeight * (
+                mobile ? CONFIG.scroll.mobileLatestPinDistance : CONFIG.scroll.latestPinDistance
+              )),
+              pin: true,
+              scrub,
+              anticipatePin: 1,
               invalidateOnRefresh: true
             }
-          });
+          })
+            .fromTo(".latest-orbit", { yPercent: 22 }, { yPercent: -28, ease: "none" }, 0)
+            .fromTo(".latest-player-wrap", { scale: .94 }, { scale: 1, ease: "none" }, 0);
+          // ===== LATEST DROP PIN / END =====
 
-          gsap.utils.toArray(".video-card").forEach((card, index) => {
-            gsap.from(card.querySelector(".video"), {
-              clipPath: "inset(100% 0% 0% 0%)",
-              y: 30,
-              opacity: .4,
-              duration: .9,
-              delay: isDesktop ? (index % 2) * .1 : 0,
-              ease: "power3.out",
+          // ===== VIDEO CLIP-PATH REVEALS / BEGIN =====
+$$
+(".video-frame").forEach(frame => {
+            gsap.fromTo(frame, {
+              clipPath: "inset(100% 0% 0% 0%)", y: 30
+            }, {
+              clipPath: "inset(0% 0% 0% 0%)",
+              y: 0,
+              ease: "none",
               scrollTrigger: {
-                trigger: card,
-                start: "top 88%",
-                once: true
+                trigger: frame,
+                start: "top 94%",
+                end: "top 62%",
+                scrub: mobile ? .35 : .65
               }
             });
           });
+          // ===== VIDEO CLIP-PATH REVEALS / END =====
 
-          if (isDesktop) {
-            const territoryTimeline = gsap.timeline({
-              scrollTrigger: {
-                trigger: ".territory",
-                start: "top top",
-                end: "+=95%",
-                scrub: .7,
-                pin: true,
-                anticipatePin: 1
-              }
-            });
+          // ===== HGHLNDS GRAPHIC PIN / BEGIN =====
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: ".territory",
+              start: "top top",
+              end: () => "+=" + Math.round(innerHeight * (
+                mobile ? CONFIG.scroll.mobileTerritoryPinDistance : CONFIG.scroll.territoryPinDistance
+              )),
+              pin: true,
+              scrub,
+              anticipatePin: 1,
+              invalidateOnRefresh: true
+            }
+          })
+            .fromTo(".territory-title",
+              { scale: .86, y: 55, opacity: .4 },
+              { scale: 1, y: 0, opacity: 1, ease: "none" }, 0)
+            .fromTo(".territory-cross",
+              { rotation: -90, y: 55 },
+              { rotation: 0, y: -25, ease: "none" }, 0);
+          // ===== HGHLNDS GRAPHIC PIN / END =====
 
-            territoryTimeline
-              .from(".territory-type", { scale: .87, opacity: .35 }, 0)
-              .fromTo(".territory-image.one",
-                { opacity: 0, y: 100, rotation: -15 },
-                { opacity: .85, y: -60, rotation: -6 }, .15)
-              .fromTo(".territory-image.two",
-                { opacity: 0, y: 150, rotation: 16 },
-                { opacity: .85, y: -35, rotation: 7 }, .35)
-              .to(".territory-image.one, .territory-image.two",
-                { opacity: .15 }, .85);
-          } else {
-            gsap.from(".territory-type", {
-              y: 45,
-              opacity: .3,
-              duration: .9,
-              scrollTrigger: {
-                trigger: ".territory",
-                start: "top 80%",
-                once: true
-              }
-            });
-          }
-
-          gsap.utils.toArray(".about-label, .about-copy, .footer-top").forEach(el => {
-            gsap.from(el, {
-              y: 35,
+          // ===== ABOUT / HEADING REVEALS / BEGIN =====
+          
+$$
+(".section-heading, .about-section > div, .footer-top").forEach(element => {
+            gsap.from(element, {
+              y: 40,
               opacity: 0,
               duration: .9,
-              ease: "power3.out",
-              scrollTrigger: { trigger: el, start: "top 88%", once: true }
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: element,
+                start: "top 88%",
+                toggleActions: "play none none none"
+              }
             });
           });
-
-          gsap.to(".progress", {
-            scaleX: 1,
-            ease: "none",
-            scrollTrigger: {
-              start: 0,
-              end: "max",
-              scrub: true
-            }
-          });
+          // ===== ABOUT / HEADING REVEALS / END =====
         });
 
-        reducedMotion.addEventListener("change", updateSmoothScroll);
-        finePointer.addEventListener("change", updateSmoothScroll);
+        ScrollTrigger.refresh();
 
-        window.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
-        document.fonts?.ready.then(() => ScrollTrigger.refresh());
+        scrollCleanup = () => {
+          context.revert();
+          if (tickerCallback) gsap.ticker.remove(tickerCallback);
+          if (lenis) lenis.destroy();
+          lenis = null;
+        };
       }
+      // ===== LENIS / SCROLLTRIGGER SETUP / END =====
 
-      /*
-       * Pen physics:
-       * Semi-implicit spring integration at a fixed time step.
-       * Velocity drives tilt; a second spring eases rotation/scale.
-       * RAF sleeps when settled and restarts on pointer activity.
-       */
-      const cursor = document.getElementById("pen-cursor");
-      const root = document.documentElement;
-      let enabled = false;
-      let visible = false;
-      let started = false;
-      let raf = 0;
-      let lastTime = 0;
-      let accumulator = 0;
+      // ===== ANCHOR NAVIGATION / FOCUS / BEGIN =====
+      document.addEventListener("click", event => {
+        const anchor = event.target.closest('a[href^="#"]');
+        if (!anchor) return;
+        const hash = anchor.getAttribute("href");
+        const target = document.getElementById(hash.slice(1));
+        if (!target) return;
+        event.preventDefault();
 
-      const state = {
-        x: 0, y: 0,
-        targetX: 0, targetY: 0,
-        vx: 0, vy: 0,
-        angle: -24, angularVelocity: 0,
-        tiltX: 0, tiltY: 0,
-        scale: 1, targetScale: 1
-      };
+        const finish = () => {
+          const previousTabindex = target.getAttribute("tabindex");
+          if (previousTabindex === null) target.setAttribute("tabindex", "-1");
+          target.focus({ preventScroll: true });
 
-      function renderCursor() {
-        cursor.style.transform =
-          `translate3d(${state.x - 17}px, ${state.y - 123}px, 0)
-           perspective(600px)
-           rotateX(${state.tiltX}deg)
-           rotateY(${state.tiltY}deg)
-           rotateZ(${state.angle}deg)
-           scale(${state.scale})`;
-      }
+          // History can be restricted in some sandboxed previews.
+          try { history.replaceState(null, "", hash); } catch (_) {}
 
-      function physicsStep(dt) {
-        const stiffness = 330;
-        const damping = 27;
+          if (previousTabindex === null) {
+            target.addEventListener("blur", () => target.removeAttribute("tabindex"), { once: true });
+          }
+        };
 
-        state.vx += (
-          (state.targetX - state.x) * stiffness - state.vx * damping
-        ) * dt;
-        state.vy += (
-          (state.targetY - state.y) * stiffness - state.vy * damping
-        ) * dt;
+        if (lenis) {
+          lenis.scrollTo(target, { offset: -24, duration: 1.15, onComplete: finish });
+        } else {
+          target.scrollIntoView({
+            behavior: reducedMotion.matches ? "auto" : "smooth",
+            block: "start"
+          });
+          finish();
+        }
+      });
+      // ===== ANCHOR NAVIGATION / FOCUS / END =====
 
-        state.x += state.vx * dt;
-        state.y += state.vy * dt;
+      // ===== CUSTOM CURSOR SETUP / BEGIN =====
+      function setupCursor() {
+        cursorCleanup();
 
-        const targetAngle =
-          -24 + Math.max(-43, Math.min(43, state.vx * .032 + state.vy * .012));
-
-        state.angularVelocity += (
-          (targetAngle - state.angle) * 180 - state.angularVelocity * 22
-        ) * dt;
-        state.angle += state.angularVelocity * dt;
-
-        const blend = 1 - Math.exp(-14 * dt);
-        state.tiltX += (
-          Math.max(-17, Math.min(17, -state.vy * .018)) - state.tiltX
-        ) * blend;
-        state.tiltY += (
-          Math.max(-22, Math.min(22, state.vx * .022)) - state.tiltY
-        ) * blend;
-        state.scale += (state.targetScale - state.scale) * blend;
-      }
-
-      function tick(now) {
-        raf = 0;
-        if (!enabled || !visible) return;
-
-        const elapsed = lastTime ? Math.min((now - lastTime) / 1000, .05) : 1 / 60;
-        lastTime = now;
-        accumulator += elapsed;
-
-        const fixedStep = 1 / 120;
-        while (accumulator >= fixedStep) {
-          physicsStep(fixedStep);
-          accumulator -= fixedStep;
+        if (isMobileDevice() || !finePointer.matches || reducedMotion.matches) {
+          cursorCleanup = () => {};
+          return;
         }
 
-        renderCursor();
+        const cursor = $("#custom-cursor");
+        const penShell = $(".pen-shell", cursor);
+        const canvas = $("#cursor-trail");
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
 
-        const unsettled =
-          Math.abs(state.targetX - state.x) > .05 ||
-          Math.abs(state.targetY - state.y) > .05 ||
-          Math.abs(state.vx) > .1 ||
-          Math.abs(state.vy) > .1 ||
-          Math.abs(state.angle + 24) > .05 ||
-          Math.abs(state.angularVelocity) > .1 ||
-          Math.abs(state.tiltX) > .05 ||
-          Math.abs(state.tiltY) > .05 ||
-          Math.abs(state.scale - state.targetScale) > .001;
+        const abort = new AbortController();
+        const options = { signal: abort.signal };
+        const passiveOptions = { signal: abort.signal, passive: true };
+        document.documentElement.classList.add("has-pen");
 
-        if (unsettled) raf = requestAnimationFrame(tick);
-        else {
+        let targetX = 0, targetY = 0, x = 0, y = 0, vx = 0, vy = 0;
+        let tilt = 0, rotation = -28;
+        let initialized = false, visible = false;
+        let raf = 0, lastTime = 0, transitionTimer = 0;
+        let overVideo = false, trailEnabled = true;
+        let points = [];
+
+        function resizeCanvas() {
+          const dpr = Math.min(devicePixelRatio || 1, 1.5);
+          canvas.width = Math.round(innerWidth * dpr);
+          canvas.height = Math.round(innerHeight * dpr);
+          canvas.style.width = innerWidth + "px";
+          canvas.style.height = innerHeight + "px";
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          points = [];
+        }
+
+        // ===== GLOWING INK TRAIL / BEGIN =====
+        function drawTrail(dt) {
+          ctx.clearRect(0, 0, innerWidth, innerHeight);
+          if (!trailEnabled || !visible) {
+            points = [];
+            return;
+          }
+
+          points.forEach(point => point.life -= dt * .055);
+          points = points.filter(point => point.life > 0);
+
+          if (Math.hypot(vx, vy) > .25) {
+            points.push({ x, y, life: 1 });
+            if (points.length > CONFIG.cursor.trailLength) points.shift();
+          }
+
+          ctx.globalCompositeOperation = "lighter";
+          for (const point of points) {
+            const radius = 2 + point.life * 5;
+            const glow = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, radius);
+            glow.addColorStop(0, "rgba(155,206,153," + point.life * .5 + ")");
+            glow.addColorStop(.4, "rgba(90,146,109," + point.life * .2 + ")");
+            glow.addColorStop(1, "rgba(90,146,109,0)");
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.globalCompositeOperation = "source-over";
+        }
+        // ===== GLOWING INK TRAIL / END =====
+
+        // ===== CURSOR PHYSICS / BEGIN =====
+        function tick(time) {
+          const dt = Math.min((time - (lastTime || time)) / 16.667 || 1, 2);
+          lastTime = time;
+
+          vx += (targetX - x) * CONFIG.cursor.spring * dt;
+          vy += (targetY - y) * CONFIG.cursor.spring * dt;
+          vx *= Math.pow(CONFIG.cursor.damping, dt);
+          vy *= Math.pow(CONFIG.cursor.damping, dt);
+          x += vx * dt;
+          y += vy * dt;
+
+          const desiredRotation = -28 + Math.max(-38, Math.min(38, vx * 1.5));
+          const desiredTilt = Math.max(-28, Math.min(28, -vy * 1.25));
+          const follow = 1 - Math.pow(.82, dt);
+          rotation += (desiredRotation - rotation) * follow;
+          tilt += (desiredTilt - tilt) * follow;
+
+          cursor.style.transform = `translate3d(${x}px,${y}px,0)`;
+          penShell.style.transform = `rotateZ(${rotation}deg) rotateY(${tilt}deg)`;
+          drawTrail(dt);
+
+          // Sleep when settled; restart on movement. Trail gets time to fade.
+          if (Math.hypot(targetX - x, targetY - y) > .1 ||
+              Math.hypot(vx, vy) > .05 ||
+              Math.abs(desiredRotation - rotation) > .1 ||
+              Math.abs(desiredTilt - tilt) > .1 ||
+              points.length) {
+            raf = requestAnimationFrame(tick);
+          } else {
+            raf = 0;
+            lastTime = 0;
+          }
+        }
+
+        function stopCursor() {
+          cancelAnimationFrame(raf);
+          raf = 0;
           lastTime = 0;
-          accumulator = 0;
-        }
-      }
-
-      function wake() {
-        if (!raf && enabled && visible) {
-          lastTime = 0;
-          raf = requestAnimationFrame(tick);
-        }
-      }
-
-      function hideCursor() {
-        visible = false;
-        cursor.style.opacity = "0";
-        root.classList.remove("pen-enabled");
-        if (raf) cancelAnimationFrame(raf);
-        raf = 0;
-        lastTime = 0;
-        accumulator = 0;
-      }
-
-      function configureCursor() {
-        enabled = finePointer.matches && !reducedMotion.matches;
-        hideCursor();
-        started = false;
-      }
-
-      window.addEventListener("pointermove", event => {
-        if (!enabled || event.pointerType === "touch") return;
-
-        state.targetX = event.clientX;
-        state.targetY = event.clientY;
-
-        if (!started || !visible) {
-          state.x = event.clientX;
-          state.y = event.clientY;
-          state.vx = state.vy = 0;
-          started = true;
+          visible = false;
+          cursor.classList.remove("is-visible");
+          ctx.clearRect(0, 0, innerWidth, innerHeight);
+          points = [];
         }
 
-        visible = true;
-        root.classList.add("pen-enabled");
-        cursor.style.opacity = "1";
+        function onPointerMove(event) {
+          if (event.pointerType !== "mouse") return;
 
-        const interactive = event.target instanceof Element &&
-          !!event.target.closest("a, button, [role='button']");
+          // Avoid decorative overlay while the pointer is over a real player.
+          if (event.target instanceof Element &&
+              event.target.closest(".video-frame.is-playing")) {
+            stopCursor();
+            return;
+          }
 
-        cursor.classList.toggle("active", interactive);
-        state.targetScale = interactive ? 1.13 : 1;
-        wake();
+          targetX = event.clientX;
+          targetY = event.clientY;
+          if (!initialized || !visible) {
+            x = targetX;
+            y = targetY;
+            vx = vy = 0;
+            initialized = true;
+          }
+
+          visible = true;
+          cursor.classList.add("is-visible");
+          if (!raf) raf = requestAnimationFrame(tick);
+        }
+        // ===== CURSOR PHYSICS / END =====
+
+        // ===== VIDEO HOVER GLITCH / BEGIN =====
+        function setVideoMode(nextMode) {
+          if (overVideo === nextMode) return;
+          overVideo = nextMode;
+          clearTimeout(transitionTimer);
+
+          cursor.classList.remove("is-glitching");
+          void cursor.offsetWidth; // Restart keyframes only on hover transitions.
+          cursor.classList.add("is-glitching");
+
+          trailEnabled = false;
+          points = [];
+          ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+          if (!nextMode) cursor.classList.remove("is-play");
+          transitionTimer = setTimeout(() => {
+            cursor.classList.toggle("is-play", nextMode);
+            cursor.classList.remove("is-glitching");
+            trailEnabled = !nextMode;
+          }, CONFIG.cursor.glitchDuration);
+        }
+$$
+(".video-frame").forEach(frame => {
+          frame.addEventListener("pointerenter", event => {
+            if (event.pointerType !== "mouse") return;
+            if (frame.classList.contains("is-playing")) stopCursor();
+            else setVideoMode(true);
+          }, options);
+
+          frame.addEventListener("pointerleave", event => {
+            if (event.pointerType === "mouse") setVideoMode(false);
+          }, options);
+        });
+        // ===== VIDEO HOVER GLITCH / END =====
+
+        // ===== CURSOR EVENTS / TEARDOWN / BEGIN =====
+        hideCursorForPlayer = stopCursor;
+        document.addEventListener("pointermove", onPointerMove, passiveOptions);
+        document.documentElement.addEventListener("pointerleave", stopCursor, options);
+        window.addEventListener("blur", stopCursor, options);
+        window.addEventListener("resize", resizeCanvas, passiveOptions);
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) stopCursor();
+        }, options);
+        document.addEventListener("keydown", event => {
+          if (event.key === "Tab") stopCursor();
+        }, options);
+
+        resizeCanvas();
+
+        cursorCleanup = () => {
+          abort.abort();
+          stopCursor();
+          clearTimeout(transitionTimer);
+          hideCursorForPlayer = () => {};
+          document.documentElement.classList.remove("has-pen");
+          cursor.classList.remove("is-play", "is-glitching", "is-visible");
+          cursor.style.transform = "";
+          penShell.style.transform = "";
+          canvas.width = canvas.height = 0;
+        };
+        // ===== CURSOR EVENTS / TEARDOWN / END =====
+      }
+      // ===== CUSTOM CURSOR SETUP / END =====
+
+      // ===== RESPONSIVE REBUILD / BOOTSTRAP / BEGIN =====
+      let previousMobile = isMobileDevice();
+      let previousWidth = innerWidth;
+
+      function rebuildExperience() {
+        setupScroll();
+        setupCursor();
+      }
+
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          const mobile = isMobileDevice();
+          const widthChanged = Math.abs(innerWidth - previousWidth) > 40;
+
+          if (mobile !== previousMobile || widthChanged) {
+            previousMobile = mobile;
+            previousWidth = innerWidth;
+            rebuildExperience();
+          } else if (window.ScrollTrigger && !reducedMotion.matches) {
+            ScrollTrigger.refresh();
+          }
+        }, 250);
       }, { passive: true });
 
-      /* Cross-origin iframe content keeps its own native cursor. */
-      document.addEventListener("pointerover", event => {
-        if (event.target instanceof HTMLIFrameElement) hideCursor();
-      });
+      reducedMotion.addEventListener("change", rebuildExperience);
+      coarsePointer.addEventListener("change", rebuildExperience);
+      finePointer.addEventListener("change", setupCursor);
 
-      document.documentElement.addEventListener("pointerleave", hideCursor);
-      window.addEventListener("blur", hideCursor);
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) hideCursor();
-      });
-      reducedMotion.addEventListener("change", configureCursor);
-      finePointer.addEventListener("change", configureCursor);
-      configureCursor();
+      renderVideos();
+      splitHeroTitle();
+      $("#copyright-year").textContent = new Date().getFullYear();
+      rebuildExperience();
 
-      window.addEventListener("pagehide", () => {
-        hideCursor();
-        stopSmoothScroll();
-      });
+      window.addEventListener("load", () => {
+        if (window.ScrollTrigger && !reducedMotion.matches) ScrollTrigger.refresh();
+      }, { once: true });
+      // ===== RESPONSIVE REBUILD / BOOTSTRAP / END =====
     })();
   </script>
-</body>
-</html>
+  <!-- ========== ALL CUSTOM JAVASCRIPT / END ========== -->
+
+  <!-- ========== EMBEDDED PROJECT BLUEPRINT / BEGIN ==========
+
+  # SMICCOPHISTO — Single-file editing guide
+
+  ## File map
+
+  index.html
+  ├── head
+  │   ├── Metadata
+  │   └── style
+  │       ├── Design tokens
+  │       ├── Global reset / accessibility
+  │       ├── Film grain
+  │       ├── Header
+  │       ├── Hero / parallax layers
+  │       ├── Marquee
+  │       ├── Section headings
+  │       ├── Latest Drop
+  │       ├── Video grid / players
+  │       ├── HGHLNDS territory
+  │       ├── About
+  │       ├── Contact / footer
+  │       ├── Desktop pen cursor
+  │       ├── RGB glitch keyframes
+  │       ├── Lenis base styles
+  │       ├── Tablet / mobile
+  │       └── Reduced motion
+  └── body
+      ├── Accessibility / cursor markup
+      ├── Header
+      ├── Main
+      │   ├── Hero
+      │   ├── Marquee
+      │   ├── Latest Drop
+      │   ├── Video library
+      │   ├── HGHLNDS graphic
+      │   ├── About
+      │   └── Contact / footer
+      ├── CDN scripts
+      └── Custom script
+          ├── CONFIG
+          ├── VIDEOS
+          ├── Device detection
+          ├── Video component builder
+          ├── Hero character splitting
+          ├── Lenis / ScrollTrigger
+          ├── Anchor navigation
+          ├── Cursor physics / trail / glitch
+          └── Responsive rebuild / bootstrap
+
+  ## Run and deploy
+
+  Save this file as index.html.
+  Serve it through a local HTTP server or static hosting provider.
+  No build step or package installation is required.
+  Internet access is needed for CDN libraries and YouTube content.
+  Use HTTP/HTTPS rather than file:// when testing embedded playback.
+  YouTube availability and embedding permissions are controlled by YouTube
+  and the video owner; this page cannot override those restrictions.
+
+  ## Content editing
+
+  Hero name:
+    Find the h1 with class="hero-title".
+    Edit its plain text; JavaScript generates accessible character spans.
+
+  Hero subtitle:
+    Find .hero-topline and .hero-statement in HERO SECTION.
+
+  Hero artwork:
+    Replace the src of .hero-image with an authorized portrait.
+    The supplied implementation uses the featured video's thumbnail.
+    Keep alt="" because the background is decorative.
+
+  About:
+    Find ABOUT SECTION and edit .about-lead and the following paragraph.
+
+  Contact:
+    Replace booking@example.com in both href and visible text.
+    Remove the placeholder note after providing the real email.
+
+  Instagram:
+    Replace .social-placeholder with an anchor containing the actual URL.
+    Use target="_blank" and rel="noopener noreferrer" for a new tab.
+
+  Colors:
+    Edit CSS variables under DESIGN TOKENS.
+    --green and --red control deep tones.
+    --green-bright and --red-bright control accent tones.
+
+  ## Add or remove videos
+
+  Find VIDEO LIBRARY in the custom script.
+
+  Add an object to VIDEOS:
+    { url: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID", label: "YOUR LABEL" }
+
+  Remove the corresponding object to remove a video.
+  Keep at least one entry for the featured player.
+  VIDEOS[0] is the Latest Drop and also appears in the archive.
+  To change Latest Drop, move the desired entry to index zero.
+  Labels are interface labels; replace them with verified titles if desired.
+  Update the "Six visuals" copy if the archive count changes.
+  Update the noscript links separately to match the library.
+
+  No iframe is created until a thumbnail is clicked.
+  Selecting another video restores the previous player's thumbnail.
+  Thumbnails use native lazy loading.
+  The hero background is eager-loaded intentionally.
+  Playback stays inside a responsive 16:9 container.
+
+  ## Animation timings
+
+  Find CONFIG.scroll in the custom script.
+
+  desktopLerp / mobileLerp:
+    Higher values follow scroll input more quickly.
+    Lower values create more delayed momentum.
+
+  scrub / mobileScrub:
+    Catch-up duration for scroll-linked animations, in seconds.
+    Higher values create more animation lag.
+
+  latestPinDistance / mobileLatestPinDistance:
+    Latest Drop pin distance as a multiple of viewport height.
+
+  territoryPinDistance / mobileTerritoryPinDistance:
+    HGHLNDS graphic pin distance as a multiple of viewport height.
+
+ 
