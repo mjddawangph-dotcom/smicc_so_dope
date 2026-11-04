@@ -9,6 +9,12 @@
   <title>SMICCOPHISTO — HGHLNDS 4114</title>
   <!-- ========== METADATA / END ========== -->
 
+  <!-- ========== FONTS / BEGIN ========== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+  <!-- ========== FONTS / END ========== -->
+
   <!-- ========== ALL STYLES / BEGIN ========== -->
   <style>
     /* ===== DESIGN TOKENS / BEGIN ===== */
@@ -25,6 +31,7 @@
       --line: rgba(238,234,224,.15);
       --page: min(90vw,1440px);
       --display: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      --display-hero: "Protest Guerrilla", Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
       --body: Arial, Helvetica, sans-serif;
     }
     /* ===== DESIGN TOKENS / END ===== */
@@ -148,7 +155,7 @@
       display: flex;
       align-items: center;
     }
-    .hero-backdrop, .hero-shade, .hero-grid { position: absolute; inset: 0; }
+    .hero-backdrop, .hero-shade { position: absolute; inset: 0; }
     .hero-backdrop { z-index: -1; overflow: hidden; }
     .hero-image {
       position: absolute;
@@ -165,11 +172,6 @@
       background:
         linear-gradient(0deg,var(--black),transparent 45%,rgba(8,10,9,.4)),
         linear-gradient(90deg,rgba(8,10,9,.85),transparent 75%);
-    }
-    .hero-grid {
-      opacity: .3;
-      background-image: linear-gradient(90deg,var(--line) 1px,transparent 1px);
-      background-size: 25% 100%;
     }
     .smoke {
       position: absolute;
@@ -205,9 +207,9 @@
     .hero-topline { font-size: 11px; font-weight: 700; letter-spacing: .16em; }
     .hero-topline .status-dot { margin-right: 9px; }
     .hero-title {
-      font-family: var(--display);
+      font-family: var(--display-hero);
       font-size: clamp(55px,11.3vw,182px);
-      font-weight: 900;
+      font-weight: 400;
       line-height: .94;
       letter-spacing: -.04em;
       margin: 36px 0;
@@ -257,7 +259,7 @@
       display: flex;
       width: max-content;
       will-change: transform;
-      font-family: var(--display);
+      font-family: var(--display-hero);
       font-size: clamp(28px,4vw,58px);
       line-height: 1;
       white-space: nowrap;
@@ -269,7 +271,8 @@
     /* ===== SECTION HEADINGS / BEGIN ===== */
     .section-heading { margin-bottom: 58px; }
     .section-heading h2, .about-section h2, .footer-top h2 {
-      font-family: var(--display);
+      font-family: var(--display-hero);
+      font-weight: 400;
       font-size: clamp(56px,7.5vw,115px);
       line-height: .94;
       letter-spacing: -.02em;
@@ -301,8 +304,14 @@
       opacity: .12;
       will-change: transform;
     }
-    .orbit-line { font-family: var(--display); font-size: clamp(120px,20vw,320px); line-height: .8; padding-left: 2vw; }
+    .orbit-line { font-family: var(--display-hero); font-size: clamp(120px,20vw,320px); line-height: .8; padding-left: 2vw; }
     .orbit-line:nth-child(2) { text-align: right; padding-right: 2vw; }
+    /* Desktop only: keep the outlined orbit line legible behind the featured cut. */
+    @media (min-width: 1025px) {
+      .latest-orbit { opacity: 1; }
+      .latest-orbit .orbit-line { opacity: .12; }
+      .latest-orbit .orbit-line.outline-text { opacity: .3; -webkit-text-stroke: 1.5px var(--paper); }
+    }
     .latest-player-wrap { width: min(76vw,1000px); }
     .player-kicker, .player-caption {
       display: flex;
@@ -409,11 +418,25 @@
       overflow: hidden;
       display: flex;
       align-items: center;
-      background: radial-gradient(ellipse at 75% 65%,rgba(92,29,38,.35),transparent 55%),#14251b;
+      background: #0c1710;
       border-block: 1px solid var(--line);
     }
-    .territory-inner { position: relative; }
-    .territory-title { margin: 0; display: flex; flex-direction: column; font-family: var(--display); line-height: .82; letter-spacing: -.025em; will-change: transform,opacity; }
+    .territory-bg {
+      position: absolute;
+      inset: 0;
+      background: url("assets/ph-locator-cavite-silang.svg") center / cover no-repeat;
+      filter: grayscale(1) brightness(.55) contrast(1.1);
+      opacity: .6;
+    }
+    .territory-tint {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 75% 65%, rgba(92,29,38,.5), transparent 58%),
+        linear-gradient(165deg, rgba(35,76,57,.5) 0%, rgba(8,10,9,.82) 100%);
+    }
+    .territory-inner { position: relative; z-index: 1; }
+    .territory-title { margin: 0; display: flex; flex-direction: column; font-family: var(--display-hero); line-height: .82; letter-spacing: -.025em; will-change: transform,opacity; }
     .territory-title span { font-size: clamp(65px,14.5vw,220px); }
     .territory-title strong { font-size: clamp(150px,28vw,440px); font-weight: inherit; color: transparent; -webkit-text-stroke: 1px var(--green-bright); }
     .territory-bottom { display: flex; justify-content: space-between; margin-top: 35px; font-size: 10px; letter-spacing: .1em; }
@@ -470,15 +493,17 @@
     }
     .pen {
       position: absolute;
-      inset: 0 0 13px;
-      border-radius: 7px 7px 3px 3px;
-      background: linear-gradient(90deg,#080c09,#28513b 21%,#709777 35%,#172b20 48%,#090e0b 80%,#476650);
-      border: 1px solid #729078;
-      box-shadow: 5px 5px 10px rgba(0,0,0,.5);
+      inset: 0;
+      border-radius: 6px;
     }
-    .pen-clip { position: absolute; right: 2px; top: 7px; width: 3px; height: 34px; border-radius: 3px; background: linear-gradient(90deg,#656a64,#eeeae0,#454b45); transform: translateZ(3px); }
-    .pen-band { position: absolute; left: -1px; right: -1px; bottom: 9px; height: 5px; background: linear-gradient(90deg,#421018,#b55b5d,#3c151b); }
-    .pen-nib { position: absolute; left: 2px; right: 2px; bottom: -13px; height: 14px; clip-path: polygon(0 0,100% 0,50% 100%); background: linear-gradient(90deg,#676d61,#eeeae0 45%,#4c5249); }
+    .pen-art {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      filter: drop-shadow(4px 5px 7px rgba(0,0,0,.55));
+    }
     .play-cursor {
       position: absolute;
       top: -27px;
@@ -555,7 +580,7 @@
       .hero-footer { bottom: 22px; }
       .hero-footer > .micro-label:last-child, .hero-side-label { display: none; }
       .section-heading { margin-bottom: 38px; }
-      .latest-stage { height: 78svh; min-height: 410px; }
+      .latest-stage { height: 48svh; min-height: 400px; }
       .latest-player-wrap { width: 90vw; }
       .player-kicker, .player-caption { font-size: 8px; letter-spacing: .06em; }
       .video-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -602,9 +627,56 @@
   <div id="custom-cursor" aria-hidden="true">
     <div class="pen-shell">
       <div class="pen">
-        <span class="pen-clip"></span>
-        <span class="pen-band"></span>
-        <span class="pen-nib"></span>
+        <svg class="pen-art" viewBox="0 0 34 200" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="pen-body" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#050806"/>
+              <stop offset=".18" stop-color="#244232"/>
+              <stop offset=".34" stop-color="#7fa287"/>
+              <stop offset=".48" stop-color="#2b4a37"/>
+              <stop offset=".74" stop-color="#0a110c"/>
+              <stop offset=".9" stop-color="#3e5b46"/>
+              <stop offset="1" stop-color="#0b120d"/>
+            </linearGradient>
+            <linearGradient id="pen-metal" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#4a5048"/>
+              <stop offset=".3" stop-color="#f2eee2"/>
+              <stop offset=".55" stop-color="#b9b4a6"/>
+              <stop offset=".8" stop-color="#f6f2e6"/>
+              <stop offset="1" stop-color="#40463f"/>
+            </linearGradient>
+            <linearGradient id="pen-band" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#2a0a0f"/>
+              <stop offset=".35" stop-color="#7a2a32"/>
+              <stop offset=".5" stop-color="#c4575e"/>
+              <stop offset=".65" stop-color="#6d2029"/>
+              <stop offset="1" stop-color="#24080c"/>
+            </linearGradient>
+            <linearGradient id="pen-grip" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#070b08"/>
+              <stop offset=".3" stop-color="#1c3326"/>
+              <stop offset=".5" stop-color="#3a5a45"/>
+              <stop offset=".75" stop-color="#13231a"/>
+              <stop offset="1" stop-color="#060a07"/>
+            </linearGradient>
+            <pattern id="pen-ribs" width="34" height="6" patternUnits="userSpaceOnUse">
+              <path d="M0 5.5h34" stroke="#000" stroke-opacity=".35" stroke-width="1"/>
+              <path d="M0 .5h34" stroke="#dff0e2" stroke-opacity=".07" stroke-width="1"/>
+            </pattern>
+          </defs>
+          <path d="M6 6 Q6 0 12 0 H22 Q28 0 28 6 V150 H6 Z" fill="url(#pen-body)"/>
+          <path d="M6 52 H28" stroke="#000" stroke-opacity=".5" stroke-width="1.2"/>
+          <path d="M6 53 H28" stroke="#bcd8c0" stroke-opacity=".12" stroke-width="1"/>
+          <path d="M25 12 Q31 12 31 20 V62 Q31 68 26.5 68" fill="none" stroke="url(#pen-metal)" stroke-width="3.4" stroke-linecap="round"/>
+          <circle cx="26.5" cy="68" r="3.2" fill="url(#pen-metal)"/>
+          <rect x="6" y="143" width="22" height="5" fill="url(#pen-band)"/>
+          <rect x="6" y="148" width="22" height="26" fill="url(#pen-grip)"/>
+          <rect x="6" y="148" width="22" height="26" fill="url(#pen-ribs)"/>
+          <path d="M6 174 H28 L22.5 186 H11.5 Z" fill="url(#pen-grip)"/>
+          <path d="M11.5 185 H22.5 L17.6 200 H16.4 Z" fill="url(#pen-metal)"/>
+          <path d="M17 187 V196" stroke="#1a1f1a" stroke-opacity=".65" stroke-width="1"/>
+          <circle cx="17" cy="198.6" r="1.5" fill="#f3efe3"/>
+        </svg>
       </div>
     </div>
     <div class="play-cursor"><span></span></div>
@@ -627,14 +699,13 @@
     <!-- ========== HERO SECTION / BEGIN ========== -->
     <section class="hero" id="home" aria-labelledby="hero-title">
       <div class="hero-backdrop" aria-hidden="true">
-        <!-- EDIT: Replace this thumbnail with an authorized artist portrait. -->
+        <!-- EDIT: Authorized artist portrait. -->
         <img class="hero-image"
-          src="https://i.ytimg.com/vi/3juj9OwWz0Q/hqdefault.jpg"
+          src="assets/hero-background.jpg"
           alt="" fetchpriority="high" decoding="async">
         <div class="hero-shade"></div>
         <div class="smoke smoke-green"></div>
         <div class="smoke smoke-red"></div>
-        <div class="hero-grid"></div>
       </div>
 
       <div class="hero-content page-width">
@@ -725,6 +796,8 @@
 
     <!-- ========== HGHLNDS PINNED GRAPHIC / BEGIN ========== -->
     <section class="territory" aria-labelledby="territory-title">
+      <div class="territory-bg" aria-hidden="true"></div>
+      <div class="territory-tint" aria-hidden="true"></div>
       <div class="territory-inner page-width">
         <span class="eyebrow"><i></i> NOT JUST A NUMBER.</span>
         <h2 class="territory-title" id="territory-title">
@@ -1024,16 +1097,15 @@ $$
         }
 
         gsap.registerPlugin(ScrollTrigger);
+        // iOS/Android address-bar resizes must not invalidate pinned positions.
+        ScrollTrigger.config({ ignoreMobileResize: true });
         let tickerCallback = null;
 
         if (window.Lenis) {
           lenis = new Lenis({
             autoRaf: false,
             lerp: mobile ? CONFIG.scroll.mobileLerp : CONFIG.scroll.desktopLerp,
-            smoothWheel: true,
-            syncTouch: true,
-            syncTouchLerp: CONFIG.scroll.mobileLerp,
-            touchInertiaExponent: 1.7
+            smoothWheel: true
           });
 
           lenis.on("scroll", ScrollTrigger.update);
@@ -1084,23 +1156,24 @@ $$
           gsap.timeline({
             scrollTrigger: {
               trigger: ".latest-stage",
-              start: "top top",
-              end: () => "+=" + Math.round(innerHeight * (
-                mobile ? CONFIG.scroll.mobileLatestPinDistance : CONFIG.scroll.latestPinDistance
-              )),
-              pin: true,
+              start: mobile ? "top bottom" : "top top",
+              end: mobile ? "bottom top" : () => "+=" + Math.round(innerHeight * CONFIG.scroll.latestPinDistance),
+              pin: !mobile,
               scrub,
               anticipatePin: 1,
               invalidateOnRefresh: true
             }
           })
-            .fromTo(".latest-orbit", { yPercent: 22 }, { yPercent: -28, ease: "none" }, 0)
+            .fromTo(".latest-orbit",
+              { yPercent: mobile ? 0 : 22 },
+              { yPercent: mobile ? -10 : -28, ease: "none" }, 0)
             .fromTo(".latest-player-wrap", { scale: .94 }, { scale: 1, ease: "none" }, 0);
           // ===== LATEST DROP PIN / END =====
 
           // ===== VIDEO CLIP-PATH REVEALS / BEGIN =====
 $$
 (".video-frame").forEach(frame => {
+            const isFeatured = frame.closest(".featured-card") !== null;
             gsap.fromTo(frame, {
               clipPath: "inset(100% 0% 0% 0%)", y: 30
             }, {
@@ -1109,9 +1182,9 @@ $$
               ease: "none",
               scrollTrigger: {
                 trigger: frame,
-                start: "top 94%",
-                end: "top 62%",
-                scrub: mobile ? .35 : .65
+                start: mobile ? (isFeatured ? "top 94%" : "top 100%") : "top 94%",
+                end: mobile ? (isFeatured ? "top 62%" : "top 74%") : "top 62%",
+                scrub: mobile ? (isFeatured ? .35 : .22) : .65
               }
             });
           });
@@ -1159,6 +1232,13 @@ $$
         });
 
         ScrollTrigger.refresh();
+
+        // Web fonts change heading metrics after load; recompute trigger positions.
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(() => {
+            if (window.ScrollTrigger && !reducedMotion.matches) ScrollTrigger.refresh();
+          });
+        }
 
         scrollCleanup = () => {
           context.revert();
@@ -1284,7 +1364,8 @@ $$
           x += vx * dt;
           y += vy * dt;
 
-          const desiredRotation = -28 + Math.max(-38, Math.min(38, vx * 1.5));
+          // Drag physics: the barrel trails opposite to horizontal motion.
+          const desiredRotation = -28 - Math.max(-38, Math.min(38, vx * 1.5));
           const desiredTilt = Math.max(-28, Math.min(28, -vy * 1.25));
           const follow = 1 - Math.pow(.82, dt);
           rotation += (desiredRotation - rotation) * follow;
@@ -1432,6 +1513,12 @@ $$
         }, 250);
       }, { passive: true });
 
+      window.addEventListener("orientationchange", () => {
+        setTimeout(() => {
+          if (window.ScrollTrigger && !reducedMotion.matches) ScrollTrigger.refresh();
+        }, 350);
+      }, { passive: true });
+
       reducedMotion.addEventListener("change", rebuildExperience);
       coarsePointer.addEventListener("change", rebuildExperience);
       finePointer.addEventListener("change", setupCursor);
@@ -1520,7 +1607,7 @@ $$
 
   Hero artwork:
     Replace the src of .hero-image with an authorized portrait.
-    The supplied implementation uses the featured video's thumbnail.
+    The supplied implementation uses assets/hero-background.jpg.
     Keep alt="" because the background is decorative.
 
   About:
