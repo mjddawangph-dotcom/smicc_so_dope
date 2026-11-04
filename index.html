@@ -1194,11 +1194,9 @@ $$
           gsap.timeline({
             scrollTrigger: {
               trigger: ".territory",
-              start: "top top",
-              end: () => "+=" + Math.round(innerHeight * (
-                mobile ? CONFIG.scroll.mobileTerritoryPinDistance : CONFIG.scroll.territoryPinDistance
-              )),
-              pin: true,
+              start: mobile ? "top bottom" : "top top",
+              end: mobile ? "top 30%" : () => "+=" + Math.round(innerHeight * CONFIG.scroll.territoryPinDistance),
+              pin: !mobile,
               scrub,
               anticipatePin: 1,
               invalidateOnRefresh: true
